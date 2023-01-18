@@ -1,0 +1,136 @@
+<div class="container-fluid no-gutters">
+  <div class="">
+      <div class="col-md-12 text-center wizard" style="background: #FAFAFA">
+   
+          <form action="javascript:;" class="login_form" [formGroup]="form" >
+
+                  <div class="application_info px-5 py-4 border-bottom">
+                      <div class="row">
+
+                        <div class="col-md-12 mb-3">
+                          <h5 class="sec_title font-weight-bold">{{frmClass?.title}}</h5> 
+                      </div>
+                    <br>
+                    <div *ngIf="errorMsg" class="alert alert-danger">
+                      {{errorMsg}}
+                    </div>
+                    <div *ngIf="successMsg" class="alert alert-success">
+                      {{successMsg}}
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+                      <label for="name" class="legends required">Name</label>
+                      <input type="text" class="form-control form-control-lg"  autocomplete="off" formControlName="name"  id="name" (keypress)="keyPressAlfhabetsOnly($event)">
+                      <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+                       Name required.
+                    </div>
+                   </div>
+                   <div class="col-md-6 mb-3">
+                    <label for="abbreviation" class="legends required">Abbreviation</label>
+                              <input type="text" class="form-control form-control-lg"  autocomplete="off" formControlName="abbreviation"  id="abbreviation" (keypress)="keyPressAlfhabetsOnly($event)">
+                              <div *ngIf="f['abbreviation'].touched && f['abbreviation'].invalid" class="alert alert-danger">
+                               Abrivation required.
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                  <label for="description" class="legends required">Description</label>
+                                  <input type="text" class="form-control form-control-lg"  autocomplete="off" formControlName="description"  id="description" (keypress)="keyPressAlfhabetsOnly($event)">
+                                  <div *ngIf="f['description'].touched && f['description'].invalid" class="alert alert-danger">
+                                    Description required.
+                                  </div>
+               </div>
+               </div>
+               
+               <div class="row">
+                <div class="col-md-8 mb-2">
+                </div>
+                <div class="col-md-2 mb-1">
+                    <a class="btn btn-primary d-block btn-lg" (click)="resetForm()">Reset</a>
+                    
+                </div>
+                <div class="col-md-2 mb-1">
+                    <a class="btn btn-primary d-block btn-lg" (click)="submit()">Submit</a>
+                </div>
+            </div>
+
+
+
+
+               </div>
+          </form>
+
+          <div class="col-md-12">
+            <table class="table table-bordered datatable">
+                <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Abbreviation</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let setup of setups">
+                    <td>{{ setup.id }}</td>
+                    <td>{{ setup.name }}</td>
+                    <td>{{ setup.abbreviation }}</td>
+                    <td>{{ setup.description }}</td>
+                    <td>
+                       <!--<a href="javascript:;"><i class="ti-trash text-danger"></i></a> -->
+                      <button type="button" class="btn btn-default" title="Edit" (click)="onEdit(setup.id)">
+                      <i class="ti-pencil-alt text-success"></i></button> 
+                    </td>
+                  </tr>
+                   
+                </tbody>
+                <!-- <ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination> -->
+                <!-- <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" [maxSize]="7" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination> -->
+            </table>
+            <!-- <ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination> -->
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize || 0" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadDataTable()">
+              </ngb-pagination>
+            
+              <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadDataTable()">
+                <option [ngValue]="10">10 items per page</option>
+                <option [ngValue]="20">20 items per page</option>
+                <option [ngValue]="50">50 items per page</option>
+              </select>
+            </div>
+            
+      </div>
+  </div>
+</div>
+          <!-- <br/>
+          <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Abbreviation</th>
+                <th>Description</th>
+                <th>Update</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="setups?.length != 0">
+              <tr *ngFor="let setup of setups">
+                <td>{{ setup.id }}</td>
+                <td>{{ setup.name }}</td>
+                <td>{{ setup.abbreviation }}</td>
+                <td>{{ setup.description }}</td>
+                <td>
+
+                  <button type="button" class="btn btn-default" title="Edit" (click)="onEdit(setup.id)">
+                    <i class="fa fa-trash-o" aria-hidden="true">Edit</i>  
+                  </button> 
+                  </td>
+              </tr>
+            </tbody>
+             <tbody *ngIf="setups?.length == 0">
+              <tr>
+                <td colspan="3" class="no-data-available">No data!</td>
+              </tr>
+            </tbody> 
+          </table> -->

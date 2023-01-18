@@ -1,0 +1,76 @@
+<div class="container-table p-0">
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col text-center fs-2">Owner Type</div>
+        <div class="col text-center fs-2">Owner Status</div>
+      </li>
+      <li class="table-row">
+        <div
+          class="col text-center text-uppercase fw-bold"
+          data-label="Owner Type"
+        >
+          {{ owner.ownerType || '' }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Owner Status">
+          {{ owner.ownerTaxGroup || '' }}
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- Person Information -->
+  <ul class="w-100">
+    <li *ngFor="let person of owner?.persons; let i = index">
+      <div class="row w-100 m-0">
+        <ngb-accordion #acc="ngbAccordion" activeIds="first" class="w-100" >
+          <ngb-panel class="custom-read-box__heading-box" id="first">
+            <ng-template ngbPanelHeader>
+              <div class="d-flex align-items-center">
+                <button ngbPanelToggle class="custom-accord-btn">
+                  <ng-container *ngIf="!acc.activeIds.includes('first')">
+                    <span class="custom-accord-icons">+</span>
+                  </ng-container>
+                  <ng-container *ngIf="acc.activeIds.includes('first')">
+                    <span class="custom-accord-icons">-</span>
+                  </ng-container>
+                  Person Detail
+                </button>
+              </div>
+            </ng-template>
+
+            <ng-template ngbPanelContent>
+              <br>
+              <!-- <app-common-read-only-person [personObj]="person"></app-common-read-only-person> -->
+              
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+    </li>
+  </ul>
+
+
+     <!-- Business Detail -->
+     <div class="row w-100 m-0" *ngIf="owner.business">
+        <ngb-accordion #acc="ngbAccordion" activeIds="first" class="w-100" >
+          <ngb-panel class="custom-read-box__heading-box" id="first">
+            <ng-template ngbPanelHeader>
+              <div class="d-flex align-items-center">
+                <button ngbPanelToggle class="custom-accord-btn">
+                  <ng-container *ngIf="!acc.activeIds.includes('first')">
+                    <span class="custom-accord-icons">+</span>
+                  </ng-container>
+                  <ng-container *ngIf="acc.activeIds.includes('first')">
+                    <span class="custom-accord-icons">-</span>
+                  </ng-container>
+                  Business Information
+                </button>
+              </div>
+            </ng-template>
+
+            <ng-template ngbPanelContent>
+              <br>
+              <!-- <app-common-read-only-business [bussinessObj]="owner.business"></app-common-read-only-business> -->
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>

@@ -1,0 +1,54 @@
+
+
+.padding-out{
+    padding-left: 0px !important;
+}
+.padding-in{
+    padding-left: 270px !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+.show{
+    padding: 0 !important;
+}
+
+.custom-styling{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-section{
+    padding-left: 280px;
+}
+
+.custom-pad{
+    padding-left: 0px;
+}
+
+.success{
+    padding-left: 80px !important;
+}
+.danger{
+    padding-left: 275px !important;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.toggleInExapndIcon{
+    display: none;
+}
+.toggleOutExapndIcon{
+    display: block;
+}
+
+.toggleIn{
+    width:80px;
+    transition: 1s all ease-in;
+}
+.toggleout{
+    width:unset;
+    transition: 1s all ease-in;
+}

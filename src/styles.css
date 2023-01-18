@@ -1,0 +1,444 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~ngx-toastr/toastr.css';
+
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* / Firefox / */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.login{
+    min-height: 100vh;
+    background: url('./assets/login_bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+.login-side{
+    height: 96vh;
+    background: #FFFFFF;
+    box-shadow: 0px 16px 112px rgba(0, 0, 0, 0.61);
+    border-radius: 12px;
+    margin: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+}
+.login-side-content{
+    width: 70%;
+}
+.login-text{
+    margin: 30px 0;
+}
+.logo{
+    margin: 27px 0 47px 0;
+}
+.pass-field{
+    position: relative;
+}
+.show-pass{
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10.8169px;
+    line-height: 13px;
+    color: #000000;
+}
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.heading-text-login{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27.0423px;
+    line-height: 33px;
+}
+.desc-text-login{
+    color: #8692A6;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16.2254px;
+    line-height: 25px;
+}
+.auth-forms{
+    margin-top: 60px;
+}
+.custom-mt-auth{
+    margin-top: 24px;
+}
+.forgot-pass{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13.2px;
+    line-height: 16px;
+    text-decoration-line: underline;
+    color: #3566AB;
+}
+.sidebar{
+    background: #314655 !important;
+}
+.sidebar-logo-text{
+    font-size: 15px !important;
+}
+.nav-link{
+    color: #fff !important;
+}
+.submit-btn{
+    width: 100%;
+    height: 57.69px;
+    background: #234575;
+    border-radius: 7.21127px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4225px;
+    line-height: 17px;
+    color: #FFFFFF;
+    margin-top: 68px;
+    outline: none;
+    border: none;
+    position: relative;
+}
+.submit-btn-icon{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+.maker{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    width: 60%;
+}
+.maker-text{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.1615px;
+    line-height: 17px;
+    text-align: center;
+    color: #333333;
+}
+.consign-heading{
+    margin: 40px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.back{
+    position: absolute;
+    left: 0px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #3566AB;
+    cursor:pointer;
+}
+.consignment{
+    padding: 0 60px;
+}
+.consign-heading-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #494949;
+}
+.consign-heading-desc{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+.divider{
+    width:100%;
+    height:2px;
+    margin: 40px 0;
+    border-top: 1px solid #CCCCCC;;
+}
+.liq-details{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    color: #484B55;
+}
+.add-btn{
+    width: 146px;
+    height: 56px;
+    background: #3FC976;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+.submitLiq-btn{
+    width: 146px;
+    height: 48px;
+    background: #547287;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+.custom-table-mt{
+    margin: 40px 0;
+}
+
+.custom-table-dark{
+    background: #F3F3F3 !important;
+}
+.custom-table-dark tr th{
+    padding: 20px 10px !important;
+}
+.table tbody tr th {
+    padding: 20px 10px !important;
+}
+.table tbody tr td {
+    padding: 20px 10px !important;
+}
+.promt-table-field{
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19px;
+    color: #3566AB;
+}
+
+.dashboard-bg{
+    background: #F4F6F8;
+    height: 100vh;
+}
+.dashboard-title{
+    height: 100px;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    color: #5D6369;
+    margin-bottom: 40px;
+}
+.box{
+    width: 206px;
+    height: 220px;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 16px rgba(82, 106, 128, 0.10);
+    border-radius:20px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+.box:hover{
+    box-shadow: 0px 7px 16px rgba(82, 106, 128, 0.25);
+    transition: 1s all;
+}
+.box-content{
+    padding-left: 10px;
+}
+.pr-1{
+    border-left: 5px solid #A957C5;
+}
+.pr-2{
+    border-left: 5px solid #38BBC3;
+}
+.box-content-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    color: #484B55;
+}
+.box-content-desc{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: #484B55;
+}
+.stock-in-border{
+    width: 38px;
+    height: 3.5px;
+    background: #54D13F;
+}
+.pos-border{
+    width: 38px;
+    height: 3.5px;
+    background: #E5502A;
+}
+.pdb-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #484B55;
+}
+.pdb-desc{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #919191;
+}
+.pos-details-heading{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: #3566AB;
+}
+.pos-details-border{
+    width: 100%;
+    border: 1.05797px solid #D1DCE5;
+    border-radius: 0px 7px 7px 7px;
+    margin-bottom:20px;
+}
+.pos-details-print{
+    border-bottom: 1px solid #D1DCE5;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+.custom-padding-x{
+    padding:20px 25px;
+}
+.print-btn{
+    width: 179px;
+    height: 44px;
+    background: #3FC976;
+    border-radius: 6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    outline: none;
+    border: none;
+}
+.margin-right-btn{
+    margin-right: 15px;
+}
+.margin-left-btn{
+    margin-left: 15px;
+}
+.printer-icon{
+    color: #3566AB;
+}
+.pos-table{
+    padding: 20px 0;
+}
+.custom-mb-pos{
+    margin-bottom: 30px;
+}
+
+.add-p-btn{
+    width: 56px;
+    height: 48px;
+    background: #E8E8E8;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+    outline: none;
+    border:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    color: #000000;
+}
+
+.pos-btns{
+    width: 146px;
+    height: 48px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+.pos-btns-primary{
+    background: #3FC976;
+}
+.pos-btns-sec{
+    background: #547287;
+    margin-left: 5px;
+}
+
+@media(max-width:600px){
+    .header{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .consignment{
+        padding: 0 20px;
+    }
+  
+    .back{
+        top: -40px;
+    }
+
+    .logo{
+        width: 100%;
+        margin: 0px;
+    }
+
+}
+
+
+@media(max-width:1200px){
+    .consign-heading-title{
+        font-size: 12px;
+        line-height: 13px;
+    }
+    .consign-heading-desc{
+        font-size: 11px;
+    }
+    .login-side-content{
+        width: 90%;
+    }
+    .login-side{
+        margin: 0px;
+    }
+    .maker{
+        width: 80%;
+    }
+}

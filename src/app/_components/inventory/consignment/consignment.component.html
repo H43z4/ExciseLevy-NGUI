@@ -1,0 +1,275 @@
+<!-- <app-header></app-header> -->
+
+<div class="consign-heading">
+    <p class="consign-heading-title mb-0">Excise Pass for Transport / Export of Liquor of all kinds from
+        licensed
+        premises</p>
+    <p class="consign-heading-desc mb-0">Four Points by Sheraton, Lahore Regency (pvt) Ltd--Consignee
+    </p>
+
+</div>
+<form class="form" [formGroup]="Consignmentform" autocomplete="off">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="excisePass">Excise Pass No. *</label>
+                <input type="text" class="form-control form-control-md" (keypress)="keyPressNumberOnly($event)" formControlName="excisePass">
+                <div *ngIf="f['excisePass'].touched && f['excisePass'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="dated">Request Date </label>
+                <input type="date" class="form-control form-control-md" formControlName="dated">
+                <div *ngIf="f['dated'].touched && f['dated'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="exportNo">Transport / Export No. *</label>
+                <input type="text" class="form-control form-control-md" formControlName="exportNo">
+                <div *ngIf="f['exportNo'].touched && f['exportNo'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="consignmentFrom">Consignment From *</label>
+                <select formControlName="consignmentFrom" class="form-select pt-2 form-control"
+                    aria-label="Default select example">
+                    <option value="2">Mehran Distillery & Brewery</option>
+                    <option value="3">Murree Brewery Rawalpindi</option>
+                    <option value="4">Hue Coastal Hub</option>
+                    <option value="5">Quetta Distillery Quetta</option>
+
+                </select>
+                <div *ngIf="f['consignmentFrom'].touched && f['consignmentFrom'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="permitNo">Permit No. *</label>
+                <input formControlName="permitNo" type="text" (keypress)="keyPressNumberOnly($event)" class="form-control form-control-md">
+                <div *ngIf="f['permitNo'].touched && f['permitNo'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="collector">Collector Officer *</label>
+                <input formControlName="collector" type="text" class="form-control form-control-md">
+                <div *ngIf="f['collector'].touched && f['collector'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="passvalidity">Pass Validity *</label>
+                <input formControlName="passvalidity" type="date" class="form-control form-control-md">
+                <div *ngIf="f['passvalidity'].touched && f['passvalidity'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="vehicleNo">Vehicle No. *</label>
+                <input formControlName="vehicleNo" type="text" class="form-control form-control-md">
+                <div *ngIf="f['vehicleNo'].touched && f['vehicleNo'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="driver">Driver</label>
+                <input formControlName="driver" type="text" class="form-control form-control-md">
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <p class="mb-0 liq-details">Liquor Details</p>
+    <div class="divider"></div>
+    <form class="form" [formGroup]="Liquorform" autocomplete="off">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="itemDescription">Item Description *</label>
+                    <input formControlName="itemDescription" [(ngModel)]="displayValue" (keyup)="search()"
+                        class="form-control form-control-md" (blur)="ValidateProduct()">
+                    <div class="dropdown" *ngIf="results.length > 0">
+                        <a class="dropdown-item" *ngFor="let result of results" (click)="select(result)">
+                            {{ result.value }}
+                        </a>
+                    </div>
+                    <div *ngIf="l['itemDescription'].touched && l['itemDescription'].invalid"
+                        class="alert alert-danger">
+                        Field required.
+                    </div>
+                    <!-- <input formControlName="itemDescription" type="text" class="form-control form-control-md">
+                            <div *ngIf="l['itemDescription'].touched && l['itemDescription'].invalid" class="alert alert-danger">
+                                Field required.
+                            </div> -->
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="uom">Unit of Measure *</label>
+                    <select formControlName="uom" class="form-select pt-2 form-control"
+                        aria-label="Default select example" (change)="CalculateValues()">
+                        <!-- Size -->
+                        <option value="1">Quarts</option>
+                        <option value="2">Pints</option>
+                        <option value="3">Nips</option>
+                        <option value="4">Beer</option>
+
+                    </select>
+                    <div *ngIf="l['uom'].touched && l['uom'].invalid" class="alert alert-danger">
+                        Field required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="quantity">Quantity (Dozens) *</label>
+                    <input formControlName="quantity" type="number" (keypress)="keyPressNumberOnly($event)" min="0" (blur)="CalculateValues()" class="form-control form-control-md">
+                    <div *ngIf="l['quantity'].touched && l['quantity'].invalid" class="alert alert-danger">
+                        Field required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="breakage">Breakage *</label>
+                    <input formControlName="breakage" type="number" (keypress)="keyPressNumberOnly($event)" min="0" class="form-control form-control-md">
+                    <div *ngIf="l['breakage'].touched && l['breakage'].invalid" class="alert alert-danger">
+                        Field required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="strength">Strength (%) *</label>
+                    <input formControlName="strength" type="number" (keypress)="keyPressNumberOnly($event)" min="0" (blur)="CalculateProofGallons()" class="form-control form-control-md">
+                    <div *ngIf="l['strength'].touched && l['strength'].invalid" class="alert alert-danger">
+                        Field required.
+                    </div>
+                    <div *ngIf="l['strength'].hasError('maxValue')" class="alert alert-danger">
+                        Value should not be greater than 100
+                     </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="bulkGallons">Bulk Gallons *</label>
+                    <input [ngModel]="bulkValue" formControlName="bulkGallons" type="number" class="form-control form-control-md" readonly>
+                    <div *ngIf="l['bulkGallons'].touched && l['bulkGallons'].invalid" class="alert alert-danger">
+                        Field required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="form-floating">
+                    <label for="proofGallons">Proof Gallons *</label>
+                    <input [ngModel]="proofValue" formControlName="proofGallons" type="number" class="form-control form-control-md" readonly>
+                    <div *ngIf="l['proofGallons'].touched && l['proofGallons'].invalid" class="alert alert-danger">
+                        Field required.
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 d-flex margin-left-btn align-items-center">
+                <button class="add-btn" (click)="populateValue()">Add</button>
+            </div>
+        </div>
+    </form>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="duty">Rate of Duty</label>
+                <input formControlName="duty" type="text" class="form-control form-control-md" (blur)="CalculateDutyLevied()" readonly>
+                <div *ngIf="f['duty'].touched && f['duty'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="dutyLevied">Amt. of Duty Levied *</label>
+                <input formControlName="dutyLevied" [ngModel]="LeviedValue" type="text" class="form-control form-control-md" readonly>
+                <div *ngIf="f['dutyLevied'].touched && f['dutyLevied'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="cHNoDate">CH No. Date *</label>
+                <input formControlName="cHNoDate" type="date" class="form-control form-control-md">
+                <div *ngIf="f['cHNoDate'].touched && f['cHNoDate'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="form-floating">
+                <label for="remarks">Remarks *</label>
+                <input formControlName="remarks" type="text" class="form-control form-control-md">
+                <div *ngIf="f['remarks'].touched && f['remarks'].invalid" class="alert alert-danger">
+                    Field required.
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 d-flex margin-right-btn align-items-center justify-content-end">
+            <button class="submitLiq-btn" (click)="Save()">Submit</button>
+        </div>
+    </div>
+
+    <div class="table-responsive custom-table-mt">
+        <table class="table">
+            <thead class="custom-table-dark">
+                <tr>
+                    <th scope="col">Sr. No</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Quarts</th>
+                    <th scope="col">Pints</th>
+                    <th scope="col">Nips</th>
+                    <th scope="col">Beer</th>
+                    <th scope="col">Bulk Gallons</th>
+                    <th scope="col">Strength</th>
+                    <th scope="col">Proof Gallons</th>
+                    <th scope="col">Breakage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of liqList">
+                    <th scope="row">{{data.srNo}}</th>
+                    <td class="promt-table-field">{{data.itemDescription}}</td>
+                    <td>{{data.quarts}}</td>
+                    <td>{{data.pints}}</td>
+                    <td>{{data.nips}}</td>
+                    <td>{{data.beer}}</td>
+                    <td>{{data.bulkGallons}}</td>
+                    <td>{{data.strenghtPercentage}}</td>
+                    <td>{{data.proofGallons}}</td>
+                    <td>{{data.breakage}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</form>

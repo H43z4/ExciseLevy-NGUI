@@ -1,0 +1,214 @@
+<div class="divider mt-3"></div>
+<div class="consign-heading">
+  <p class="consign-heading-title text-left mb-0">Point of sale</p>
+</div>
+<div class="divider my-2"></div>
+<div class="pos-table">
+  <p class="pos-details-heading text-dark my-3">Customer details</p>
+  <div class="form-floating w-25 custom-mb-pos align-items-end justify-content-end">
+    <form class="form" [formGroup]="PersonForm" autocomplete="off">
+      <label for="floatingInput">CNIC/Passport</label>
+      <input formControlName="passportCNIC" (blur)="fetchPerson()" class="form-control form-control-md">
+      <p class="mb-0 show-pass">
+        <i class="bi bi-search"></i>
+      </p>
+    </form>
+  </div>
+
+
+  <div class="row">
+    <table class="table">
+      <thead class="custom-table-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Person Name</th>
+          <th scope="col">CNIC</th>
+          <th scope="col">Phone No.</th>
+          <th scope="col">Address</th>
+          <th scope="col">City</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Visa Expiry</th>
+          <th scope="col">Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let arr of personData">
+          <th scope="row" class="promt-table-field">{{arr.personId}}</th>
+          <td>{{arr.personName}}</td>
+          <td>{{arr.cNIC_PASSPORT}}</td>
+          <td>{{arr.cellNo}}</td>
+          <td>{{arr.address}}</td>
+          <td>{{arr.city}}</td>
+          <td>{{arr.dateofBirth| date:'dd-MMM-yyyy'}}</td>
+          <td>{{arr.visaExpiryDate|date:'dd-MMM-yyyy'}}</td>
+          <td>{{arr.age}}</td>
+
+        </tr>
+
+
+
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+<div class="divider mt-2"></div>
+
+<div class="row">
+  <div class="col-lg-6 colmd-6 col-sm-12">
+
+
+    <div class="form-floating w-75 custom-mb-pos">
+      <form [formGroup]="POSform" autocomplete="off">
+        <!-- <label for="floatingInput">Product name</label>
+
+      <input (keyup)="search()" [ngModel]="this.displayValue" formControlName="ProductName" class="form-control form-control-md"
+        (blur)="ValidateProduct()">
+      <div class="dropdown" *ngIf="results.length > 0">
+        <a class="dropdown-item" *ngFor="let result of results" (click)="select(result)">
+          {{ result.value }}
+        </a>
+      </div> -->
+        <div class="form-floating">
+          <label for="ProductName">Product Name *</label>
+          <input formControlName="ProductName" [(ngModel)]="displayValue" (keyup)="search()"
+            class="form-control form-control-md" (blur)="ValidateProduct()">
+          <div class="dropdown" *ngIf="results.length > 0">
+            <a class="dropdown-item" *ngFor="let result of results" (click)="select(result)">
+              {{ result.value }}
+            </a>
+          </div>
+          <div *ngIf="l['ProductName'].touched && l['ProductName'].invalid" class="alert alert-danger">
+            Field required.
+          </div>
+          <!-- <input formControlName="itemDescription" type="text" class="form-control form-control-md">
+                <div *ngIf="l['itemDescription'].touched && l['itemDescription'].invalid" class="alert alert-danger">
+                    Field required.
+                </div> -->
+        </div>
+        <p class="mb-0 show-pass">
+          <i class="bi bi-search"></i>
+        </p>
+        <div class="w-75 d-flex align-items-center justify-content-between">
+          <div class="form-floating">
+            <div class="add-product d-flex align-items-center justify-content-between w-100 my-5">
+
+
+              <div class="add-product-numbers d-flex align-items-center justify-content-center">
+                <label for="ProdSize">Quantity</label>
+                <input type="number" value="0" (keypress)="keyPressNumberOnly($event)" formControlName="qtyBox"
+                  class="add-p-btn bg-transparent mx-3 text-center border border-dark-subtle ">
+                <div *ngIf="l['qtyBox'].touched && l['qtyBox'].invalid" class="alert alert-danger">
+                  Field required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="w-75 d-flex align-items-center justify-content-between">
+          <div class="form-floating" style="width: 200px;">
+            <label for="ProdSize">Product size</label>
+            <select class="form-control form-control-md custom-pos-select-form"
+            formControlName="ProdSize">
+           <option *ngFor="let op of Size"
+            [value]="op.key">
+            {{op.value}}</option>
+          </select>
+            <div *ngIf="l['ProdSize'].touched && l['ProdSize'].invalid" class="alert alert-danger">
+              Field required.
+            </div>
+          </div>
+          <div class="form-floating" style="width: 200px;margin-left: 12px;">
+            <label for="ProdPrice">Product price</label>
+            <input type="number"(keypress)="keyPressNumberOnly($event)" formControlName="ProdPrice" class="form-control form-control-md custom-pos-select-form"
+              id="PermitInput">
+            <div *ngIf="l['ProdPrice'].touched && l['ProdPrice'].invalid" class="alert alert-danger">
+              Field required.
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="w-100 d-flex align-items-center justify-content-start my-5">
+          <button class="pos-btns pos-btns-primary" (click)="AddData()">Add</button>
+          <button class="pos-btns pos-btns-sec ms-4" (click)="resetdata()">Cancel</button>
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
+
+  <div class="col-lg-6 colmd-6 col-sm-12">
+    <div class="invoice pb-3">
+      <div class="title text-center">INVOICE</div>
+      <div class="products-qty d-flex align-items-center justify-content-between py-3">
+        <div class="pq-content px-3">
+          <p class="pdb-title mb-0">Product Name</p>
+        </div>
+        <div class="pq-content px-3">
+          <div class="pq-actuall-qty">Qty/Size</div>
+        </div>
+        
+        <div class="pq-actuall-qty">Product Price</div>
+        <div class="pq-total px-3">Product Total</div>
+      </div>
+<div *ngFor="let arr of liqList let i = index">
+      <div class="products-qty d-flex align-items-center justify-content-between py-3">
+        <div class="pq-content px-3">
+          <p class="pdb-title mb-0">{{arr.ProductName}} </p>
+        </div>
+        <div class="pq-content px-3">
+          <div class="pq-actuall-qty">{{arr.Quantity  +" "+arr.ProdSize}}</div>
+        </div>
+        
+        <div class="pq-actuall-qty">{{arr.ProductPrice }}</div>
+        <div class="pq-total px-3">{{arr.TotalPrice }}</div>
+      </div>
+    </div>
+      <div class="px-3">
+        <div class="divider mb-2"></div>
+        <div class="products-qty d-flex align-items-center justify-content-between py-1">
+          <div class="pq-content">
+            <p class="pdb-title  mb-0"> Total </p>
+          </div>
+          <div class="pdb-title">{{this.QtyTotal}}</div>
+          <div class="pdb-title">{{this.TotalPriceTotal}}</div>
+        </div>
+        <div class="divider my-1"></div>
+
+        <div  [formGroup]="POSInvoiceform" class="w-100 d-flex align-items-center justify-content-between my-5">
+          <!-- <div class="form-floating w-10">
+            <label for="ProdPrice">Tax %</label>
+            <input type="number" formControlName="Tax" (blur)="TaxDiscout()" class="form-control form-control-md custom-pos-select-form"
+             >
+          </div> -->
+          <!-- <div class="form-floating w-10" style="margin-left: 12px">
+            <label for="ProdPrice">Discout</label>
+            <input type="number" formControlName="Discout" (blur)="TaxDiscout()"class="form-control form-control-md custom-pos-select-form"
+             >
+          </div> -->
+          <!-- <div class="form-floating" style="margin-left: 12px">
+            <label for="ProdPrice">Total</label>
+            <div>{{this.GrandTotal}}</div>
+          </div> -->
+          
+        </div>
+       
+      
+       
+        <div class="w-100 d-flex align-items-center justify-content-start my-5">
+          <button class="pos-btns pos-btns-primary" style="margin-left: 479px;" (click)="SubmitData()">Submit</button>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>

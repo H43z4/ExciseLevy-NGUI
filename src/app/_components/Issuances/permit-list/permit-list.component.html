@@ -1,0 +1,62 @@
+        <!-- <app-header></app-header> -->
+
+          <div class="divider mt-3"></div>
+          <div class="consign-heading">
+            <p class="consign-heading-title mb-0">Permit Applications List</p>
+            <!-- <p class="consign-heading-desc mb-0">Gill Jackson</p> -->
+  
+          </div>
+  
+  
+          <div class="table-responsive custom-table-mt">
+            <table class="table">
+              <thead class="custom-table-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">CNIC/Passport No</th>
+                  <th scope="col">Phone No</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">City</th>
+                  <th scope="col">DOB</th>
+                  <th scope="col">Old Permit</th>
+                  <th scope="col">Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let arr of PRlist">
+                  <!-- <tr *ngFor="let arr of PRlist let i = index"> -->
+                    <!-- <th scope="row" class="promt-table-field">{{i+1}}</th> -->
+                    <th scope="row" class="promt-table-field">{{arr.applicationId}}</th>
+                    <td>{{arr.personName}}</td>
+                    <td>{{arr.cnic}}</td>
+                    <td>{{arr.cellNo}}</td>
+                    <td>{{arr.address}}</td>
+                    <td>{{arr.city}}</td>
+                    <td>{{arr.dateofBirth| date:'dd-MMM-yyyy'}}</td>
+                    <td>{{arr.oldPermitNo == 0?'-----':arr.oldPermitNo}}</td>
+                <td class="promt-table-field">
+                  <button 
+                  (click)="SendPRID(arr.applicationId)"
+                   class="submitLiq-btn">View Details</button>
+                
+             
+              <!-- <app-permit-detail [ApplicationObj]="arr.applicationId"></app-permit-detail> -->
+                
+                </td>
+                  </tr>
+              
+                  
+  
+              </tbody>
+            </table>
+            <!-- <nav aria-label="Page navigation example">
+              <ul *ngFor="let arr of PRlist; let i" class="pagination  w-100 d-flex align-items-center justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li i class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav> -->
+          </div>

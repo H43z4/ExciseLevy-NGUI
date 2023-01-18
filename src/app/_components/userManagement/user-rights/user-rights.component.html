@@ -1,0 +1,279 @@
+
+
+<div class="container-fluid custom-tabs-container">
+    <div class="contianer bg-transparent">
+        <ngb-accordion
+        activeIds="first"
+        class="w-100 mt-5"
+      >
+        <ngb-panel class="custom-read-box__heading-box" id="first">
+          <ng-template ngbPanelHeader>
+            <div class="d-flex align-items-center">
+              <button ngbPanelToggle class="custom-accord-btn">
+                User Information
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template ngbPanelContent>
+            <div class="row custom-row-styles w-100 m-0 p-0 mb-3 border-bottom">
+              <div class="col-md-4 mb-4">
+                <label for="" class="mb-1">District</label>
+                <div class="info">{{UserInfo.district}}</div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <label for="" class="mb-1">Site Office</label>
+                <div class="info">{{UserInfo.siteOffice}}</div>
+              </div>
+             
+              <div class="col-md-4 mb-4">
+                <label for="" class="mb-1">User Role</label>
+                <div class="info">{{UserInfo.roleName}}</div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="" class="mb-1">Username</label>
+                <div class="info">{{UserInfo.userName}}</div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="" class="mb-1">Name</label
+                >
+                <div class="info">{{UserInfo.personName}}</div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="" class="mb-1">CNIC</label>
+                <div class="info">{{UserInfo.cnic}}</div>
+              </div>
+              <div class="col-md-4 mb-4" *ngIf="UserInfo.managerName">
+                <label for="" class="mb-1">Manager</label>
+                <div class="info">{{UserInfo.managerName}}</div>
+              </div>
+              <div class="col-md-4 mb-4" *ngIf="UserInfo.managerUserName">
+                <label for="" class="mb-1">Manager Username</label
+                >
+                <div class="info">{{UserInfo.managerUserName}}</div>
+              </div>
+            </div>
+         
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1" >
+              <a ngbNavLink class="roles-tabs">User Roles</a>
+              <ng-template ngbNavContent>
+
+                <form class="form" [formGroup]="Roleform" autocomplete="off">
+
+                
+                <div class="row w-100 m-0 py-4">
+
+
+                  
+                  <div class="col-lg-4">
+                    <label for="DistrictId" class="legends">Office District</label>
+                    <select formControlName="DistrictId" class="form-control form-control-lg" (change)="changeDistrict()">
+                        <option value=""> Please select</option>
+                        <option *ngFor="let item of dddistricts" [value]="item.value">
+                            {{item.display}}
+                        </option>
+                    </select>
+                    <div *ngIf="f['DistrictId'].touched && f['DistrictId'].invalid " class="alert alert-danger">
+                       Office district required.
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label for="SiteOfficeId" class="legends">Site Office</label>
+                    <select formControlName="SiteOfficeId" class="form-control form-control-lg" (change)="ChangeRole()">
+                        <option value=""> Please select</option>
+                        <option *ngFor="let item of ddSiteOfficeFiltered" [value]="item.value">
+                            {{item.display}}
+                        </option>
+                    </select>
+                    <div *ngIf="f['SiteOfficeId'].touched && f['SiteOfficeId'].invalid " class="alert alert-danger">
+                      Site office required.
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label for="RoleId" class="legends">Role</label>
+                    <select formControlName="RoleId" class="form-control form-control-lg" (change)="ChangeRole()">
+                        <option value=""> Please select</option>
+                        <option *ngFor="let item of ddRoles" [value]="item.value">
+                            {{item.display}}
+                        </option>
+                    </select>
+                    <div *ngIf="f['RoleId'].touched && f['RoleId'].invalid " class="alert alert-danger">
+                       User role required.
+                    </div>
+                </div>
+
+                <div class="col-lg-3" *ngIf="showLineManager===true">
+                    <label for="LineManagerId" class="legends">Line Manager</label>
+                    <select formControlName="LineManagerId" class="form-control form-control-lg">
+                        <option value=""> Please select</option>
+                        <option *ngFor="let item of ddLineManager" [value]="item.value">
+                            {{item.display}}
+                        </option>
+                    </select>
+                    <div *ngIf="f['LineManagerId'].touched && f['LineManagerId'].invalid " class="alert alert-danger">
+                       Line manager required.
+                    </div>
+                </div>
+
+
+
+
+                    <!-- <div class="col-lg-12 my-4">
+                        
+                    <textarea name="" id="" cols="20" rows="10" class="w-100 p-2 form-control-lg form-control" placeholder="Enter Comments here"></textarea>
+                    </div> -->
+                  </div>
+                </form>
+                  <div class="bottom_next_prev_area py-2">
+                    <div class="row w-100 mx-0">
+                      <div class="col-md-12 text-right">
+                        <button class="btn btn-lg btn-secondary mr-2"  (click)="ResetUserRole()">Reset</button>
+                        <button class="btn btn-lg btn-primary" (click)="SaveUserRole()"> Save</button>
+                      </div>
+                    </div>
+                  </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink class="roles-tabs">Special Permission</a>
+              <ng-template ngbNavContent>
+
+                <form class="form" [formGroup]="PermissionForm" autocomplete="off">
+                <div class="row py-3">
+                   
+
+                    <div class="col-md-4 mb-4">
+                        <label for="minDateTime" class="legends">From</label>
+                        <input type="datetime-local" formControlName="minDateTime"  class="form-control form-control-lg" autocomplete="off" >
+                        
+                        <!-- <div *ngIf="f['minDateTime'].touched && f['minDateTime'].invalid " class="alert alert-danger">
+                          Date From required.
+                       </div> -->
+                    
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                      <label for="maxDateTime" class="legends">To</label>
+                      <input type="datetime-local" formControlName="maxDateTime"  class="form-control form-control-lg" autocomplete="off" >
+                  
+                      <!-- <div *ngIf="f['maxDateTime'].touched && f['maxDateTime'].invalid " class="alert alert-danger">
+                        Date Trom required.
+                     </div> -->
+                    </div>
+
+                  
+
+                    <div class="col-md-4 mb-4">
+                      <label  for="workingPermissionId" class="legends">Status</label> 
+                      <select formControlName="workingPermissionId"  class="form-control form-control-lg">
+                        <option value="">Please select</option>  
+                        <option value="1">Allowed</option>
+                        <option value="2">Blocked</option>
+                      </select>
+                  </div>
+                </div>
+              </form>
+              <div class="bottom_next_prev_area pb-4 pt-0">
+                <div class="row w-100 mx-0">
+                  <div class="col-md-12 text-right">
+                    <button class="btn btn-lg btn-primary" (click)="SavePermissions()">Save</button>
+                  </div>
+                </div>
+              </div>
+                <div class="row px-2">
+                    <div class="container-table p-0">
+                        <ul class="responsive-table">
+                          <li class="table-header">
+                            <div class="col">From</div> 
+                            <div class="col">To</div> 
+                            <div class="col">Status</div> 
+                            <div class="col">Delete</div> 
+                          </li>
+
+                          <li class="table-row"  *ngFor="let obj of UserPersmissionsList">
+                           
+                            <div class="col" data-label="From">
+                              {{obj.minDateTime | date: "dd-MM-yyyy hh:mm:ss a"}}
+                            </div> 
+                            <div class="col" data-label="To">
+                              {{obj.maxDateTime | date: "dd-MM-yyyy hh:mm:ss a"}}
+                            </div> 
+                            <div class="col" data-label="Status">
+                              {{obj.workingPermission}}
+                            </div>  
+                            <div class="col" data-label="Allowed">
+                                <!-- <i  class="ti-pencil-alt text-success mr-3"></i>  -->
+                                <i  class="ti-trash text-danger" (click)="open(content,obj.userWorkingPermissionId)"></i>
+                            </div>
+                            <ng-template #content let-c="close" let-d="dismiss">
+                                <div class="modal-header">
+                                  <h4 class="modal-title" id="modal-basic-title">Are you sure!</h4>
+                                  <!-- <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button> -->
+                                </div>
+                                <div class="modal-body">
+                                  <p>You want to delete this record?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-outline-primary" (click)="DeletePermissions(0)" (click)="c('Cross click')">Delete</button>
+                                  <button type="button" class="btn btn-outline-dark" (click)="c('Cross click')">Close</button>
+                                </div>
+                              </ng-template>
+                          </li>
+                        </ul>
+                      </div>
+                </div>
+              
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3" >
+              <a ngbNavLink class="roles-tabs">Series Assignment</a>
+              <ng-template ngbNavContent>
+                <div class="row px-2 py-2">
+                    <div class="container-table p-0">
+
+                      <form action="javascript:;" class="login_form" [formGroup]="CatListform" >
+                        
+                        
+                        <ul class="responsive-table">
+                          <li class="table-header">
+                            <div class="col text-center">Series Category</div>
+                            <div class="col text-center">Allowed</div> 
+                            
+                          </li>
+                          <!-- <li class="table-row py-1 p-0" *ngFor="let cat of SeriesCategories">
+                           
+                            <div class="col d-flex align-items-center justify-content-center" data-label="Date">
+                              {{cat.seriesCategory}}
+                            </div>
+                            <div class="col text-center" data-label="Time From">
+                                <input type="checkbox" class="m-3" [value]="cat.seriesCategoryId" (change)="onCheckChange($event)" [checked]="cat.isAssigned" >
+                            </div>  
+                          </li> -->
+                        </ul>
+                      </form>
+
+                      <div class="bottom_next_prev_area py-4">
+                        <div class="row w-100 mx-0">
+                          <div class="col-md-12 text-right">
+                            <button class="btn btn-lg btn-primary">Save</button>
+                            <!-- <button class="btn btn-lg btn-primary" (click)="SaveSeriesCategory()">Save</button> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+    
+</div>

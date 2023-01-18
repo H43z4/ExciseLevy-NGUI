@@ -1,0 +1,61 @@
+        <!-- <app-header></app-header> -->
+
+        <div class="divider mt-3"></div>
+        <div class="consign-heading">
+          <p class="consign-heading-title mb-0">Stock in Application List</p>
+          <!-- <p class="consign-heading-desc mb-0">Gill Jackson</p> -->
+
+        </div>
+
+
+        <div class="table-responsive custom-table-mt">
+          <table class="table">
+            <thead class="custom-table-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Manufacturer</th>
+                <th scope="col">Organization</th>
+                <th scope="col">Permit No</th>
+                <th scope="col">Excise Pass No</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Transport Export No</th>
+                <th scope="col">Detail</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let arr of Stocklist">
+                <!-- <tr *ngFor="let arr of PRlist let i = index"> -->
+                  <!-- <th scope="row" class="promt-table-field">{{i+1}}</th> -->
+                  <th scope="row" class="promt-table-field">{{arr.stockInApplicationId}}</th>
+                  <td>{{arr.manufacturerName}}</td>
+                  <td>{{arr.organization}}</td>
+                  <td>{{arr.permitNo}}</td>
+                  <td>{{arr.excisePassNo}}</td>
+                  <td>{{arr.requestDate| date:'dd-MMM-yyyy'}}</td>
+                  <td>{{arr.transportExportNo}}</td>
+              <td class="promt-table-field">
+                <button 
+                (click)="SendStockinApplicationDetail(arr.stockInApplicationId)"
+                 class="submitLiq-btn">View Details</button>
+              
+           
+            <!-- <app-permit-detail [ApplicationObj]="arr.applicationId"></app-permit-detail> -->
+              
+              </td>
+                </tr>
+            
+                
+
+            </tbody>
+          </table>
+          <!-- <nav aria-label="Page navigation example">
+            <ul *ngFor="let arr of PRlist; let i" class="pagination  w-100 d-flex align-items-center justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li i class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav> -->
+        </div>

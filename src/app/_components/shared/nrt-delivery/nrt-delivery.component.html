@@ -1,0 +1,285 @@
+<div class="container-fluid no-gutters d-flex align-items-center justify-content-center flex-column pb-5">
+  <div class="bg-white w-100 px-4">
+
+  <div class="row w-100 bg-white py-5 m-0">
+    <form class="form w-100" autocomplete="off">
+      <div class="row w-100 m-0">
+        <div class="col-lg-3"></div>
+        <div class="col-md-5 ">
+          <label for="cnic" class="legends">Application Id / Reg No.</label>
+          <input #box type="text" class="form-control form-control-lg w-100" maxlength="20">
+        </div>
+
+        <div class="col-md-4">
+          <div class="btn btn-success" (click)="getValue(box.value)"><i class="far fa-caret-square-down"></i> Search
+          </div>
+          <!-- <button class="btn btn-outline-danger"  (click)="ClearCustomer()"><i class="fas fa-redo-alt"></i> Rest Owner </button> -->
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="container-table p-0" *ngIf="GeneralObj?.data?.owner?.persons">
+    <h4>Owner Information</h4>
+    <ul class="responsive-table flex-column">
+      <li class="table-header">
+        <div class="col text-center">Name</div>
+        <div class="col text-center">Father/Husband Name</div>
+        <div class="col text-center">CNIC</div>
+        <div class="col text-center">Phone</div>
+      </li>
+      <li class="table-row" *ngFor="let person of GeneralObj?.data?.owner?.persons">
+        <div class="col text-center text-uppercase fw-bold" data-label="Name">
+          {{ person.personName }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Father/Husband Name">
+          {{ person.fatherHusbandName }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Father/Husband Name">
+          {{ person.cnic }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Father/Husband Name">
+          {{ person.phoneNumbers[0].phoneNumberValue }}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-table p-0" *ngIf="GeneralObj?.data?.owner?.business">
+    <h4>Owner Information</h4>
+    <ul class="responsive-table flex-column">
+      <li class="table-header">
+        <div class="col text-center">NTN</div>
+        <div class="col text-center">Business RegNo</div>
+        <div class="col text-center">Business Name</div>
+        <div class="col text-center">Email</div>
+      </li>
+      <li class="table-row">
+        <div class="col text-center text-uppercase fw-bold" data-label="NTN">
+          {{ GeneralObj?.data?.owner?.business?.ntn }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Business RegNo">
+          {{ GeneralObj?.data?.owner?.business?.businessRegNo }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Business Name">
+          {{ GeneralObj?.data?.owner?.business?.businessName }}
+        </div>
+        <div class="col text-center fw-bold" data-label="Email">
+          {{ GeneralObj?.data?.owner?.business?.email }}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-table p-0 mt-3" *ngIf="GeneralObj?.data?.vehicle">
+    <h4>Vehicle Information</h4>
+    <ul class="responsive-table flex-column">
+      <li class="table-header">
+        <div class="col text-center">Reg#</div>
+        <div class="col text-center">Make</div>
+        <div class="col text-center">Modal</div>
+        <div class="col text-center">Maker</div>
+      </li>
+      <li class="table-row">
+        <div class="col text-center text-uppercase fw-bold" data-label="Reg#">
+          {{GeneralObj?.data?.vehicle.registrationNo}}
+        </div>
+        <div class="col text-center fw-bold" data-label="Make">
+          {{GeneralObj?.data?.vehicle.vehicleMake}}
+        </div>
+        <div class="col text-center fw-bold" data-label="Modal">
+          {{GeneralObj?.data?.vehicle.manufacturingYear}}
+        </div>
+        <div class="col text-center fw-bold" data-label="Maker">
+          {{GeneralObj?.data?.vehicle.vehicleMaker  || "Not Available"}}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="row w-100 d-flex align-items-center justify-content-around">
+    <ul *ngIf="deliveryFile.length" class="list-inline w-100 py-5 d-flex align-items-center justify-content-center">
+      <li *ngFor="let item of checkboxesDataList;">
+        <div class="form-check d-flex align-items-center mr-5">
+          <input type="checkbox" [(ngModel)]="item.isChecked" [attr.disabled]="item.isShow ? true : null"
+            style="margin-right:9px;" (change)="changeSelection()">{{item.label}}
+          <!--
+  <input class="form-check-input" type="checkbox" (value)="item.id" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault" style="margin-right:90px; ">
+                    {{item?.name}}
+                </label>
+
+                -->
+
+        </div>
+      </li>
+    </ul>
+  </div>
+
+ 
+
+
+  <ngb-accordion #acc="ngbAccordion" activeIds="three" class="w-100" *ngIf="isShown">
+    <ngb-panel class="custom-read-box__heading-box" id="three">
+      <ng-template ngbPanelHeader>
+        <div class="d-flex align-items-center">
+          <button ngbPanelToggle class="custom-accord-btn">
+            <ng-container *ngIf="!acc.activeIds.includes('three')">
+              <span class="custom-accord-icons">+</span>
+            </ng-container>
+            <ng-container *ngIf="acc.activeIds.includes('three')">
+              <span class="custom-accord-icons">-</span>
+            </ng-container>
+            Delivery Detail
+          </button>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+
+     
+
+        <div class="row custom-row-styles w-100 p-0 m-0" *ngIf="isShown">
+          <form class="form d-flex flex-wrap pt-4 " [formGroup]="form" autocomplete="off">
+            <h4>Delivery Method</h4>
+            <div class="col-md-12 mb-5">
+              <label class="px-5 m-0"><input type="radio" value="1" name="MethodId" formControlName="MethodId"><span class="px-1 m-0">Owner</span></label>
+              <label class="px-5 m-0"><input type="radio" value="2" name="MethodId" formControlName="MethodId"><span class="px-1 m-0">Other</span></label>
+              <label class="px-5 m-0"><input type="radio" value="3" name="MethodId" formControlName="MethodId"><span class="px-1 m-0">Courier</span></label>
+              <div *ngIf="f['MethodId'].touched && f['MethodId'].invalid " class="alert alert-danger">
+                Delivery Method required.
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-5">
+              <label for="" class="legends">Name</label>
+              <input type="text"  trim="blur"  class="form-control form-control-lg info" autocomplete="off"
+                (keypress)="keyPressAlfhabetsOnly($event)" formControlName="name" maxlength="50">
+              <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+                Name required
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <label for="" class="legends">Father's Name</label>
+              <input type="text"  trim="blur"  class="form-control form-control-lg info" autocomplete="off"
+                (keypress)="keyPressAlfhabetsOnly($event)" formControlName="fatherName" maxlength="50">
+              <div *ngIf="f['fatherName'].touched && f['fatherName'].invalid" class="alert alert-danger">
+                Father Name required
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <label for="" class="legends">CNIC</label>
+              <input formControlName="cnic" mask='00000-0000000-0' [showMaskTyped]="true" type="text"
+                class="form-control form-control-lg info" (keypress)="keyPressCNIC($event)">
+              <div *ngIf="f['cnic'].touched && f['cnic'].invalid" class="alert alert-danger">
+                <div *ngIf="f['cnic'].errors && f['cnic'].errors['required']">CNIC required.</div>
+                <div *ngIf="f['cnic'].errors && f['cnic'].errors['minlength']">Invalid CNIC.</div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <label for="" class="legends">Mobile</label>
+              <input type="text" class="form-control form-control-lg info" autocomplete="off" formControlName="mobile"
+                maxlength="11" (keypress)="keyPressNumberOnly($event)">
+              <div *ngIf="f['mobile'].touched && f['mobile'].invalid" class="alert alert-danger">
+                Mobile No required
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <label for="" class="legends">DI Address</label>
+              <input type="text"  trim="blur"  class="form-control form-control-lg info" autocomplete="off" formControlName="address"
+                maxlength="50">
+              <div *ngIf="f['address'].touched && f['address'].invalid" class="alert alert-danger">
+                Address is required
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <label for="" class="legends">Remark's</label>
+              <input type="text"  trim="blur"  class="form-control form-control-lg info" autocomplete="off" formControlName="remarks"
+                maxlength="50">
+              <div *ngIf="f['remarks'].touched && f['remarks'].invalid" class="alert alert-danger">
+                Remarks required
+              </div>
+            </div>
+            <div class="row w-100 d-flex align-items-center justify-content-end">
+              <button type="button" class="btn btn-lg btn-success" *ngIf="isShown"
+                (click)="SaveDeliveryInfo()">Save</button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+
+
+
+
+
+
+  <div class="container-table p-0 mt-5" *ngIf="deliveryFileChecked.length>0">
+    <h4>Delivered Files</h4>
+    <ul class="responsive-table flex-column">
+      <li class="table-header">
+        <div class="col text-center">Article</div>
+        <div class="col text-center">Name</div>
+        <div class="col text-center">CNIC</div>
+        <div class="col text-center">Address</div>
+        <div class="col text-center">Contact</div>
+        <div class="col text-center">Remarks</div>
+      </li>
+      <li class="table-row" *ngFor="let vehicleDocuments of deliveryFileChecked">
+        <div class="col text-center text-uppercase fw-bold" data-label="Article">
+            {{vehicleDocuments.vehicleArticleName}}
+        </div>
+        <div class="col text-center fw-bold" data-label="Make">
+            {{vehicleDocuments.name}}
+        </div>
+        <div class="col text-center fw-bold" data-label="CNIC">
+            {{vehicleDocuments.cnic}}
+        </div>
+        <div class="col text-center fw-bold" data-label="Address">
+            {{vehicleDocuments.address}}
+          </div>
+          <div class="col text-center fw-bold" data-label="Contact">
+            {{vehicleDocuments.mobile}}
+          </div>
+          <div class="col text-center fw-bold" data-label="Remarks">
+            {{vehicleDocuments.remarks}}
+          </div>
+      </li>
+    </ul>
+  </div>
+    
+</div>
+
+<!-- 
+  <div class="row w-100 card" *ngIf="deliveryFileChecked.length>0">
+    <h5 class="card-header bg-primary h6">Delivered Files</h5>
+    <div class="card-body">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Article</th>
+            <th scope="col">Name</th>
+            <th scope="col">CNIC</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehicleDocuments of deliveryFileChecked">
+
+            <td>{{vehicleDocuments.vehicleArticleName}}</td>
+            <td>{{vehicleDocuments.name}}</td>
+            <td>{{vehicleDocuments.cnic}}</td>
+            <td>{{vehicleDocuments.address}}</td>
+            <td>{{vehicleDocuments.mobile}}</td>
+            <td>{{vehicleDocuments.remarks}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div> -->

@@ -1,0 +1,86 @@
+<div class="divider mt-3"></div>
+<div class="consign-heading">
+  <p class="consign-heading-title mb-0">{{this.Record1.manufacturerName}}</p>
+</div>
+<div class="pos-details-border ">
+  <div class="print-details d-flex align-items-center justify-content-between pos-details-print custom-padding-x">
+      <p class="mb-0 pos-details-heading">Detailed View</p>
+      <div class="print-command d-flex align-items-center">
+          <p class="mb-0 printer-icon mx-5"><i class="fs-4 bi-printer"></i></p>
+      </div>
+  </div>
+  <div class="row w-100 px-3 m-0">
+      
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Name</p>
+              <p class="pdb-desc mb-0">{{this.Record1.manufacturerName}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Organization</p>
+              <p class="pdb-desc mb-0">{{this.Record1.organization}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="pos-details-box">
+            <p class="pdb-title mb-0">Transport Export No</p>
+            <p class="pdb-desc mb-0">{{this.Record1.transportExportNo}}</p>
+        </div>
+    </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Permit No</p>
+              <p class="pdb-desc mb-0">{{this.Record1.permitNo}}</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Excise Pass No</p>
+              <p class="pdb-desc mb-0">{{this.Record1.excisePassNo}}</p>
+          </div>
+      </div>
+    </div>
+
+
+
+    
+    <div class="table-responsive custom-table-mt">
+        <table class="table">
+          <thead class="custom-table-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Bottle</th>
+              <th scope="col">Bulk Gallons</th>
+              <th scope="col">Quantity</th>
+              <!-- <th scope="col">Request Date</th> -->
+              <th scope="col">Strength %</th>
+              <th scope="col">Created At</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let arr of StockInDetaillist">
+                <td>{{arr.productName}}</td>
+                <td>{{arr.bottleSize}}</td>
+                <td>{{arr.bulkGallons}}</td>
+                <td>{{arr.quantity}}</td>
+                <!-- <td>{{arr.requestDate| date:'dd-MMM-yy'}}</td> -->
+                <td>{{arr.strenghtPercentage}}</td>
+                <td>{{arr.createdAt| date:'dd-MMM-yyyy'}}</td>
+
+              </tr>
+          
+              
+
+          </tbody>
+        </table>
+      </div>
+
+
+
+ 
+</div>
+<!-- StockInDetaillist -->

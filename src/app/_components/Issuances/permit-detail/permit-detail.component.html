@@ -1,0 +1,144 @@
+<!-- <app-header></app-header> -->
+<div class="divider mt-3"></div>
+<div class="consign-heading">
+  <p class="consign-heading-title mb-0">{{this.Record.personName}}</p>
+</div>
+<div class="pos-details-border ">
+  <div class="print-details d-flex align-items-center justify-content-between pos-details-print custom-padding-x">
+      <p class="mb-0 pos-details-heading">Detailed View</p>
+      <div class="print-command d-flex align-items-center">
+          <p class="mb-0 printer-icon mx-5"><i class="fs-4 bi-printer"></i></p>
+          <!-- <button class="print-btn">Download PDF <span> <i class="bi bi-arrow-down-short"></i></span></button> -->
+      </div>
+  </div>
+  <div class="row w-100 px-3 m-0">
+      
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Name</p>
+              <p class="pdb-desc mb-0">{{this.Record.personName}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Father's Name</p>
+              <p class="pdb-desc mb-0">{{this.Record.fatherHusbandName}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="pos-details-box">
+            <p class="pdb-title mb-0">Phone No</p>
+            <p class="pdb-desc mb-0">{{this.Record.cellNo}}</p>
+        </div>
+    </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">City</p>
+              <p class="pdb-desc mb-0">{{this.Record.city}}</p>
+          </div>
+      </div>
+      <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Profession</p>
+              <p class="pdb-desc mb-0">{{this.Record.city}}</p>
+          </div>
+      </div> -->
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Address</p>
+              <p class="pdb-desc mb-0">{{this.Record.address}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">CNIC/Passport No</p>
+              <p class="pdb-desc mb-0">{{this.Record.cnic}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Permit No (If any)</p>
+              <p class="pdb-desc mb-0">{{this.Record.oldPermitNo == null?'-----':this.Record.oldPermitNo}}</p>
+          </div>
+      </div>
+      <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Old Permit (If any)</p>
+              <p class="pdb-desc mb-0">Call for Report</p>
+          </div>
+      </div> -->
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">DOB</p>
+              <p class="pdb-desc mb-0">{{this.Record.dateofBirth}}</p>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Created At</p>
+              <p class="pdb-desc mb-0">{{this.Record.createdAt}}</p>
+          </div>
+      </div>
+      <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Valid Till</p>
+              <p class="pdb-desc mb-0">12-10-2023</p>
+          </div>
+      </div> -->
+    </div>
+
+    <!-- <p class="mb-0 pos-details-heading custom-padding-x">Liquor Details</p>
+    <div class="divider my-4"></div>
+
+    <div class="row w-100 px-3 m-0">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Quarts</p>
+              <p class="pdb-desc mb-0">150</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Pints</p>
+              <p class="pdb-desc mb-0">100</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Nips</p>
+              <p class="pdb-desc mb-0">100</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Type</p>
+              <p class="pdb-desc mb-0">Lava Mango</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Strength</p>
+              <p class="pdb-desc mb-0">70%</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Duty Rate</p>
+              <p class="pdb-desc mb-0">BA</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="pos-details-box">
+              <p class="pdb-title mb-0">Challan Number</p>
+              <p class="pdb-desc mb-0">6</p>
+          </div>
+      </div>
+    </div>  -->
+</div>
+  

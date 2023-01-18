@@ -1,0 +1,238 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col py-3">
+      <div class="container-fluid consignment">
+        <div class="header">
+
+          <!-- <div class="logout dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin
+            <span class="avatar">
+              <img src="../../assets/profile.png" alt="">
+            </span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div> -->
+          <div class="logout" >
+          <button class="pos-btns pos-btns-sec ms-4" (click)="logout()">Logout</button>
+
+            
+          
+          </div>
+        </div>
+        
+        <!-- <app-header></app-header> -->
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- 
+
+<div class="header">
+  <div class="logout dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Admin
+    <span class="avatar">
+      <img src="../../assets/profile.png" alt="">
+    </span>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li><a class="dropdown-item" href="#">Logout</a></li>
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
+</div>
+Header -->
+
+
+
+
+
+
+
+<!-- <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+  <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <span
+      class="fs-5 d-none d-sm-inline w-100 d-flex align-items-center justify-cotent-center flex-column text-center">
+      <img src="../../assets/government-of-punjab.svg" class="w-50" alt="">
+      <p class="mb-0 sidebar-logo-text">EXCISE TEXTATION & <br> NARCOTICS CONTROL DEPRATMENT</p>
+    </span>
+  </a>
+  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start mt-5" id="menu">
+    <li class="nav-item">
+      <a href="#" class="nav-link align-middle px-0">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link px-0 align-middle">
+        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Consignment</span></a>
+    </li>
+    <li>
+      <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+        <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">PR-1 Form</span></a>
+    </li>
+
+  </ul>
+  <hr>
+  <div class="col py-3">
+  </div>
+</div> -->
+
+
+<!-- <div class="custom-styling">
+  <nav class="sidebar" [ngClass]="status ? 'toggleIn' : 'toggleOut'">
+    <div class="logo d-flex justify-content-between">
+      <a class="large_logo" href="javascript:;"
+        ><img src="../assets/img/logo.png" alt=""
+      /></a>
+      <a class="small_logo" href="javascript:;"
+        ><img src="../assets/img/mini_logo.png" alt=""
+      /></a>
+      <div class="sidebar_close_icon d-lg-none"><i class="ti-close"></i></div>
+    </div>
+    <ul id="sidebar_menu">
+      <ngb-accordion
+        #acc="ngbAccordion"
+        activeIds="ngb-panel-0"
+        class="w-100 p-0"
+        *ngFor="let routes of user.Routes; let i = index"
+        [attr.data-index]="i"
+      >
+        <ngb-panel
+          id="itwo"
+          class="custom-read-box__heading-box border-none custom-side-styles p-0"
+        >
+          <ng-template ngbPanelHeader class="w-25">
+            <div class="d-flex align-items-center justify-content-around w-100">
+              <button ngbPanelToggle class="custom-accord-btn">
+                <div *ngIf="routes.subMenuList?.length" [ngClass]="status ? 'toggleInExapndIcon' : 'toggleOutExapndIcon'">
+                  <ng-container *ngIf="!acc.activeIds.includes('itwo')">
+                    <span class="custom-accord-icons">+</span>
+                  </ng-container>
+                  <ng-container *ngIf="acc.activeIds.includes('itwo')">
+                    <span class="custom-accord-icons">-</span>
+                  </ng-container>
+                </div>
+
+                <a
+                  routerLink="{{ routes.routesadd }}"
+                  aria-expanded="false"
+                  class="d-flex align-items-center justify-content-start border-none w-100 float-left"
+                  
+                >
+                  <div class="nav_icon_small mr-2">
+                    <img
+                      src="../assets/img/menu-icon/{{ routes.icon }}"
+                      alt=""
+                    />
+                  </div>
+                  <div class="nav_title" [ngClass]="status ? 'toggleInExapndIcon' : 'toggleOutExapndIcon'">
+                    <span> {{ routes.routename }}</span>
+                  </div>
+                </a>
+              </button>
+            </div>
+          </ng-template>
+          <ng-template
+            ngbPanelContent
+            *ngIf="routes.subMenuList?.length"
+            class="py-0 bg-dark"
+            
+          >
+            <ul class="child-side-menu" [ngClass]="status ? 'toggleInExapndIcon' : 'toggleOutExapndIcon'">
+              <li
+                *ngFor="let subroutes of routes.subMenuList; let j = index"
+                [attr.data-index]="j"
+              >
+                <a routerLink="{{ subroutes.routesadd }}">{{
+                  subroutes.routename
+                }}</a>
+              </li>
+            </ul>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+
+    </ul>
+  </nav>
+
+  <section
+    id="main-section"
+    class="main_content dashboard_part large_header_bg pb-0"
+    [ngClass]="status ? 'success' : 'danger'"
+  >
+    <div class="container-fluid no-gutters mb-4 border-bottom">
+      <div class="row">
+        <div class="col-lg-12 p-0">
+          <div
+            class="header_iner d-flex align-items-center bg-theme-light"
+          >
+            <div class="sidebar_icon d-lg-none">
+              <i class="ti-menu"></i>
+            </div>
+            <div
+              class="line_icon open_miniSide d-none d-lg-block cursor-pointer"
+              (click)="expanded = !expanded"
+            >
+              <img
+                src="./../../../assets/img/line_img.png"
+                (click)="clickEvent()"
+                alt=""
+              />
+            </div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb tbg">
+                <li class="breadcrumb-item"><a href="#">Adminstration</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  New Registration
+                </li>
+              </ol>
+            </nav>
+            <div class="header_right d-flex ml-auto align-items-center">
+              <div class="profile_info d-flex align-items-center">
+                <div class="profile_thumb mr-2">
+                  <img
+                    src="./../../../assets/img/transfer/4.png"
+                    alt="Profile Pic"
+                  />
+                </div>
+                <div class="author_name">
+                  <h4 class="f_s_12 mb-0 mt-1">{{ user.data?.fullName }}</h4>
+                  <p class="f_s_12 f_w_400" style="margin-top: -7px;">Manager</p>
+                </div>
+                <div class="profile_info_iner">
+                  <div class="profile_author_name">
+                    <p>Manager</p>
+                    <h5>{{ user.data?.fullName }}</h5>
+                  </div>
+                  <div class="profile_info_details">
+                    <a href="#">My Profile </a>
+                    <a href="#">Settings</a>
+                    <a (click)="logout()">Log Out </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </section>
+</div>
+-->

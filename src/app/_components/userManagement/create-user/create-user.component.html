@@ -1,0 +1,231 @@
+<div class="container-fluid no-gutters">
+    <div class="">
+        <div class="col-md-12 wizard">
+
+
+            <form class="form" [formGroup]="form" autocomplete="off">
+                <div class="application_info px-5 py-4 border-bottom">
+                    <div class="row">
+
+                        <div class="col-md-12 mb-2">
+                            <h5 class="sec_title font-weight-bold">Person Information</h5>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="cnic" class="legends">CNIC</label>
+                            <input formControlName="cnic" mask='00000-0000000-0' [showMaskTyped]="true" type="text"
+                                class="form-control form-control-lg" (keypress)="keyPressCNIC($event)"
+                                (change)="cnicChange()">
+                            <div *ngIf="f['cnic'].touched && f['cnic'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['cnic'].errors && f['cnic'].errors['required']">CNIC required.</div>
+                                <div *ngIf="f['cnic'].errors && f['cnic'].errors['minlength']">Invalid CNIC.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <button class="btn btn-success" *ngIf="btnFetchVisibile===true"
+                                (click)="FetchCustomer(1)"><i class="far fa-caret-square-down"></i> Fetch Owner
+                            </button>
+                            <button class="btn btn-outline-danger" *ngIf="btnDeleteVisibile===true"
+                                (click)="ClearCustomer()"><i class="fas fa-redo-alt"></i> Reset Owner </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="personName" class="legends">Owner Name</label>
+                            <input type="text" trim="blur" class="form-control form-control-lg" autocomplete="off"
+                                (keypress)="keyPressAlfhabetsOnly($event)" formControlName="personName" maxlength="50">
+                            <div *ngIf="f['personName'].touched && f['personName'].invalid" class="alert alert-danger">
+                                Owner Name required
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-4">
+                            <label for="fatherHusbandName" class="legends">Father / Husband Name</label>
+                            <input type="text" trim="blur" class="form-control form-control-lg" autocomplete="off"
+                                (keypress)="keyPressAlfhabetsOnly($event)" formControlName="fatherHusbandName"
+                                maxlength="50">
+                            <div *ngIf="f['fatherHusbandName'].touched && f['fatherHusbandName'].invalid"
+                                class="alert alert-danger">
+                                Father/Husband name required
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-12 mb-3">
+                            <h5 class="sec_title font-weight-bold">Other Particulars</h5>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="phoneNumber" class="legends">Phone Number</label>
+                            <input type="text" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="phoneNumber" (keypress)="keyPressNumberOnly($event)" maxlength="11">
+                            <div *ngIf="f['phoneNumber'].touched && f['phoneNumber'].invalid"
+                                class="alert alert-danger">
+                                <div *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['required']">Phone number
+                                    required.</div>
+                                <div *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['minlength']">Invalid
+                                    phone number.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="phone2" class="legends">Phone 2</label>
+                            <input type="text" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="phone2" (keypress)="keyPressNumberOnly($event)" maxlength="11">
+                            <div *ngIf="f['phone2'].touched && f['phone2'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['phone2'].errors && f['phone2'].errors['required']">Phone number required.
+                                </div>
+                                <div *ngIf="f['phone2'].errors && f['phone2'].errors['minlength']">Invalid phone number.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="email" class="legends">Email</label>
+                            <input type="text" trim="blur" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="email" maxlength="50">
+                            <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['email'].errors && f['email'].errors['required']">Email required.</div>
+                                <div *ngIf="f['email'].errors && f['email'].errors['email']">Invalid email.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="ntn" class="legends">NTN No</label>
+                            <input type="text" trim="blur" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="ntn" id="ntn" (keypress)="keyPressNumberOnly($event)" maxlength="20">
+                            <div *ngIf="f['ntn'].touched && f['ntn'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['ntn'].errors && f['ntn'].errors['required']">NTN required.</div>
+                                <div *ngIf="f['ntn'].errors && f['ntn'].errors['minlength']">Invalid NTN.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- <app-cmnaddress [InputData]="CommonAddress" [dddistricts]="dddistricts"
+                            [ddAddressArea]="ddaddressArea" [ddTehsil]="ddTehsil" [ddPostOffice]="ddPostOffice"
+                            [Isdisabled]="0" (onsave)="AddressedSaved($event)"></app-cmnaddress> -->
+
+                    </div>
+                </div>
+
+
+                <div class="application_info px-5 py-4 border-bottom">
+
+                    <div class="row">
+
+                        <div class="col-md-12 mb-2">
+                            <h5 class="sec_title font-weight-bold">User Information</h5>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="UserName" class="legends">User Name</label>
+                            <input type="text" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="UserName" maxlength="50" readonly="readonly">
+                            <div *ngIf="f['UserName'].touched && f['UserName'].invalid" class="alert alert-danger">
+                                Username required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="Password" class="legends">Password</label>
+                            <input type="password" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="Password" maxlength="50">
+                            <div *ngIf="f['Password'].touched && f['Password'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['Password'].errors && f['Password'].errors['required']">Password required.
+                                </div>
+                                <div *ngIf="f['Password'].errors && f['Password'].errors['minlength']">Password should
+                                    have at least 8 digits.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="cnfPassword" class="legends">Confirm Password</label>
+                            <input type="password" class="form-control form-control-lg" autocomplete="off"
+                                formControlName="cnfPassword" maxlength="50">
+                            <div *ngIf="f['cnfPassword'].touched && f['cnfPassword'].invalid"
+                                class="alert alert-danger">
+                                <div *ngIf="f['cnfPassword'].errors && f['cnfPassword'].errors['required']">Confirm
+                                    password required.</div>
+                                <div *ngIf="f['cnfPassword'].errors && f['cnfPassword'].errors['minlength']">Confirm
+                                    password should have at least 8 digits.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="DistrictId" class="legends">Office District</label>
+                            <select formControlName="DistrictId" class="form-control form-control-lg"
+                                (change)="changeDistrict()">
+                                <option value=""> Please select</option>
+                                <option *ngFor="let item of dddistricts" [value]="item.value">
+                                    {{item.display}}
+                                </option>
+                            </select>
+                            <div *ngIf="f['DistrictId'].touched && f['DistrictId'].invalid " class="alert alert-danger">
+                                Office district required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="SiteOfficeId" class="legends">Site Office</label>
+                            <select formControlName="SiteOfficeId" class="form-control form-control-lg"
+                                (change)="ChangeRole()">
+                                <option value=""> Please select</option>
+                                <option *ngFor="let item of ddSiteOfficeFiltered" [value]="item.value">
+                                    {{item.display}}
+                                </option>
+                            </select>
+                            <div *ngIf="f['SiteOfficeId'].touched && f['SiteOfficeId'].invalid "
+                                class="alert alert-danger">
+                                Site office required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="RoleId" class="legends">Role</label>
+                            <select formControlName="RoleId" class="form-control form-control-lg"
+                                (change)="ChangeRole()">
+                                <option value=""> Please select</option>
+                                <option *ngFor="let item of ddRoles" [value]="item.value">
+                                    {{item.display}}
+                                </option>
+                            </select>
+                            <div *ngIf="f['RoleId'].touched && f['RoleId'].invalid " class="alert alert-danger">
+                                User role required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4" *ngIf="showLineManager===true">
+                            <label for="LineManagerId" class="legends">Line Manager</label>
+                            <select formControlName="LineManagerId" class="form-control form-control-lg">
+                                <option value=""> Please select</option>
+                                <option *ngFor="let item of ddLineManager" [value]="item.value">
+                                    {{item.display}}
+                                </option>
+                            </select>
+                            <div *ngIf="f['LineManagerId'].touched && f['LineManagerId'].invalid "
+                                class="alert alert-danger">
+                                Line manager required.
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </form>
+            <div class="bottom_next_prev_area px-5 py-4">
+                <div class="row">
+                    <div class="col-md-10">
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <button class="btn btn-lg btn-success py-2 mr-3" (click)="restApplication()">Reset</button>
+                        <button class="btn btn-lg btn-primary px-3 py-2" (click)="Save()">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

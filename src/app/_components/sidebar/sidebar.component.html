@@ -1,0 +1,50 @@
+<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+  <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <span
+      class="fs-5 d-none d-sm-inline w-100 d-flex align-items-center justify-cotent-center flex-column text-center">
+      <img src="../../assets/government-of-punjab.svg" class="w-50" alt="">
+      <p class="mb-0 sidebar-logo-text">EXCISE TAXATION & <br> NARCOTICS CONTROL DEPARTMENT</p>
+    </span>
+  </a>
+  <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start mt-5" id="menu">
+    <!-- <li class="nav-item">
+      <a href="/src/app/_components/dashboard/dashboard.component.html" class="nav-link align-middle px-0">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+      </a>
+    </li> -->
+    <li>
+      <a href="master/dashboard" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+    </li>
+    <div *ngIf="this.role == 'ETI' || this.role == 'ETO'">
+      <li>
+        <a href="master/PermitApplication" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+          <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Permit Issuance Application</span></a>
+      </li>
+      <li>
+        <a href="master/PermitList" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+          <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Permit Application List</span></a>
+      </li>
+    </div>
+    <div *ngIf="this.role == 'Vend Shop Operator'">
+      <li>
+        <a href="master/StockInApplication" class="nav-link px-0 align-middle">
+          <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Consignment</span></a>
+      </li>
+    
+      <li>
+        <a href="master/pos" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+          <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">POS</span></a>
+      </li>
+      <li>
+        <a href="master/StockInList" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+          <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Stock In List</span></a>
+      </li>
+    </div>
+
+
+    
+    
+  </ul>
+  <hr>
+</div>

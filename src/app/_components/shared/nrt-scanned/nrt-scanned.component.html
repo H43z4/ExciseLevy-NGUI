@@ -1,0 +1,295 @@
+<div class="container-fluid last-child no-gutters d-flex align-items-center justify-content-center flex-column bg-white px-4 py-3">
+    <div class="row w-100">
+        <form class="form w-100"  [formGroup]="form"  autocomplete="off"  >  
+          <div class="row w-100">
+            <div class="col-lg-3"></div>
+            <div class="col-md-5 mb-4">
+              <label for="cnic" class="legends">Application Id / Reg No.</label>
+              <input formControlName="RegNo" type="text"  class="form-control form-control-lg"  maxlength="30">
+              <div *ngIf="f['RegNo'].touched && f['RegNo'].invalid" class="alert alert-danger">
+                Field required.
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <button class="btn btn-success" *ngIf="btnFetchVisibile===true"
+                (click)="onRegisterSubmit()"><i class="far fa-caret-square-down"></i> Search </button>
+              <button class="btn btn-outline-danger" *ngIf="btnDeleteVisibile===true"
+                (click)="rest()"><i class="fas fa-redo-alt"></i> Reset </button>
+            </div>
+          </div>  
+
+            <!-- <div class="row w-100">
+                <div class="col-lg-3"></div>
+                <div class="col-md-5  mb-4">
+                    <label for="cnic" class="legends">Application Id / Reg No.</label>
+                    <input  type="text" class="form-control form-control-lg w-100"
+                    #myTitle (keyup)="keyup(myTitle.value)"
+                    maxlength="20">
+                </div>
+               
+                <div class="col-md-4 mb-4">
+                    <button class="btn btn-success" (click)="onRegisterSubmit()" ><i class="far fa-caret-square-down"></i> Search </button>
+                </div>
+            </div> -->
+        </form>
+    </div>
+
+    <div class="container-table p-0" *ngIf="GeneralObj?.data?.owner?.persons">
+        <!-- <h4>Owner Information</h4> -->
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col text-center fs-2">Name</div>
+            <div class="col text-center fs-2">Father/Husband Name</div>
+            <div class="col text-center fs-2">CNIC</div>
+            <div class="col text-center fs-2">Phone</div>
+          </li>
+          <li
+            class="table-row"
+            *ngFor="let person of GeneralObj?.data?.owner?.persons"
+          >
+            <div
+              class="col text-center text-uppercase fw-bold"
+              data-label="Name"
+            >
+              {{ person.personName }}
+            </div>
+            <div
+              class="col text-center fw-bold"
+              data-label="Father/Husband Name"
+            >
+              {{ person.fatherHusbandName }}
+            </div>
+            <div class="col text-center fw-bold" data-label="CNIC">
+              {{ person.cnic }}
+            </div>
+            <div class="col text-center fw-bold" data-label="Phone">
+              {{ person.phoneNumbers[0].phoneNumberValue }}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="container-table p-0" *ngIf="GeneralObj?.data?.owner?.business">
+        <!-- <h4>Owner Information</h4> -->
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col text-center fs-2">NTN</div>
+            <div class="col text-center fs-2">Business RegNo</div>
+            <div class="col text-center fs-2">Business Name</div>
+            <div class="col text-center fs-2">Email</div>
+          </li>
+          <li class="table-row" >
+            <div
+              class="col text-center text-uppercase fw-bold"
+              data-label="NTN"
+            >
+              {{ GeneralObj?.data?.owner?.business?.ntn }}
+            </div>
+            <div class="col text-center fw-bold" data-label="Business RegNo">
+              {{ GeneralObj?.data?.owner?.business?.businessRegNo }}
+            </div>
+            <div class="col text-center fw-bold" data-label="Business Name">
+              {{ GeneralObj?.data?.owner?.business?.businessName }}
+            </div>
+            <div class="col text-center fw-bold" data-label="Email">
+              {{ GeneralObj?.data?.owner?.business?.email }}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+    <!-- <div class="row w-100 card" *ngIf="GeneralObj?.data?.owner?.persons">
+        <h5 class="card-header bg-primary h6">Owner Information</h5>
+        <div class="card-body">
+          
+            <table class="table table-bordered" >
+                <thead>
+                      <tr><th>Name</th><th>Father/Husband Name</th><th>CNIC</th> <th>Phone</th></tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let person of GeneralObj?.data?.owner?.persons">
+                      <td>{{ person.personName }}</td>
+                      <td>{{ person.fatherHusbandName }}</td>
+                      <td>{{ person.cnic }}</td>
+                      <td>{{ person.phoneNumbers[0].phoneNumberValue }}</td>
+                </tr>
+                </tbody>
+             </table>
+          
+        </div>
+    </div>
+    <div class="row w-100 card" *ngIf="GeneralObj?.data?.owner?.business">
+        <h5 class="card-header bg-primary h6">Owner Information</h5>
+        <div class="card-body">
+          
+            <table *ngIf="GeneralObj?.data?.owner?.business" class="table table-bordered datatable" >
+                <thead>
+                   <tr><th>NTN</th><th>Business RegNo</th><th>Business Name</th><th>Email</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                   <td>{{ GeneralObj?.data?.owner?.business?.ntn }}</td>
+                   <td>{{ GeneralObj?.data?.owner?.business?.businessRegNo }}</td>
+                   <td>{{ GeneralObj?.data?.owner?.business?.businessName }}</td>
+                   <td>{{ GeneralObj?.data?.owner?.business?.email }}</td>
+                </tr>
+                </tbody>
+          </table>
+          
+        </div>
+    </div> -->
+
+    <!-- <div class="row w-100 card" *ngIf="GeneralObj?.data?.vehicle">
+        <h5 class="card-header bg-primary h6">Vehicle Information</h5>
+            <div class="card-body">
+                <div class="row">
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Reg#</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.registrationNo}}</h5>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Make</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.vehicleMake}}</h5>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Modal</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.manufacturingYear}}</h5>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Maker</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.vehicleMaker}}</h5>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <ngb-accordion #acc="ngbAccordion" activeIds="first" class="w-100" *ngIf="GeneralObj?.data?.vehicle">
+        <ngb-panel class="custom-read-box__heading-box" id="first">
+          <ng-template ngbPanelHeader>
+            <div class="d-flex align-items-center">
+              <button ngbPanelToggle class="custom-accord-btn">
+                <ng-container *ngIf="!acc.activeIds.includes('first')">
+                  <span class="custom-accord-icons">+</span>
+                </ng-container>
+                <ng-container *ngIf="acc.activeIds.includes('first')">
+                  <span class="custom-accord-icons">-</span>
+                </ng-container>
+                Vehicle Information
+              </button>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent >
+           <br>
+           <div class="row">
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Reg#</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.registrationNo}}</h5>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Make</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.vehicleMake}}</h5>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Modal</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.manufacturingYear}}</h5>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <label for="" class="legends">Maker</label>
+                    <h5 class="my-2">{{GeneralObj?.data?.vehicle.vehicleMaker}}</h5>
+                </div>
+        </div>
+    
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+
+
+    <div class="container-table p-0" *ngIf="GeneralObj?.data?.vehicleDocuments">
+        <!-- <h4>Attached Documents</h4> -->
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col text-center fs-2">Document Type</div>
+            <div class="col text-center fs-2">No of Pages</div>
+            <div class="col text-center fs-2">File Name</div>
+            <div class="col text-center fs-2">Upload</div>
+          </li>
+          <li
+            class="table-row"
+            *ngFor="let vehicleDocuments of GeneralObj?.data?.vehicleDocuments"
+          >
+            <div
+              class="col text-center text-uppercase fw-bold"
+              data-label="Document Type"
+            >
+              {{ vehicleDocuments.vehicleDocumentType }}
+            </div>
+            <div
+              class="col text-center fw-bold"
+              data-label="total Pages"
+            >
+              {{ vehicleDocuments.totalPages }}
+            </div>
+            <div class="col text-center fw-bold" data-label="File Name">
+              {{ vehicleDocuments.uploadedFileName }}
+            </div>
+            <div class="col text-center fw-bold" data-label="Attach">
+                <input type="file" (change)="selectFiles($event,vehicleDocuments.vehicleDocumentTypeId,vehicleDocuments.totalPages)">
+            </div>
+          </li>
+        </ul>
+      </div>
+
+<!-- <div class="row w-100 card" *ngIf="GeneralObj?.data?.vehicleDocuments">
+    <h5 class="card-header bg-primary h6">Document List</h5>
+    <div class="card-body">
+        <table class="table table-bordered mx-5">
+            <thead>
+              <tr>
+                <th scope="col">Document Type</th>
+                <th scope="col">No of Pages</th>
+                <th scope="col">File Name</th>
+                <th scope="col">Upload</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let vehicleDocuments of GeneralObj?.data?.vehicleDocuments">
+                <td>{{vehicleDocuments.vehicleDocumentType}}</td>
+                <td>{{vehicleDocuments.totalPages}}</td>
+                <td>{{vehicleDocuments.uploadedFileName}}</td>
+                <td>
+                    
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      
+    </div>
+</div> -->
+
+
+
+
+
+<br>
+<div class="row w-100 d-flex align-items-center justify-content-end pb-5">
+    <button type="button" *ngIf="GeneralObj?.data?.vehicleDocuments" class="btn btn-lg btn-primary py-2 mr-3"  (click)="uploadFiles()">Upload Documents</button>
+    <button type="button" *ngIf="applicationId && applicationId>0" class="btn btn-lg btn-success py-2 mr-3"  (click)="open(content)">Acknowledgement</button>
+    
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Are you sure!</h4>
+        <!-- <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button> -->
+      </div>
+      <div class="modal-body">
+        <p>Document scaning is complete for this application.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="PhaseChange()" (click)="c('Cross click')">Confirm</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Cross click')">Close</button>
+      </div>
+    </ng-template>
+
+</div>
+</div>

@@ -1,0 +1,13 @@
+.nav .nav-item:before {
+  display: none;
+}
+.nav-tabs .nav-link{
+    font-size: 16px;
+    color: #7f7f8d;
+    font-weight: normal;
+}
+
+.nav.nav-tabs .nav-item.show:focus, .nav.nav-tabs .nav-item.show.active, .nav.nav-tabs .nav-link:focus, .nav.nav-tabs .nav-link.active{
+    color: #11263C !important;
+    font-weight: 600;
+}

@@ -1,0 +1,383 @@
+<div class="container-fluid no-gutters">
+    <div class="">
+        <div class="col-md-12 wizard">
+    <form class="form" [formGroup]="form" autocomplete="off">
+                        <div class="application_info px-5 py-4 border-bottom">
+                                <!-- Business Detail -->
+                                <div class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <h5 class="sec_title font-weight-bold">Business Information</h5> 
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="businessNTN" class="legends">NTN</label>
+                                        <input formControlName="businessNTN" type="text" class="form-control form-control-lg" (keypress)="keyPressNTN($event)" maxlength="30">
+                                    <div *ngIf="f['businessNTN'].touched && f['businessNTN'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['businessNTN'].errors && f['businessNTN'].errors['required']">NTN required.</div>
+                                        <div *ngIf="f['businessNTN'].errors && f['businessNTN'].errors['minlength']">Invalid NTN.</div>
+                                    </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <!-- <button class="btn btn-success" *ngIf="btnFetchVisibile===true" (click)="FetchBusiness()"><i class="far fa-caret-square-down"></i> Fetch Business </button> -->
+                                        <button class="btn btn-outline-danger" *ngIf="btnDeleteVisibile===true" (click)="ClearBusiess()"><i class="fas fa-redo-alt"></i> Rest Business </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessTypeId" class="legends">Business Type</label> 
+                                    <select formControlName="businessTypeId" class="form-control form-control-lg">
+                                        <option value=""> Please select</option>
+                                        <option *ngFor="let item of ddbusinessType" [value]="item.value">
+                                            {{item.display}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="f['businessTypeId'].touched && f['businessTypeId'].invalid" class="alert alert-danger">
+                                        Business type required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessSectorId" class="legends">Business Sector</label> 
+                                    <select formControlName="businessSectorId" class="form-control form-control-lg">
+                                        <option value=""> Please select</option>
+                                        <option *ngFor="let item of ddbusinessSector" [value]="item.value">
+                                            {{item.display}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="f['businessSectorId'].touched && f['businessSectorId'].invalid" class="alert alert-danger">
+                                        Business sector required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessStatusId" class="legends">Business Status</label> 
+                                    <select formControlName="businessStatusId" class="form-control form-control-lg" >
+                                        <option value=""> Please select</option>
+                                        <option *ngFor="let item of ddbusinessStatus" [value]="item.value">
+                                            {{item.display}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="f['businessStatusId'].touched && f['businessStatusId'].invalid" class="alert alert-danger">
+                                        Business status required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessRegNo" class="legends">Reg No</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="businessRegNo" maxlength="50">
+                                    <div *ngIf="f['businessRegNo'].touched && f['businessRegNo'].invalid" class="alert alert-danger">
+                                        Reg No required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessName" class="legends">Business Name</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off"  (keypress)="keyPressAlfhabetsOnly($event)" formControlName="businessName" maxlength="50">
+                                    <div *ngIf="f['businessName'].touched && f['businessName'].invalid" class="alert alert-danger">
+                                        Business name required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessEmail" class="legends">Business Email</label>
+                                    <input type="email" class="form-control form-control-lg" autocomplete="off" formControlName="businessEmail" maxlength="50">
+                                    <div *ngIf="f['businessEmail'].touched && f['businessEmail'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['businessEmail'].errors && f['businessEmail'].errors['required']">Email required.</div>
+                                        <div *ngIf="f['businessEmail'].errors && f['businessEmail'].errors['email']">Invalid email.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for=" businessFTN" class="legends">FTN</label>
+                                    <input type="text" class="form-control form-control-lg" (keypress)="keyPressNumberOnly($event)" autocomplete="off" formControlName="businessFTN" maxlength="10">
+                                    <div *ngIf="f['businessFTN'].touched && f['businessFTN'].invalid" class="alert alert-danger">
+                                        FTN required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessSTN" class="legends">STN</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressNumberOnly($event)" formControlName="businessSTN" maxlength="10">
+                                    <div *ngIf="f['businessSTN'].touched && f['businessSTN'].invalid" class="alert alert-danger">
+                                        STN required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <h5 class="sec_title font-weight-bold">Present address</h5> 
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPresentAddress" class="legends">Street</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="businessPresentAddress" maxlength="50">
+                                    <div *ngIf="f['businessPresentAddress'].touched && f['businessPresentAddress'].invalid" class="alert alert-danger">
+                                        Street of permenent address required
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPresentCity" class="legends">City</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="businessPresentCity" maxlength="50">
+                                    <div *ngIf="f['businessPresentCity'].touched && f['businessPresentCity'].invalid" class="alert alert-danger">
+                                        City name of present address required
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPresentDistrictId" class="legends">District</label>
+                                    <select formControlName="businessPresentDistrictId" class="form-control form-control-lg">
+                                        <option value=""> Please select</option>
+                                        <option *ngFor="let item of dddistricts" [value]="item.value">
+                                            {{item.display}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="f['businessPresentDistrictId'].touched && f['businessPresentDistrictId'].invalid " class="alert alert-danger">
+                                        businesst district required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <h5 class="sec_title font-weight-bold">Permanent address</h5> 
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPermanentAddress" class="legends">Street</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="businessPermanentAddress" maxlength="50">
+                                    <div *ngIf="f['businessPermanentAddress'].touched && f['businessPermanentAddress'].invalid" class="alert alert-danger">
+                                        Street of permenent address required
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPermanentCity" class="legends">City</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="businessPermanentCity" maxlength="50">
+                                    <div *ngIf="f['businessPermanentCity'].touched && f['businessPermanentCity'].invalid" class="alert alert-danger">
+                                    City name of permenent address required
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPermanentDistrictId" class="legends">District</label>
+                                    <select formControlName="businessPermanentDistrictId" class="form-control form-control-lg">
+                                        <option value=""> Please select</option>
+                                        <option *ngFor="let item of dddistricts" [value]="item.value">
+                                            {{item.display}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="f['businessPermanentDistrictId'].touched && f['businessPermanentDistrictId'].invalid " class="alert alert-danger">
+                                        District required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <h5 class="sec_title font-weight-bold">Other particulars</h5> 
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPhoneNumber" class="legends">phone Number</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="businessPhoneNumber" (keypress)="keyPressNumberOnly($event)" maxlength="11">
+                                    <div *ngIf="f['businessPhoneNumber'].touched && f['businessPhoneNumber'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['businessPhoneNumber'].errors && f['businessPhoneNumber'].errors['required']">Phone number required.</div>
+                                        <div *ngIf="f['businessPhoneNumber'].errors && f['businessPhoneNumber'].errors['minlength']">Invalid phone number.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPhone2" class="legends">Phone 2</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="businessPhone2" (keypress)="keyPressNumberOnly($event)" maxlength="11">
+                                    <div *ngIf="f['businessPhone2'].touched && f['businessPhone2'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['businessPhone2'].errors && f['businessPhone2'].errors['required']">Phone number required.</div>
+                                        <div *ngIf="f['businessPhone2'].errors && f['businessPhone2'].errors['minlength']">Invalid phone number.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label for="businessPostalCode" class="legends">Postal Code</label>
+                                    <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="businessPostalCode" (keypress)="keyPressNumberOnly($event)" maxlength="5">
+                                    <div *ngIf="f['businessPostalCode'].touched && f['businessPostalCode'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['businessPostalCode'].errors && f['businessPostalCode'].errors['required']"> Postal code required.</div>
+                                        <div *ngIf="f['businessPostalCode'].errors && f['businessPostalCode'].errors['minlength']">Invalid postal code.</div>
+                                    </div>
+                                </div>
+                                </div>
+
+                          <hr>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                    <h5 class="sec_title font-weight-bold">Owner Information</h5> 
+                                </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="cnic" class="legends">CNIC</label>
+                                <input formControlName="cnic" mask='00000-0000000-0'
+                                  type="text" class="form-control form-control-lg">
+                                    <div *ngIf="f['cnic'].touched && f['cnic'].invalid" class="alert alert-danger">
+                                        <div *ngIf="f['cnic'].errors && f['cnic'].errors['required']">CNIC required.</div>
+                                        <div *ngIf="f['cnic'].errors && f['cnic'].errors['minlength']">Invalid CNIC.</div>
+                                    </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="personName" class="legends">Owner Name</label> 
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="personName"  maxlength="50">
+                                <div *ngIf="f['personName'].touched && f['personName'].invalid" class="alert alert-danger">
+                                    Owner Name required
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 mb-4">
+                                <label for="fatherHusbandName" class="legends">Father / Husband name</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="fatherHusbandName" maxlength="50">
+                                <div *ngIf="f['fatherHusbandName'].touched && f['fatherHusbandName'].invalid" class="alert alert-danger">
+                                    Father/Husband name required
+                                </div>
+                             </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-12 mb-2">
+                                <h5 class="sec_title font-weight-bold">Present address</h5> 
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="presentAddress" class="legends">Street</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off"  formControlName="presentAddress" maxlength="50">
+                                <div *ngIf="f['presentAddress'].touched && f['presentAddress'].invalid" class="alert alert-danger">
+                                    Street of permenent address required
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="presentCity" class="legends">City</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="presentCity" maxlength="50">
+                                <div *ngIf="f['presentCity'].touched && f['presentCity'].invalid" class="alert alert-danger">
+                                    City name of present address required
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="presentDistrictId" class="legends">District</label>
+                                <select formControlName="presentDistrictId" class="form-control form-control-lg">
+                                    <option value=""> Please select</option>
+                                    <option *ngFor="let item of dddistricts" [value]="item.value">
+                                        {{item.display}}
+                                    </option>
+                                </select>
+                                <div *ngIf="f['presentDistrictId'].touched && f['presentDistrictId'].invalid " class="alert alert-danger">
+                                    District required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-2">
+                                <h5 class="sec_title font-weight-bold">Permanent address</h5> 
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="permanentAddress" class="legends">Street</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="permanentAddress" maxlength="50">
+                                <div *ngIf="f['permanentAddress'].touched && f['permanentAddress'].invalid" class="alert alert-danger">
+                                    Street of permenent address required
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="permanentCity" class="legends">City</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" (keypress)="keyPressAlfhabetsOnly($event)" formControlName="permanentCity" maxlength="50">
+                                <div *ngIf="f['permanentCity'].touched && f['permanentCity'].invalid" class="alert alert-danger">
+                                   City name of permenent address required
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="permanentDistrictId" class="legends">District</label>
+                                <select formControlName="permanentDistrictId" class="form-control form-control-lg">
+                                    <option value=""> Please select</option>
+                                    <option *ngFor="let item of dddistricts" [value]="item.value">
+                                        {{item.display}}
+                                    </option>
+                                </select>
+                                <div *ngIf="f['permanentDistrictId'].touched && f['permanentDistrictId'].invalid " class="alert alert-danger">
+                                    District required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-2">
+                                <h5 class="sec_title font-weight-bold">Other particulars</h5> 
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="phoneNumber" class="legends">phone Number</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="phoneNumber" (keypress)="keyPressNumberOnly($event)" maxlength="11">
+                                <div *ngIf="f['phoneNumber'].touched && f['phoneNumber'].invalid" class="alert alert-danger">
+                                    <div *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['required']">Phone number required.</div>
+                                    <div *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['minlength']">Invalid phone number.</div>
+                                 </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="phone2" class="legends">Phone 2</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="phone2" (keypress)="keyPressNumberOnly($event)" maxlength="11">
+                                <div *ngIf="f['phone2'].touched && f['phone2'].invalid" class="alert alert-danger">
+                                    <div *ngIf="f['phone2'].errors && f['phone2'].errors['required']">Phone number required.</div>
+                                    <div *ngIf="f['phone2'].errors && f['phone2'].errors['minlength']">Invalid phone number.</div>
+                                 </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="email" class="legends">Email</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="email" maxlength="50">
+                                <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                                    <div *ngIf="f['email'].errors && f['email'].errors['required']">Email required.</div>
+                                    <div *ngIf="f['email'].errors && f['email'].errors['email']">Invalid email.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-4">
+                                <label for="postalCode" class="legends">Postal Code</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="postalCode" (keypress)="keyPressNumberOnly($event)" maxlength="5">
+                                <div *ngIf="f['postalCode'].touched && f['postalCode'].invalid" class="alert alert-danger">
+                                    <div *ngIf="f['postalCode'].errors && f['postalCode'].errors['required']">Postal code required.</div>
+                                    <div *ngIf="f['postalCode'].errors && f['postalCode'].errors['minlength']">Invalid postal code.</div>
+                                 </div>
+                            </div>
+
+                            <!-- <div class="col-md-4 mb-3">
+                                <label for="oldCNIC" class="legends">Old NIC</label>
+                                <input type="text" class="form-control" mask='00000-0000000-0'  [showMaskTyped]="true"  formControlName="oldCNIC" id="oldCNIC">
+                            </div> -->
+                            <div class="col-md-4 mb-4">
+                                <label for="ntn" class="legends">NTN No</label>
+                                <input type="text" class="form-control form-control-lg" autocomplete="off" formControlName="ntn" id="ntn" (keypress)="keyPressNumberOnly($event)" maxlength="10">
+                                <div *ngIf="f['ntn'].touched && f['ntn'].invalid" class="alert alert-danger">
+                                    <div *ngIf="f['ntn'].errors && f['ntn'].errors['required']">NTN required.</div>
+                                    <div *ngIf="f['ntn'].errors && f['ntn'].errors['minlength']">Invalid NTN.</div>
+                                 </div>
+                            </div>
+                        </div>
+                 
+                      
+            </div>                
+
+             
+                        
+                    </form>
+                    <div class="bottom_next_prev_area px-5 py-4">
+                        <div class="row">
+                            <div class="col-md-10">
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <button class="btn btn-lg btn-secondary py-2" (click)="resetForm()">Reset</button>
+                                <button class="btn btn-lg btn-primary px-3 py-2" (click)="Save()" >Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+        </div>
+                   
+
+                   
+            
+        
+    </div>
+</div>

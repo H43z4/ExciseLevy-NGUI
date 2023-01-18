@@ -1,0 +1,72 @@
+
+
+<div class="container-table p-1" style="background-color: #ffff; width: 98%;">
+
+
+<!-- <table datatable [dtOptions]="dtOptions"  class="row-border hover responsive-table" >
+    <thead  class="table-header">
+      <tr>
+        <th>District</th>
+        <th>Site Office</th>
+        <th>User Name</th>
+        <th>CNIC</th>
+        <th>Person Name</th>
+        <th>Email</th>
+        <th>Manager Name</th>
+        <th>Manager UserName</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-row" *ngFor="let user of userList">
+        <td>{{user.district}}</td>
+        <td>{{user.siteOffice}}</td>
+        <td>{{user.userName}}</td>
+        <td>{{user.cnic}}</td>
+        <td>{{user.personName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.managerName}}</td>
+        <td>{{user.managerUserName}}</td>
+   
+      </tr>
+    
+    </tbody>
+  </table> -->
+  
+
+  <div class="container-table">
+    <ul class="responsive-table">
+      <li class="table-header d-flex align-items-center">
+        <div class="col">District</div>
+        <div class="col">Site Office</div>
+        <div class="col ">User Name</div>
+        <!-- <div class="col">CNIC</div> -->
+        <div class="col ">Person Name</div>
+        <div class="col">Email</div>
+        <div class="col">Manager Name</div>
+        <div class="col">Manager UserName</div>
+        <div class="col col-1 text-center">Detail</div>
+      </li>
+      <li class="table-row d-flex align-items-center p-2" *ngFor="let user of userList">
+        <div class="col" data-label="District">{{ user.district }}</div>
+        <div class="col" data-label="Site Office">{{ user.siteOffice }}</div>
+        <div class="col " data-label="User Name">{{ user.userName }}</div>
+        <!-- <div class="col" data-label="CNIC">{{ user.cnic }}</div> -->
+        <div class="col " data-label="Person Name">{{ user.personName }}</div>
+        <div class="col" data-label="Email">{{ user.email }}</div>
+        <div class="col" data-label="Manager">{{ user.managerName }}</div>
+        <div class="col" data-label="Manager UserName">{{ user.managerUserName }}</div>
+        <div class="col col-1 text-end" data-label="Detail">
+          <button type="button" class="btn btn-default" title="Detail" (click)="viewProfileDetail(user.userId)">
+          <i class="ti-pencil-alt text-success"></i>
+        </button>
+        </div>
+      </li>
+     
+    </ul>
+  </div>
+  
+
+
+  
+   
+  </div>

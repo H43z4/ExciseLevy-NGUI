@@ -1,0 +1,285 @@
+
+        <!-- <app-header></app-header> -->
+         
+          <div class="divider mt-3"></div>
+          <div class="consign-heading">
+            <p class="consign-heading-title mb-0">Permit Application Form</p>
+          </div>
+          <input type="radio" name="color" checked  (change)="OnCheckChange(1)" value="1"> Local Resident
+          <input type="radio" name="color" (change)="OnCheckChange(2)"value="2"> Foreigner
+
+
+          <p class="mb-0 liq-details">Personal Information</p>
+          <div class="divider"></div>
+          <div class="row" [formGroup]="PRBasicfromLocal" *ngIf="ShowForeign === false">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Name*</label>
+                <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="Name" placeholder="Name">
+                <div *ngIf="TypeControl['Name'].touched && TypeControl['Name'].invalid" class="alert alert-danger">
+                  Name required.
+              </div>
+
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Father Name*</label>
+                <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="FatherName" placeholder="Father Name">
+                <div *ngIf="TypeControl['FatherName'].touched && TypeControl['FatherName'].invalid" class="alert alert-danger">
+                  Father Name required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">CNIC*</label>
+                <input type="text" placeholder="0000000000000" (blur)="searchCnic()" (keypress)="keyPressNumberOnly($event)"onKeyPress="if(this.value.length==13) return false;" class="form-control" formControlName="CNIC">
+                <div *ngIf="TypeControl['CNIC'].touched && TypeControl['CNIC'].invalid" class="alert alert-danger">
+                  CNIC required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Phone Number*</label>
+                <input type="text" class="form-control" (keypress)="keyPressbyNumber19Only($event)" placeholder="0000000000" onKeyPress="if(this.value.length==11) return false;" formControlName="Phone">
+                <div *ngIf="TypeControl['Phone'].touched && TypeControl['Phone'].invalid" class="alert alert-danger">
+                  Phone Number required.
+              </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Address*</label>
+                <input type="text" class="form-control" formControlName="Address" placeholder="Address">
+                <div *ngIf="TypeControl['Address'].touched && TypeControl['Address'].invalid" class="alert alert-danger">
+                  Address required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">City*</label>
+                <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="City"placeholder="City">
+                <div *ngIf="TypeControl['City'].touched && TypeControl['City'].invalid" class="alert alert-danger">
+                  City required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">DOB*</label>
+                <input type="date" class="form-control" (change)="dateChanged($event)"  formControlName="DOB" placeholder="DOB">
+                <div *ngIf="TypeControl['DOB'].touched && TypeControl['DOB'].invalid" class="alert alert-danger">
+                  DOB required.
+              </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Profession*</label>
+                <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="Profession"placeholder="Profession">
+                <div *ngIf="TypeControl['Profession'].touched && TypeControl['Profession'].invalid" class="alert alert-danger">
+                  Profession required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Old Permit No. (If any)</label>
+                <input type="number" class="form-control" formControlName="OldPermit" placeholder="Old Permit No">
+                <!-- <div *ngIf="TypeControl['OldPermit'].touched && TypeControl['OldPermit'].invalid" class="alert alert-danger">
+                  Old Permit required.
+              </div> -->
+              </div>
+            </div>
+          </div>
+  
+
+          <div class="row" [formGroup]="PRBasicFromForeign" *ngIf="ShowForeign === true">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Name*</label>
+                <input type="text"(keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="Name" placeholder="Enter Name">
+                <div *ngIf="TypeControlForeign['Name'].touched && TypeControlForeign['Name'].invalid" class="alert alert-danger">
+                  Name required.
+              </div>
+
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Father Name*</label>
+                <input type="text" class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"formControlName="FatherName" placeholder="Enter Father Name">
+                <div *ngIf="TypeControlForeign['FatherName'].touched && TypeControlForeign['FatherName'].invalid" class="alert alert-danger">
+                  Father Name required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Passport No*</label>
+                <input type="text" (blur)="searchCnic()" onKeyPress="if(this.value.length==15) return false;" (keypress)="keyPressAlfhabetnumericOnly($event)" class="form-control" formControlName="Pasportno" placeholder="Passport No">
+                <div *ngIf="TypeControlForeign['Pasportno'].touched && TypeControlForeign['Pasportno'].invalid" class="alert alert-danger">
+                  Passport No required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Phone Number*</label>
+                <input type="text" placeholder="000000000000000" onKeyPress="if(this.value.length==15) return false;" class="form-control" formControlName="Phone">
+                <div *ngIf="TypeControlForeign['Phone'].touched && TypeControlForeign['Phone'].invalid" class="alert alert-danger">
+                  Phone Number required.
+              </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Address*</label>
+                <input type="text" class="form-control" formControlName="Address" placeholder="Address">
+                <div *ngIf="TypeControlForeign['Address'].touched && TypeControlForeign['Address'].invalid" class="alert alert-danger">
+                  Address required.
+              </div>
+              </div>
+            </div>
+  
+           
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4" >
+              <div class="form-floating">
+                <label for="floatingInput">Country*</label>
+                <select class="form-control pt-2" formControlName="Country">
+                 <option *ngFor="let op of Country"[value]="op.value"> {{op.label}}</option>
+                </select>
+                <div *ngIf="TypeControlForeign['Country'].touched && TypeControlForeign['Country'].invalid" class="alert alert-danger">
+                  Country required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Nationality*</label>
+                <input type="text"(keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="Nationality"placeholder="Nationality">
+                <div *ngIf="TypeControlForeign['Nationality'].touched && TypeControlForeign['Nationality'].invalid" class="alert alert-danger">
+                  Nationality required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4"  >
+              <div class="form-floating">
+                <label for="floatingInput">Visa Expiry Date*</label>
+                <input type="date" class="form-control" formControlName="VisaExpiaryDate" placeholder="Visa Expiry Date">
+                <div *ngIf="TypeControlForeign['VisaExpiaryDate'].touched && TypeControlForeign['VisaExpiaryDate'].invalid" class="alert alert-danger">
+                  Visa Expiry Date required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">DOB*</label>
+                <input type="date" class="form-control"(change)="dateChanged($event)"  formControlName="DOB" placeholder="DOB">
+                <div *ngIf="TypeControlForeign['DOB'].touched && TypeControlForeign['DOB'].invalid" class="alert alert-danger">
+                  DOB required.
+              </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Profession*</label>
+                <input type="text" (keypress)="keyPressAlfhabetsOnly($event)"class="form-control" formControlName="Profession"placeholder="Profession">
+                <div *ngIf="TypeControlForeign['Profession'].touched && TypeControlForeign['Profession'].invalid" class="alert alert-danger">
+                  Profession required.
+              </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Old Permit No. (If any)</label>
+                <input type="text" class="form-control" formControlName="OldPermit" placeholder="Old Permit No">
+                <!-- <div *ngIf="TypeControlForeign['OldPermit'].touched && TypeControlForeign['OldPermit'].invalid" class="alert alert-danger">
+                  Old Permit required.
+              </div> -->
+              </div>
+            </div>
+          </div>
+  
+
+
+
+
+
+
+
+          <!-- <p class="mb-0 liq-details mt-3">Issuance of Liquor / Beer Issuance</p>
+          <div class="divider"></div>
+  
+          <div class="row" [formGroup]="PRDefinationfrom">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Type</label>
+                <select class="form-control pt-2"
+                  formControlName="Type"  (change)="GetMeasure()">
+                 <option *ngFor="let op of Uints"
+                  [value]="op.value">
+                  {{op.label}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Size</label>
+                 <select class="form-control pt-2"
+                  formControlName="Size">
+                 <option *ngFor="let op of Size"
+                  [value]="op.value">
+                  {{op.label}}</option>
+                </select>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+              <div class="form-floating">
+                <label for="floatingInput">Quantity</label>
+                <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity">
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <button class="add-btn" (click)="ADDITEM()">Add</button>
+            </div>
+        
+          </div> -->
+          <!-- <div class="table-responsive custom-table-mt">
+            <table class="table">
+              <thead class="custom-table-dark">
+                <tr>
+                  <th scope="col">Sr.No</th>
+                  <th scope="col" colspan="3">Type (PMFL)</th>
+                  <th scope="col">Size of bottle</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total allocation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let arr of ItemArray let i = index">
+                  <th scope="row" class="promt-table-field">{{i+1}}</th>
+                  <td colspan="3">{{arr.Type}}</td>
+                  <td>{{arr.Size}}</td>
+                  <td>{{arr.Quantity}}</td>
+                  <td>{{arr.Total}}ml</td>
+                </tr>
+  
+              </tbody>
+            </table>
+          </div> -->
+       
+       
+          <!-- [disabled]="!PRBasicfrom.valid" -->
+          <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <button class="add-btn" (click)="Save()"  >Save</button>
+          </div>
