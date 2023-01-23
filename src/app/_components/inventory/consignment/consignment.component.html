@@ -4,7 +4,7 @@
     <p class="consign-heading-title mb-0">Excise Pass for Transport / Export of Liquor of all kinds from
         licensed
         premises</p>
-    <p class="consign-heading-desc mb-0">Four Points by Sheraton, Lahore Regency (pvt) Ltd--Consignee
+    <p class="consign-heading-desc mb-0" Id="titleOffice">
     </p>
 
 </div>
@@ -66,8 +66,8 @@
 
         <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="form-floating">
-                <label for="collector">Collector Officer *</label>
-                <input formControlName="collector" type="text" class="form-control form-control-md">
+                <label for="collector">ETI/ETO/Prohibition Officer</label>
+                <input formControlName="collector" type="text" class="form-control form-control-md" readonly>
                 <div *ngIf="f['collector'].touched && f['collector'].invalid" class="alert alert-danger">
                     Field required.
                 </div>

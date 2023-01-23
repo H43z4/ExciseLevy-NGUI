@@ -6,6 +6,7 @@ import { InventoryServiceService } from 'src/app/_services/inventory/inventory-s
 import { ItemLiq } from 'src/app/_models/inventory/item.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-consignment',
@@ -42,6 +43,7 @@ export class ConsignmentComponent implements OnInit {
   leviedAmt:bigint=BigInt(0);
   leviAmount: number | 0 | undefined;
   itemLevied: string | undefined;
+  loggedinUser: any = [];
   constructor(private spinner: NgxSpinnerService,
     private toastrService: ToastrService,
     private InventoryService: InventoryServiceService,
@@ -49,7 +51,19 @@ export class ConsignmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    var user = localStorage?.getItem('user');
+    if(user != null && user != "")  
+      {
+        this.loggedinUser = JSON.parse(user);
+        debugger;
+        var fullName = this.loggedinUser?.data.fullName;
+        var orgName = this.loggedinUser?.data.organizationName;
+        this.Consignmentform.get('collector')?.setValue(fullName);
+        const titleOffice= document.getElementById('titleOffice'); 
+        if(titleOffice)
+        titleOffice.innerText = orgName;
   }
+}
   maxValue(control: FormControl) {
     const max = 100;
     const value = control.value;
