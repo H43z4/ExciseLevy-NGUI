@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { PR1 } from 'src/app/_models/Issuances/PR1Model';
+import { Dropdown } from 'src/app/_models/setup/Dropdown';
 import { PR1Service } from 'src/app/_services/PR1/pr1-service';
 
 @Component({
@@ -48,6 +49,11 @@ export class PR1Component implements OnInit {
 
   selectedDate: Date | undefined;
   date: any;
+  Districts: any;
+  cities: any;
+  Profession: any;
+
+
   constructor(
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
@@ -75,6 +81,9 @@ export class PR1Component implements OnInit {
       Name: new FormControl('', [Validators.required]),
       CNIC: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
       City: new FormControl('', [Validators.required]),
+      District: new FormControl('', [Validators.required]),
+      OtherProfession: new FormControl('', [Validators.required]),
+      
     });
 
     this.PRBasicFromForeign = this.fb.group({
@@ -100,9 +109,62 @@ export class PR1Component implements OnInit {
     });
 
 
+    this.AllDistrict();
+    this.AllCities();
+    this.AllProfessions();
     this.OnCheckChange(1);
     this.GetPermitApplicationList();
   }
+
+  AllProfessions()
+  {
+    this.pr1Services.GetProfession().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+            this.Profession = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
+
+  AllCities()
+  {
+    this.pr1Services.GetCities().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+            this.cities = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
+
+  AllDistrict()
+  {
+    this.pr1Services.GetDistrict().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+            this.Districts = res.data;
+          this.PRBasicFromForeign.reset();
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
+
+
+  active = 1;
+  activeLocal = 1;
   get TypeControl() {
     return this.PRBasicfromLocal.controls;
   }

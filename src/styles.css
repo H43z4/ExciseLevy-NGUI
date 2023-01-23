@@ -1,9 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~ngx-toastr/toastr.css';
 
-
-
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -14,6 +11,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
 .login{
     min-height: 100vh;
     background: url('./assets/login_bg.png');
@@ -216,6 +214,21 @@ input[type=number] {
     margin: 40px 0;
 }
 
+.custom-data-table{
+    background: #234575 !important;
+    border-radius: 8px 8px 0px 0px !important;
+    color: #fff !important;
+    height: 55.55px !important;
+}
+
+.custom-data-table tr th:first-child{
+    border-top-left-radius: 8px !important;
+}
+.custom-data-table tr th:last-child{
+    border-top-right-radius: 8px !important;
+}
+
+
 .custom-table-dark{
     background: #F3F3F3 !important;
 }
@@ -263,6 +276,7 @@ input[type=number] {
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
+    text-decoration: none ;
 
 }
 .box:hover{
@@ -317,10 +331,10 @@ input[type=number] {
 }
 .pos-details-heading{
     font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 30px;
-    color: #3566AB;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 150%;
+    color: #000000;
 }
 .pos-details-border{
     width: 100%;
@@ -329,7 +343,6 @@ input[type=number] {
     margin-bottom:20px;
 }
 .pos-details-print{
-    border-bottom: 1px solid #D1DCE5;
     padding: 20px 0;
     margin-bottom: 10px;
 }
@@ -349,12 +362,6 @@ input[type=number] {
     color: #FFFFFF;
     outline: none;
     border: none;
-}
-.margin-right-btn{
-    margin-right: 15px;
-}
-.margin-left-btn{
-    margin-left: 15px;
 }
 .printer-icon{
     color: #3566AB;
@@ -400,9 +407,232 @@ input[type=number] {
 }
 .pos-btns-sec{
     background: #547287;
-    margin-left: 5px;
+}
+.invoice{
+    width: 70%;
+    min-height:200px;
+    border: 1px solid #3566AB;
+    border-radius: 6px;
+}
+.invoice .title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background: #3566AB;
+}
+.person-dp{
+    width: 192px;
+    height: 192px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+}
+.bg-theme-primary{
+    background-color: #3566AB;
 }
 
+
+.doc-box{
+    width: 235px;
+    height: 234px;
+    background: #FFFFFF;
+    border: 1px dashed #284F68;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin:10px
+}
+.img-view{
+    color: rgba(40, 79, 104, 0.5);
+    font-size: 80px;
+}
+.seprator{
+    height: 2px;
+    width: 80%;
+    border: 1px solid #C4C4C4;
+}
+.doc-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #284F68;
+    margin: 24px 0;
+}
+.progress-steps-reg{
+    min-height: 65vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.bio-metric{
+    border: 1px solid #EBEBEB;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+.bio-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #284F68;
+}
+.proceed{
+    width: 70%;
+    height: 202px;
+    background: #FFFFFF;
+    border: 1px solid #DEDEDE;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin: 50px 0;
+}
+.p-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3E3E3E;
+}
+.photo-header{
+    height: 400px;
+    width: 400px;
+    border: 1px solid #EDEDED;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.text-pri{
+    width: 100%;
+}
+.custom-tab-li{
+    width: 33.33% !important;
+}
+.custom-tab-li a{
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 13.1065px !important;
+    line-height: 150% !important;
+    color: #636363 !important;
+    text-align: center;
+}
+.custom-tab-li-slide a{
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 13.1065px !important;
+    line-height: 150% !important;
+    color: #636363 !important;
+    text-align: center;
+}
+
+.nav-tabs{
+    background: #FFFFFF !important;
+    border: 0.873767px solid #EBEBEB !important;
+    border-radius: 87.3767px !important;
+    padding: 10px !important;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    background: #284F68;
+    border-radius: 87.3767px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13.1065px;
+    line-height: 150%;
+    color: #FFFFFF !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px !important;
+}
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus{
+    border-radius: 87.3767px !important;
+}
+
+.dataTables_filter input{
+    outline:none !important;
+    margin-bottom:20px;
+}
+
+
+table.dataTable tbody tr{
+    padding: 10px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background-color: #fff !important;
+    background: #fff !important;
+    border:none !important;
+    color: #000000 !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current{
+    background: #3566AB !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.table.dataTable.row-border tbody tr:first-child td {
+    border-left: 2px solid #F8D7DA !important;
+}
+.less24{
+    border-left: 10px solid #F8D7DA;
+}
+.less48{
+    border-left: 10px solid #F2C715;
+}
+.less72{
+    border-left: 10px solid #8BCCED;
+}
+table.dataTable tbody th, table.dataTable tbody td{
+    padding: 18px 10px !important;
+}
+.less24box .c-box{
+    height: 20px;
+    width: 20px;
+    background: #F8D7DA;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.less48box .c-box{
+    height: 20px;
+    width: 20px;
+    background: #F2C715;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.less72box .c-box{
+    height: 20px;
+    width: 20px;
+    background: #8BCCED;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.c-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.87);
+}
 @media(max-width:600px){
     .header{
         flex-direction: column;

@@ -31,7 +31,7 @@
     "file-saver": "^2.0.5",
     "jquery": "^3.6.1",
     "moment": "^2.29.4",
-    "ngx-mask": "^13.1.1",
+    "ngx-mask": "^13.1.15",
     "ngx-pagination": "^6.0.2",
     "ngx-spinner": "^13.1.1",
     "ngx-toastr": "^14.2.1",
