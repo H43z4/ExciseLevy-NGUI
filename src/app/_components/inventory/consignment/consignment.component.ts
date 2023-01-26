@@ -7,6 +7,7 @@ import { ItemLiq } from 'src/app/_models/inventory/item.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
+import { DropDownService } from 'src/app/_services';
 
 @Component({
   selector: 'app-consignment',
@@ -25,22 +26,23 @@ export class ConsignmentComponent implements OnInit {
 
   ];
   Uints = [
-    { value: '1', label: 'Quarts',measure:750, leviAmount:600  },
-    { value: '2', label: 'Pints',measure:375, leviAmount:500},
-    { value: '3', label: 'Nips',measure:187.5, leviAmount:400 },
-    { value: '4', label: 'Beer',measure:500, leviAmount:300},
+    { value: '1', label: 'Quarts', measure: 750, leviAmount: 600 },
+    { value: '2', label: 'Pints', measure: 375, leviAmount: 500 },
+    { value: '3', label: 'Nips', measure: 187.5, leviAmount: 400 },
+    { value: '4', label: 'Beer', measure: 500, leviAmount: 300 },
 
   ];
+  manufacturers: any;
   results: { key: string, value: string }[] = [];
   displayValue: string = '';
   selectedValue: string = '';
   uom: string = "";
-  quantity : string = "";
+  quantity: string = "";
   bulkValue: string = '';
   proofValue: string = '';
-  LeviedValue:string='';
-  maxiValue:boolean=false;
-  leviedAmt:bigint=BigInt(0);
+  LeviedValue: string = '';
+  maxiValue: boolean = false;
+  leviedAmt: bigint = BigInt(0);
   leviAmount: number | 0 | undefined;
   itemLevied: string | undefined;
   loggedinUser: any = [];
@@ -48,22 +50,65 @@ export class ConsignmentComponent implements OnInit {
     private toastrService: ToastrService,
     private InventoryService: InventoryServiceService,
     private router: Router,
+    private dropdownService: DropDownService,
   ) { }
 
   ngOnInit(): void {
     var user = localStorage?.getItem('user');
-    if(user != null && user != "")  
-      {
-        this.loggedinUser = JSON.parse(user);
-        debugger;
-        var fullName = this.loggedinUser?.data.fullName;
-        var orgName = this.loggedinUser?.data.organizationName;
-        this.Consignmentform.get('collector')?.setValue(fullName);
-        const titleOffice= document.getElementById('titleOffice'); 
-        if(titleOffice)
+    if (user != null && user != "") {
+      this.loggedinUser = JSON.parse(user);
+      debugger;
+      var fullName = this.loggedinUser?.data.fullName;
+      var orgName = this.loggedinUser?.data.organizationName;
+      this.Consignmentform.get('collector')?.setValue(fullName);
+      const titleOffice = document.getElementById('titleOffice');
+      if (titleOffice)
         titleOffice.innerText = orgName;
+
+    }
+    this.ddlManufacturers();
+    this.ddlProducUnits();
+    this.ddlProducts();
   }
-}
+  ddlProducts() {
+    this.dropdownService.GetProducts().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.items = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
+  ddlProducUnits() {
+    this.dropdownService.GetProductUnits().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.Uints = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
+  ddlManufacturers() {
+    this.dropdownService.GetManufacturers().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.manufacturers = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
   maxValue(control: FormControl) {
     const max = 100;
     const value = control.value;
@@ -95,7 +140,7 @@ export class ConsignmentComponent implements OnInit {
     uom: new FormControl('', [Validators.required]),
     quantity: new FormControl('', [Validators.required]),
     bulkGallons: new FormControl(''),
-    strength: new FormControl('', [Validators.required,this.maxValue]),
+    strength: new FormControl('', [Validators.required, this.maxValue]),
     proofGallons: new FormControl(''),
     breakage: new FormControl('', [Validators.required])
   });
@@ -113,10 +158,10 @@ export class ConsignmentComponent implements OnInit {
       this.results = this.items.filter(item => item.value.toLowerCase().includes(this.displayValue.toLowerCase()));
     }
   }
-  ValidateProduct(){
+  ValidateProduct() {
     let itemDescription = this.Liquorform.get('itemDescription')?.value;
     debugger
-    if(this.items.filter(item => item.value.toLowerCase() == itemDescription.toLowerCase())){
+    if (this.items.filter(item => item.value.toLowerCase() == itemDescription.toLowerCase())) {
       this.displayValue = "";
     }
   }
@@ -147,43 +192,42 @@ export class ConsignmentComponent implements OnInit {
 
     this.liqList.push({
       srNo: this.count,
-      productId:product,
+      productId: product,
       itemDescription: itemDescription,
       quarts: this.uom == "1" ? this.quantity : '0',
       pints: this.uom == "2" ? this.quantity : '0',
       nips: this.uom == "3" ? this.quantity : '0',
       beer: this.uom == "4" ? this.quantity : '0',
-      bottleSizeId:this.uom,
-      quantity:this.quantity,
+      bottleSizeId: this.uom,
+      quantity: this.quantity,
       bulkGallons: bulkGallons != "" ? bulkGallons : '0',
       strenghtPercentage: strength != "" ? strength : '0',
       proofGallons: proofGallons != "" ? proofGallons : '0',
       breakage: breakage,
     })
     debugger;
-    if(dutyRate.includes('.')){let strDutyRate = dutyRate.toString(); dutyRate=strDutyRate.split('.',2)[0]}
+    if (dutyRate.includes('.')) { let strDutyRate = dutyRate.toString(); dutyRate = strDutyRate.split('.', 2)[0] }
     debugger
 
-    let Type = this.Liquorform.get('uom')?.value; 
+    let Type = this.Liquorform.get('uom')?.value;
     debugger
 
-     this.leviAmount = this.Uints.find(a=>a.value ==Type)?.leviAmount;
+    this.leviAmount = this.Uints.find(a => a.value == Type)?.leviAmount;
 
     if (this.leviAmount == undefined) {
 
     }
-    else
-    {
+    else {
       debugger
       // let prG = BigInt(proofGallons);
-      this.itemLevied =  (this.leviAmount * proofGallons)?.toString() ;  
-      this.leviedAmt = BigInt(this.leviedAmt)+BigInt(this.itemLevied);
+      this.itemLevied = (this.leviAmount * proofGallons)?.toString();
+      this.leviedAmt = BigInt(this.leviedAmt) + BigInt(this.itemLevied);
 
     }
     debugger
 
 
-    this.Consignmentform.patchValue({ dutyLevied: this.leviedAmt});
+    this.Consignmentform.patchValue({ dutyLevied: this.leviedAmt });
     this.Consignmentform.patchValue({ duty: '' });
 
     this.Liquorform.reset();
@@ -219,9 +263,9 @@ export class ConsignmentComponent implements OnInit {
           this.spinner.hide();
           this.toastrService.success('Consignment created successfully!', 'Success!');
           // this.router.navigateByUrl('master/applist');
-this.Liquorform.reset();
-this.Consignmentform.reset();
-this.liqList=[];
+          this.Liquorform.reset();
+          this.Consignmentform.reset();
+          this.liqList = [];
 
 
         } else {
@@ -239,14 +283,14 @@ this.liqList=[];
   CalculateValues() {
     this.uom = this.Liquorform.get('uom')?.value;
     this.quantity = this.Liquorform.get('quantity')?.value;
-    
-    if ((this.uom != null && this.uom.trim() != "") && (this.quantity != null && parseInt(this.quantity)>0 )) {
-        let BG = this.uom == "1"? (((parseFloat(this.quantity) *12)*750)/4500).toString():this.uom == "2"?(((parseFloat(this.quantity) *12)*375)/4500).toString():this.uom == "3"?(((parseFloat(this.quantity) *12)*187.5)/4500).toString():this.uom == "4"?(((parseFloat(this.quantity) *12)*500)/4500).toString():'0'; 
-        let rBG = (Math. round(parseFloat(BG))).toString();
-        this.bulkValue = rBG;     
-        this.Liquorform.patchValue({strength:''});
-      }
-    else{
+
+    if ((this.uom != null && this.uom.trim() != "") && (this.quantity != null && parseInt(this.quantity) > 0)) {
+      let BG = this.uom == "1" ? (((parseFloat(this.quantity) * 12) * 750) / 4500).toString() : this.uom == "2" ? (((parseFloat(this.quantity) * 12) * 375) / 4500).toString() : this.uom == "3" ? (((parseFloat(this.quantity) * 12) * 187.5) / 4500).toString() : this.uom == "4" ? (((parseFloat(this.quantity) * 12) * 500) / 4500).toString() : '0';
+      let rBG = (Math.round(parseFloat(BG))).toString();
+      this.bulkValue = rBG;
+      this.Liquorform.patchValue({ strength: '' });
+    }
+    else {
       this.bulkValue = '0';
     }
   }
@@ -254,55 +298,56 @@ this.liqList=[];
     let bulkGallons = this.Liquorform.get('bulkGallons')?.value;
     let strength = this.Liquorform.get('strength')?.value;
     debugger;
-    if ((strength != null && parseFloat(strength)>0 ) && (bulkGallons != null && parseInt(bulkGallons)>0 )) {
-        let PG = ((bulkGallons*strength)/100).toString(); 
-        let rPG = Math.round(parseFloat(PG)).toString();
-        this.Liquorform.get('proofGallons')?.setValue(rPG);
-        // this.proofValue = PG;     
-        debugger;
-        let Type = this.Liquorform.get('uom')?.value; 
-        
-        let leviAmount = this.Uints.find(a=>a.value ==Type)?.leviAmount;
-        if (leviAmount !== undefined) {
-          // let itemLevied =  (measure*parseFloat(PG))?.toString() ;  
-          let itemLevied =  leviAmount?.toString() ;  
-          this.Consignmentform.get('duty')?.setValue(itemLevied);
-          // this.Consignmentform.setValue({duty});   
-        }    
+    if ((strength != null && parseFloat(strength) > 0) && (bulkGallons != null && parseInt(bulkGallons) > 0)) {
+      let PG = ((bulkGallons * strength) / 100).toString();
+      let rPG = Math.round(parseFloat(PG)).toString();
+      this.Liquorform.get('proofGallons')?.setValue(rPG);
+      // this.proofValue = PG;     
+      debugger;
+      let Type = this.Liquorform.get('uom')?.value;
+
+      let leviAmount = this.Uints.find(a => a.value == Type)?.leviAmount;
+      if (leviAmount !== undefined) {
+        // let itemLevied =  (measure*parseFloat(PG))?.toString() ;  
+        let itemLevied = leviAmount?.toString();
+        this.Consignmentform.get('duty')?.setValue(itemLevied);
+        // this.Consignmentform.setValue({duty});   
       }
-    else{
+    }
+    else {
       this.Liquorform.get('proofGallons')?.setValue('0');
 
       // this.proofValue = '0';
 
     }
   }
-    CalculateDutyLevied() {
-      
+  CalculateDutyLevied() {
+
     let proofGallons = this.Liquorform.get('proofGallons')?.value;
     let duty = this.Consignmentform.get('duty')?.value;
     debugger;
-    if ((duty != null && parseFloat(duty)>0 ) && (proofGallons != null && parseInt(proofGallons)>0 )) {
-        let DL = (proofGallons*duty).toString(); 
-        this.LeviedValue = DL;        
-      }
-    else{
+    if ((duty != null && parseFloat(duty) > 0) && (proofGallons != null && parseInt(proofGallons) > 0)) {
+      let DL = (proofGallons * duty).toString();
+      this.LeviedValue = DL;
+    }
+    else {
       this.LeviedValue = '0';
     }
   }
   keyPressNumberOnly(event: KeyboardEvent) {
     const pattern = /[0-9]/;
     const inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {    
-        // invalid character, prevent input
-        event.preventDefault();
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
     }
   }
   keyPressAlfhabetsOnly(event: KeyboardEvent) {
     const pattern = /^[a-zA-Z ]*$/;
     const inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {    
-        // invalid character, prevent input
-        event.preventDefault();
-    }}
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+  }
 }

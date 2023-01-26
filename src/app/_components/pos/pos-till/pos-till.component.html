@@ -114,8 +114,8 @@
             <select class="form-control form-control-md custom-pos-select-form"
             formControlName="ProdSize">
            <option *ngFor="let op of Size"
-            [value]="op.key">
-            {{op.value}}</option>
+            [value]="op.value">
+            {{op.label}}</option>
           </select>
             <div *ngIf="l['ProdSize'].touched && l['ProdSize'].invalid" class="alert alert-danger">
               Field required.

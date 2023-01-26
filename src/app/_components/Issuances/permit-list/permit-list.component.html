@@ -6,12 +6,30 @@
         <div class="divider mt-3"></div>
         <div class="consign-heading">
           <p class="consign-heading-title mb-0">Permit Listing</p>
-          <p class="consign-heading-desc mb-0">Gill Jackson</p>
+          <!-- <p class="consign-heading-desc mb-0">Gill Jackson</p> -->
 
         </div>
 
 
         <div class="table-responsive custom-table-mt">
+          <div class="w-100 d-flex align-items-center justify-content-end my-2">
+            <div class="less24box d-flex align-items-center">
+              <div class="c-box"></div>
+              <p class="c-title mb-0"> Less than 24 Hours</p>
+            </div>
+            <div class="box24 d-flex align-items-center mx-4">
+              <div class="c-box"></div>
+              <p class="c-title mb-0">Greater than 24 Hours</p>
+            </div>
+            <div class="box48 d-flex align-items-center">
+              <div class="c-box"></div>
+              <p class="c-title mb-0">Greater than 48 Hours</p>
+            </div>
+            <div class="box72 d-flex align-items-center mx-4">
+              <div class="c-box"></div>
+              <p class="c-title mb-0">Greater than 72 Hours</p>
+            </div>
+          </div>
           <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead class="custom-table-dark">
               <tr>
@@ -19,38 +37,36 @@
                 <th scope="col">Name</th>
                 <th scope="col">CNIC</th>
                 <th scope="col">Phone No.</th>
-                <th scope="col">Address</th>
+                <!-- <th scope="col">Address</th> -->
                 <th scope="col">City</th>
                 <th scope="col">DOB</th>
                 <!-- <th scope="col">Professional Trade</th> -->
-                <th scope="col">Old Permit</th>
-                <th scope="col">View Details</th>
+                <!-- <th scope="col">Old Permit</th> -->
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let arr of PRlist">
                 <!-- <tr *ngFor="let arr of PRlist let i = index"> -->
-                  <!-- <th scope="row" class="promt-table-field">{{i+1}}</th> -->
-                  <th scope="row" class="promt-table-field">{{arr.count}}</th>
-                  <td>{{arr.personName}}</td>
-                  <td>{{arr.cnic}}</td>
-                  <td>{{arr.cellNo}}</td>
-                  <td>{{arr.address}}</td>
-                  <td>{{arr.city}}</td>
-                  <td>{{arr.dateofBirth| date:'dd-MMM-yyyy'}}</td>
-                  <td>{{arr.oldPermitNo == 0?'-----':arr.oldPermitNo}}</td>
-              <td class="promt-table-field">
-                <button 
-                (click)="SendPRID(arr.applicationId)"
-                 class="submitLiq-btn">View Details</button>
-              
-           
-            <!-- <app-permit-detail [ApplicationObj]="arr.applicationId"></app-permit-detail> -->
-              
-              </td>
-                </tr>
-            
-                
+                <!-- <th scope="row" class="promt-table-field">{{i+1}}</th> -->
+                <th scope="row" Id="permitListCol" class="promt-table-field hours24">{{arr.count}}</th>
+                <td>{{arr.personName}}</td>
+                <td>{{arr.cnic}}</td>
+                <td>{{arr.cellNo}}</td>
+                <!-- <td>{{arr.address}}</td> -->
+                <td>{{arr.city}}</td>
+                <td>{{arr.dateofBirth| date:'dd-MMM-yyyy'}}</td>
+                <!-- <td>{{arr.oldPermitNo == 0?'-----':arr.oldPermitNo}}</td> -->
+                <td class="promt-table-field">
+                  <button (click)="SendPRID(arr.applicationId)" class="submitLiq-btn">Details</button>
+
+
+                  <!-- <app-permit-detail [ApplicationObj]="arr.applicationId"></app-permit-detail> -->
+
+                </td>
+              </tr>
+
+
 
             </tbody>
           </table>

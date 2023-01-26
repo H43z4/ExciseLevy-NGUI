@@ -40,14 +40,18 @@
         <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="form-floating">
                 <label for="consignmentFrom">Consignment From *</label>
-                <select formControlName="consignmentFrom" class="form-select pt-2 form-control"
+                <select class="form-select pt-2 form-control"
+                formControlName="consignmentFrom" aria-label="Default select example">
+               <option *ngFor="let op of this.manufacturers"[value]="op.key">{{op.value}}</option>
+              </select>
+                <!-- <select formControlName="consignmentFrom" class="form-select pt-2 form-control"
                     aria-label="Default select example">
                     <option value="2">Mehran Distillery & Brewery</option>
                     <option value="3">Murree Brewery Rawalpindi</option>
                     <option value="4">Hue Coastal Hub</option>
                     <option value="5">Quetta Distillery Quetta</option>
 
-                </select>
+                </select> -->
                 <div *ngIf="f['consignmentFrom'].touched && f['consignmentFrom'].invalid" class="alert alert-danger">
                     Field required.
                 </div>

@@ -13,89 +13,106 @@
     </div>
   </div>
 </div> -->
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col py-3">
+      <div class="container-fluid consignment">
+        <div class="divider mt-3"></div>
+        <div class="container-fluid overflow-hidden px-0">
+          <div class="container m-0 px-0">
+            <p class="dashboard-title">Permit Application Form</p>
 
-<div class="container-fluid overflow-hidden px-0">
-  <div class="container px-0">
-    <p class="dashboard-title">Permit Application Form</p>
 
 
-
-    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs w-100 d-flex align-items-center justify-content-between">
-      <li [ngbNavItem]="1" class="custom-tab-li">
-          <a class="text-pri" ngbNavLink> <span class="mx-2"><img src="../../assets/bio.png" alt=""></span> Biometric</a>
-          <ng-template ngbNavContent>
-             <div class="progress-steps-reg">
-              <div class="psr-header">
-                  <div class="bio-metric">
-                      <img src="../../assets/bio-metric.png" alt="">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active"
+              class="nav-tabs w-100 d-flex align-items-center justify-content-between">
+              <li [ngbNavItem]="1" class="custom-tab-li">
+                <a class="text-pri" ngbNavLink> <span class="mx-2"><img src="../../assets/bio.png" alt=""></span>
+                  Biometric</a>
+                <ng-template ngbNavContent>
+                  <div class="progress-steps-reg">
+                    <div class="psr-header">
+                      <div class="bio-metric">
+                        <img src="../../assets/bio-metric.png" alt="">
+                      </div>
+                      <p class="bio-title mb-0">Place left thumb on scanner</p>
+                    </div>
+                    <div class="proceed">
+                      <img src="../../assets/verified.png" alt="">
+                      <p class="mb-0 p-title">Non Muslim Proceed</p>
+                    </div>
+                    <div class="proceed">
+                      <img src="../../assets/rejected.png" alt="">
+                      <p class="mb-0 p-title">Muslim Cannot Proceed</p>
+                    </div>
                   </div>
-                  <p class="bio-title mb-0">Place left thumb on scanner</p>
-              </div>
-              <div class="proceed">
-                  <img src="../../assets/verified.png" alt="">
-                  <p class="mb-0 p-title">Non Muslim Proceed</p>
-              </div>
-              <div class="proceed">
-                  <img src="../../assets/rejected.png" alt="">
-                  <p class="mb-0 p-title">Muslim Cant Proceed</p>
-              </div>
-             </div>
-          </ng-template>
-      </li>
-      <li [ngbNavItem]="2" class="custom-tab-li">
-          <a ngbNavLink><span class="mx-2"><img src="../../assets/img-bio.png" alt=""></span> Take Photo</a>
-          <ng-template ngbNavContent>
-              <div class="progress-steps-reg">
-                  <div class="photo-header">
-                          <img src="../../assets/pic.png" alt="">
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2" class="custom-tab-li">
+                <a ngbNavLink><span class="mx-2"><img src="../../assets/img-bio.png" alt=""></span> Take Photo</a>
+                <ng-template ngbNavContent>
+                  <div class="progress-steps-reg">
+                    <div class="photo-header">
+                      <img src="../../assets/pic.png" alt="">
 
-                          <p class="mb-0 bio-title">Take Photo</p>
+                      <p class="mb-0 bio-title">Take Photo</p>
+                    </div>
                   </div>
-                 </div>
-          </ng-template>
-      </li>
-      <li [ngbNavItem]="3" class="custom-tab-li">
-          <a ngbNavLink><span class="mx-2"><img src="../../assets/active-bio.png" alt=""></span>Personal Details</a>
-          <ng-template ngbNavContent>
-              <div class="personal-details p-2">
-                  <div class="row" [formGroup]="PRBasicfromLocal">
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="3" class="custom-tab-li">
+                <a ngbNavLink><span class="mx-2"><img src="../../assets/active-bio.png" alt=""></span>Personal
+                  Details</a>
+                <ng-template ngbNavContent>
+                  <div class="personal-details p-2">
+                    <div class="row" [formGroup]="PRBasicfromLocal">
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Name*</label>
-                          <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="Name" placeholder="Name">
-                          <div *ngIf="TypeControl['Name'].touched && TypeControl['Name'].invalid" class="alert alert-danger">
+                          <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control"
+                            formControlName="Name" placeholder="Name">
+                          <div *ngIf="TypeControl['Name'].touched && TypeControl['Name'].invalid"
+                            class="alert alert-danger">
                             Name required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Father Name*</label>
-                          <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="FatherName" placeholder="Father Name">
-                          <div *ngIf="TypeControl['FatherName'].touched && TypeControl['FatherName'].invalid" class="alert alert-danger">
+                          <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control"
+                            formControlName="FatherName" placeholder="Father Name">
+                          <div *ngIf="TypeControl['FatherName'].touched && TypeControl['FatherName'].invalid"
+                            class="alert alert-danger">
                             Father Name required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">CNIC*</label>
-                          <input type="text" mask="00000-0000000-0" placeholder="00000-0000000-0" (blur)="searchCnic()" (keypress)="keyPressNumberOnly($event)"onKeyPress="if(this.value.length==15) return false;" class="form-control" formControlName="CNIC">
-                          <div *ngIf="TypeControl['CNIC'].touched && TypeControl['CNIC'].invalid" class="alert alert-danger">
+                          <input type="text" mask="00000-0000000-0" placeholder="00000-0000000-0" (blur)="searchCnic()"
+                            (keypress)="keyPressNumberOnly($event)" onKeyPress="if(this.value.length==15) return false;"
+                            class="form-control" formControlName="CNIC">
+                          <div *ngIf="TypeControl['CNIC'].touched && TypeControl['CNIC'].invalid"
+                            class="alert alert-danger">
                             CNIC required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Phone Number*</label>
-                          <input type="text" class="form-control" (keypress)="keyPressbyNumber19Only($event)" mask="0000-0000000" placeholder="0000-0000000" onKeyPress="if(this.value.length==12) return false;" formControlName="Phone">
-                          <div *ngIf="TypeControl['Phone'].touched && TypeControl['Phone'].invalid" class="alert alert-danger">
+                          <input type="text" class="form-control" (keypress)="keyPressbyNumber19Only($event)"
+                            mask="0000-0000000" placeholder="0000-0000000"
+                            onKeyPress="if(this.value.length==12) return false;" formControlName="Phone">
+                          <div *ngIf="TypeControl['Phone'].touched && TypeControl['Phone'].invalid"
+                            class="alert alert-danger">
                             Phone Number required.
-                        </div>
+                          </div>
                         </div>
                       </div>
-                    
+
                       <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Type</label>
@@ -110,89 +127,101 @@
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">District*</label>
-                          <select class="form-control pt-2"
-                          formControlName="District" >
-                         <option *ngFor="let op of this.Districts"[value]="op.key">{{op.value}}</option>
-                        </select>
-                         <div *ngIf="TypeControl['District'].touched && TypeControl['District'].invalid" class="alert alert-danger">
+                          <select class="form-control pt-2" formControlName="District">
+                            <option *ngFor="let op of this.Districts" [value]="op.key">{{op.value}}</option>
+                          </select>
+                          <div *ngIf="TypeControl['District'].touched && TypeControl['District'].invalid"
+                            class="alert alert-danger">
                             District required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">City*</label>
-                          <select class="form-control pt-2"
-                          formControlName="City" >
-                         <option *ngFor="let op of this.cities"[value]="op.key">{{op.value}}</option>
-                        </select>
+                          <select class="form-control pt-2" formControlName="City">
+                            <option *ngFor="let op of this.cities" [value]="op.key">{{op.value}}</option>
+                          </select>
                           <!-- <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="City"placeholder="City"> -->
-                          <div *ngIf="TypeControl['City'].touched && TypeControl['City'].invalid" class="alert alert-danger">
+                          <div *ngIf="TypeControl['City'].touched && TypeControl['City'].invalid"
+                            class="alert alert-danger">
                             City required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Address*</label>
-                          <textarea type="text" rows="1" class="form-control" formControlName="Address" placeholder="Address"></textarea>
-                          <div *ngIf="TypeControl['Address'].touched && TypeControl['Address'].invalid" class="alert alert-danger">
+                          <textarea type="text" rows="1" class="form-control" formControlName="Address"
+                            placeholder="Address"></textarea>
+                          <div *ngIf="TypeControl['Address'].touched && TypeControl['Address'].invalid"
+                            class="alert alert-danger">
                             Address required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">DOB*</label>
-                          <input type="date" class="form-control" (change)="dateChanged($event)"  formControlName="DOB" placeholder="DOB">
-                          <div *ngIf="TypeControl['DOB'].touched && TypeControl['DOB'].invalid" class="alert alert-danger">
+                          <input type="date" class="form-control" (change)="dateChanged($event)" formControlName="DOB"
+                            placeholder="DOB">
+                          <div *ngIf="TypeControl['DOB'].touched && TypeControl['DOB'].invalid"
+                            class="alert alert-danger">
                             DOB required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Profession*</label>
-                          <select class="form-control pt-2"
-                          formControlName="Profession" >
-                         <option *ngFor="let op of this.Profession"[value]="op.key">{{op.value}}</option>
-                        </select>
-                          <div *ngIf="TypeControl['Profession'].touched && TypeControl['Profession'].invalid" class="alert alert-danger">
+                          <select class="form-control pt-2" formControlName="Profession" [(ngModel)]="ShowOtherProfession" (change)="ShowHideOtherProfession($event)">
+                            <option *ngFor="let op of this.Profession" [value]="op.key">{{op.value}}</option>
+                          </select>
+                          <div *ngIf="TypeControl['Profession'].touched && TypeControl['Profession'].invalid"
+                            class="alert alert-danger">
                             Profession required.
-                        </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Old Permit No. (If any)</label>
-                          <input type="number" class="form-control" formControlName="OldPermit" placeholder="Old Permit No">
-                         <div *ngIf="TypeControl['OldPermit'].touched && TypeControl['OldPermit'].invalid" class="alert alert-danger">
+                          <input type="number" class="form-control" formControlName="OldPermit"
+                            placeholder="Old Permit No">
+                          <div *ngIf="TypeControl['OldPermit'].touched && TypeControl['OldPermit'].invalid"
+                            class="alert alert-danger">
                             Old Permit required.
-                        </div> 
+                          </div>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" *ngIf="this.ShowOtherProfession === '0'">
                         <div class="form-floating">
                           <label for="floatingInput">Other Profession*</label>
-                          <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control" formControlName="OtherProfession"placeholder="Profession">
-                          <div *ngIf="TypeControl['OtherProfession'].touched && TypeControl['OtherProfession'].invalid" class="alert alert-danger">
+                          <input type="text" (keypress)="keyPressAlfhabetsOnly($event)" class="form-control"
+                            formControlName="OtherProfession" placeholder="Profession">
+                          <div *ngIf="TypeControl['OtherProfession'].touched && TypeControl['OtherProfession'].invalid"
+                            class="alert alert-danger">
                             Other Profession required.
-                        </div>
+                          </div>
                         </div>
                       </div>
-                     
+
 
                       <div class="w-100 d-flex align-items-center justify-content-start">
-                          <button class="btn-success add-btn">SUBMIT</button>
+                        <button class="btn-success add-btn" (click)="Save()">SUBMIT</button>
                       </div>
                     </div>
-              </div>
-          </ng-template>
-      </li>
-  </ul>
-  <div [ngbNavOutlet]="nav" class="mt-2"></div>
-  </div>
+                  </div>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
 
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -253,9 +282,9 @@
 
 
 
-      <!-- <app-header></app-header> -->
-         
-          <!-- <div class="divider mt-3"></div>
+<!-- <app-header></app-header> -->
+
+<!-- <div class="divider mt-3"></div>
           <div class="consign-heading">
             <p class="consign-heading-title mb-0">Permit Application Form</p>
           </div>
@@ -438,10 +467,10 @@
               <div class="form-floating">
                 <label for="floatingInput">Old Permit No. (If any)</label>
                 <input type="text" class="form-control" formControlName="OldPermit" placeholder="Old Permit No"> -->
-                <!-- <div *ngIf="TypeControlForeign['OldPermit'].touched && TypeControlForeign['OldPermit'].invalid" class="alert alert-danger">
+<!-- <div *ngIf="TypeControlForeign['OldPermit'].touched && TypeControlForeign['OldPermit'].invalid" class="alert alert-danger">
                   Old Permit required.
               </div> -->
-              <!-- </div>
+<!-- </div>
             </div>
           </div>
    -->
@@ -452,7 +481,7 @@
 
 
 
-          <!-- <p class="mb-0 liq-details mt-3">Issuance of Liquor / Beer Issuance</p>
+<!-- <p class="mb-0 liq-details mt-3">Issuance of Liquor / Beer Issuance</p>
           <div class="divider"></div>
   
           <div class="row" [formGroup]="PRDefinationfrom">
@@ -491,7 +520,7 @@
             </div>
         
           </div> -->
-          <!-- <div class="table-responsive custom-table-mt">
+<!-- <div class="table-responsive custom-table-mt">
             <table class="table">
               <thead class="custom-table-dark">
                 <tr>
@@ -514,9 +543,9 @@
               </tbody>
             </table>
           </div> -->
-       
-       
-          <!-- [disabled]="!PRBasicfrom.valid" -->
-          <!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+
+
+<!-- [disabled]="!PRBasicfrom.valid" -->
+<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <button class="add-btn" (click)="Save()"  >Save</button>
           </div> -->

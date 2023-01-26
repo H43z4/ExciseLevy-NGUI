@@ -6,8 +6,12 @@ export class PR1 {
     cellNo?:string;
     address?:string;
     city?:any;
+    cityId?:any;
+    districtId?:any;
+    district?:any;
     dateofBirth?:string;
-    Profession?:string;
+    professionName?:string;
+    professionId?:any;
     passportNo?:any;
     countryId?:any;
     nationality?:any;

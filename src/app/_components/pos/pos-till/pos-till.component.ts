@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
-import { SharedService } from 'src/app/_services';
+import { DropDownService, SharedService } from 'src/app/_services';
 import { InventoryServiceService } from 'src/app/_services/inventory/inventory-service.service';
 @Component({
   selector: 'app-pos-till',
@@ -19,12 +19,7 @@ export class PosTillComponent implements OnInit {
     { key: '5', value: 'MD 1 Whisky' }
   ];
 
-  Size: { key: string, value: string }[] = [
-    { key: '1', value: 'Quarts' },
-    { key: '2', value: 'Pints' },
-    { key: '3', value: 'Nips' },
-    { key: '4', value: 'Beer' },
-  ];
+  Size: { value: string, label: string }[] = [];
 
 
   results: { key: string, value: string }[] = [];
@@ -40,11 +35,13 @@ export class PosTillComponent implements OnInit {
     private SharedService: SharedService,
     private Inventry: InventoryServiceService,
     private toastrService: ToastrService,
-
+    private dropdownService: DropDownService,
 
   ) { }
 
   ngOnInit(): void {
+    this.ddlProducUnits();
+    this.ddlProducts();
   }
   POSInvoiceform = new FormGroup({
 
@@ -81,6 +78,32 @@ export class PosTillComponent implements OnInit {
 
   get l() {
     return this.POSform.controls;
+  }
+  ddlProducts() {
+    this.dropdownService.GetProducts().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.items = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
+  ddlProducUnits() {
+    this.dropdownService.GetProductUnits().subscribe(
+      res => {
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.Size = res.data;
+        }
+        else {
+          this.spinner.hide();
+          this.toastrService.error(res.message, 'Error!');
+        }
+      });
   }
   search() {
     if (this.displayValue.trim().length === 0) {
@@ -167,8 +190,8 @@ export class PosTillComponent implements OnInit {
 
     this.liqList.push({
       Quantity: qtyBox,
-      ProdSize: this.Size.find(a => a.key == ProdSize)?.value, //ProdSize,
-      ProductSize: this.Size.find(a => a.key == ProdSize)?.key, //ProdSize,
+      ProdSize: this.Size.find(a => a.value == ProdSize)?.label, //ProdSize,
+      ProductSize: this.Size.find(a => a.value == ProdSize)?.value, //ProdSize,
       ProductPrice: ProdPrice,
       ProductName: ProductName,
       TotalPrice: ProdPrice * qtyBox,
@@ -237,7 +260,7 @@ export class PosTillComponent implements OnInit {
           // debugger
           if (res.status == '0') {
             this.spinner.hide();
-            this.toastrService.success('Your Application Save successfully!', 'Success!');
+            this.toastrService.success('Order placed successfully', 'Success!');
             this.POSform.reset();
             this.PersonForm.reset();
             this.liqList=[];

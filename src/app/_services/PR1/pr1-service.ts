@@ -27,28 +27,6 @@ export class PR1Service {
   PRDetailById(id: any) {
     return this.http.get<any>(`${environment.apiUrlsample}/Permit/GetPermitApplicationListById?id=`+id)
   }
-
-  GetDistrict() {
-    return this.http.get<DropdownApi>(`${environment.apiUrlsample}/DropDown/GetDistrictsLOV`)
-    .pipe(map(res =>{
-      return res;
-    }));
-  }
-  
-  GetCities() {
-    return this.http.get<DropdownApi>(`${environment.apiUrlsample}/DropDown/GetCitiesLOV`)
-    .pipe(map(res =>{
-      return res;
-    }));
-  }
-          
-    
-  GetProfession() {
-    return this.http.get<DropdownApi>(`${environment.apiUrlsample}/DropDown/GetProfessionsLOV`)
-    .pipe(map(res =>{
-      return res;
-    }));
-  }
   // CancellUserPermissions(UserId:number, PermissionId:number){
     
   //   return this.http.post<generalResponse>(`${environment.apiUrl}/api/UserManagement/CancellUserPermission`, { "UserId":UserId, "PermissionId":PermissionId } )

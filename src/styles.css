@@ -436,7 +436,6 @@ input[type=number] {
     background-color: #3566AB;
 }
 
-
 .doc-box{
     width: 235px;
     height: 234px;
@@ -591,13 +590,16 @@ table.dataTable tbody tr{
     border-left: 2px solid #F8D7DA !important;
 }
 .less24{
-    border-left: 10px solid #F8D7DA;
+    border-left: 10px solid #5ff05f;
 }
-.less48{
-    border-left: 10px solid #F2C715;
+.hours24{
+    border-left: 10px solid #f0ac4e;
 }
-.less72{
-    border-left: 10px solid #8BCCED;
+.hours48{
+    border-left: 10px solid #1688c1;
+}
+.hours72{
+    border-left: 10px solid #ff0015;
 }
 table.dataTable tbody th, table.dataTable tbody td{
     padding: 18px 10px !important;
@@ -605,21 +607,35 @@ table.dataTable tbody th, table.dataTable tbody td{
 .less24box .c-box{
     height: 20px;
     width: 20px;
-    background: #F8D7DA;
+    background: #5ff05f;
     border-radius: 3px;
     margin-right: 5px;
 }
-.less48box .c-box{
+.box24 .c-box{
     height: 20px;
     width: 20px;
-    background: #F2C715;
+    background: #f0ac4e;
     border-radius: 3px;
     margin-right: 5px;
 }
-.less72box .c-box{
+.box48 .c-box{
     height: 20px;
     width: 20px;
-    background: #8BCCED;
+    background: #1688c1;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.box72 .c-box{
+    height: 20px;
+    width: 20px;
+    background: #ff0015;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+.greater72box .c-box{
+    height: 20px;
+    width: 20px;
+    background: #ff0015;
     border-radius: 3px;
     margin-right: 5px;
 }

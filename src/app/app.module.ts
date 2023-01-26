@@ -27,6 +27,7 @@ import { SidebarComponent } from './_components/sidebar/sidebar.component';
 import { HeaderComponent } from './_components/header/header.component';
 import { StockInListComponent } from './_components/inventory/stock-in-list/stock-in-list.component';
 import { StockInDetailComponent } from './_components/inventory/stock-in-detail/stock-in-detail.component';
+import { Pr2Component } from './_components/Issuances/pr2/pr2.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { StockInDetailComponent } from './_components/inventory/stock-in-detail/
     SidebarComponent,
     HeaderComponent,
     StockInListComponent,
-    StockInDetailComponent
+    StockInDetailComponent,
+    Pr2Component
   ],
   imports: [
     BrowserModule,

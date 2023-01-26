@@ -24,7 +24,7 @@ export class SharedService {
   }
     
     FetchPersonWithCnic(cnic:string) {
-        return  this.http.get<generalResponse>(`${environment.apiUrlsample}/api/Inventory/GetPersonInfoByCNIC?cnic=`+cnic);
+        return  this.http.get<generalResponse>(`${environment.apiUrlsample}/Person/GetPersonInfoByCNIC?cnic=`+cnic);
        }
    
    

@@ -7,6 +7,8 @@ import { StockInListComponent } from './_components/inventory/stock-in-list/stoc
 import { PermitDetailComponent } from './_components/Issuances/permit-detail/permit-detail.component';
 import { PermitListComponent } from './_components/Issuances/permit-list/permit-list.component';
 import { PR1Component } from './_components/Issuances/pr1/pr1.component';
+import { Pr2Component } from './_components/Issuances/pr2/pr2.component';
+
 import { PosTillComponent } from './_components/pos/pos-till/pos-till.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
@@ -25,7 +27,9 @@ const routes: Routes = [
     { path: 'StockInList', component: StockInListComponent,canActivate: [AuthGuard]   },
     { path: 'StockInDetail', component: StockInDetailComponent,canActivate: [AuthGuard]   },
 
-    { path: 'PermitApplication', component: PR1Component,canActivate: [AuthGuard]   },
+    { path: 'PermitApplicationL', component: PR1Component,canActivate: [AuthGuard]   },
+    { path: 'PermitApplicationF', component: Pr2Component,canActivate: [AuthGuard]   },
+
     { path: 'PermitList', component: PermitListComponent,canActivate: [AuthGuard]   },
     { path: 'PermitDetail', component: PermitDetailComponent,canActivate: [AuthGuard]   },
 

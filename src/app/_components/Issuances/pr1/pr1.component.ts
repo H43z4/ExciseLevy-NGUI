@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { PR1 } from 'src/app/_models/Issuances/PR1Model';
 import { Dropdown } from 'src/app/_models/setup/Dropdown';
 import { PR1Service } from 'src/app/_services/PR1/pr1-service';
+import { DropDownService } from 'src/app/_services/shared/dropDown.service';
+
 
 @Component({
   selector: 'app-pr1',
@@ -46,6 +48,7 @@ export class PR1Component implements OnInit {
   TypeValue: string | undefined;
   SizeValue: string | undefined;
   ShowForeign: boolean | undefined;
+  ShowOtherProfession: string="";
 
   selectedDate: Date | undefined;
   date: any;
@@ -59,6 +62,7 @@ export class PR1Component implements OnInit {
     private spinner: NgxSpinnerService,
     private pr1Services: PR1Service,
     private toastrService: ToastrService,
+    private dropdownService: DropDownService,
 
   ) { }
 
@@ -118,7 +122,7 @@ export class PR1Component implements OnInit {
 
   AllProfessions()
   {
-    this.pr1Services.GetProfession().subscribe(
+    this.dropdownService.GetProfession().subscribe(
       res => {
         if (res.status == '0') {
           this.spinner.hide();
@@ -133,7 +137,7 @@ export class PR1Component implements OnInit {
 
   AllCities()
   {
-    this.pr1Services.GetCities().subscribe(
+    this.dropdownService.GetCities().subscribe(
       res => {
         if (res.status == '0') {
           this.spinner.hide();
@@ -148,7 +152,7 @@ export class PR1Component implements OnInit {
 
   AllDistrict()
   {
-    this.pr1Services.GetDistrict().subscribe(
+    this.dropdownService.GetDistrict().subscribe(
       res => {
         if (res.status == '0') {
           this.spinner.hide();
@@ -328,9 +332,17 @@ export class PR1Component implements OnInit {
       // this.toastrService.success("Age is not greater than 21");
     }
   }
-
+  ShowHideOtherProfession(event:any) {
+    debugger;
+    this.ShowOtherProfession = event.target.value;
+    if (this.ShowOtherProfession != '0' ) {
+      this.PRBasicfromLocal.get('OtherProfession')?.setValue(event.target.options[event.target.selectedIndex].text);
+    }else{
+      this.PRBasicfromLocal.get('OtherProfession')?.setValue('');
+    }
+  }
   Save() {
-
+debugger
 
     this.spinner.show();
     if (this.ShowForeign == true) {
@@ -398,8 +410,11 @@ export class PR1Component implements OnInit {
       let Phone = this.PRBasicfromLocal.get('Phone')?.value;
       let Address = this.PRBasicfromLocal.get('Address')?.value;
       let City = this.PRBasicfromLocal.get('City')?.value;
+      let District = this.PRBasicfromLocal.get('District')?.value;
       let DOB = this.PRBasicfromLocal.get('DOB')?.value;
       let Profession = this.PRBasicfromLocal.get('Profession')?.value;
+      let OtherProfession = this.PRBasicfromLocal.get('OtherProfession')?.value;
+
       let pr1 = new PR1();
       pr1.oldPermitNo = oldPermit;
       pr1.personName = Name;
@@ -407,9 +422,11 @@ export class PR1Component implements OnInit {
       pr1.cnic = CNIC;
       pr1.cellNo = Phone;
       pr1.address = Address;
-      pr1.city = City;
+      pr1.cityId = City;
+      pr1.districtId = District;
       pr1.dateofBirth = DOB;
-      // pr1.Profession = Profession;
+      pr1.professionId = Profession;
+      pr1.professionName = OtherProfession;
       pr1.passportNo = 0;
       pr1.countryId = 0;
       pr1.permitTypeId=3;
