@@ -8,7 +8,7 @@
   <div class="form-floating w-25 custom-mb-pos align-items-end justify-content-end">
     <form class="form" [formGroup]="PersonForm" autocomplete="off">
       <label for="floatingInput">CNIC/Passport</label>
-      <input formControlName="passportCNIC" (blur)="fetchPerson()" class="form-control form-control-md">
+      <input formControlName="passportCNIC"  mask="00000-0000000-0" placeholder="00000-0000000-0" (blur)="fetchPerson()" class="form-control form-control-md">
       <p class="mb-0 show-pass">
         <i class="bi bi-search"></i>
       </p>

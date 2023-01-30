@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { InventoryServiceService } from 'src/app/_services/inventory/inventory-service.service';
 
 @Component({
@@ -9,11 +10,15 @@ import { InventoryServiceService } from 'src/app/_services/inventory/inventory-s
 })
 export class StockInListComponent implements OnInit {
   Stocklist: any[] = [];  
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
   constructor(
     private stockIn: InventoryServiceService,
     private router:Router
   ) { }
-
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
   ngOnInit(): void {
     this.GetStockInApplicationList();
   }
@@ -51,7 +56,7 @@ export class StockInListComponent implements OnInit {
         }
     
 
-    
+        this.dtTrigger.next(Records);
      
       });
     }

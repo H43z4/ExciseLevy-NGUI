@@ -23,6 +23,7 @@ export class PermitDetailComponent implements OnInit {
     let Id = localStorage.getItem("PermitByID");
     this.pr1Services.PRDetailById(Id).subscribe(
       res => {
+        debugger
          this.Record = res.data[0];
       });
     }

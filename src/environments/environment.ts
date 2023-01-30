@@ -8,8 +8,8 @@ export const environment = {
   
   apiUrl:'http://10.50.126.65:5010',
   // apiUrlsample: 'http://10.50.126.65:5010'
-  // apiUrlsample: 'https://dev-net.punjab.gov.pk/exciseliquorapi'
-  apiUrlsample: 'https://localhost:61954'
+  apiUrlsample: 'https://dev-net.punjab.gov.pk/exciseliquorapi'
+  // apiUrlsample: 'https://localhost:63205'
 };
 
 /*

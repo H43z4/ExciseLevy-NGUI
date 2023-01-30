@@ -23,6 +23,18 @@ export class DropDownService {
       }));
     }
     
+    GetCountries() {
+      return this.http.get<DropdownApi>(`${environment.apiUrlsample}/DropDown/GetCountriesLOV`)
+      .pipe(map(res =>{
+        return res;
+      }));
+    }
+    GetNatonality() {
+      return this.http.get<DropdownApi>(`${environment.apiUrlsample}/DropDown/GetCountriesLOV`)
+      .pipe(map(res =>{
+        return res;
+      }));
+    }
     GetCities() {
       return this.http.get<DropdownApi>(`${environment.apiUrlsample}/DropDown/GetCitiesLOV`)
       .pipe(map(res =>{

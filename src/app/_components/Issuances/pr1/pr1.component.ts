@@ -126,6 +126,55 @@ export class PR1Component implements OnInit {
 
 
 
+  // ngOnInit(): void {
+
+
+  //   this.PRBasicfromLocal = this.fb.group({
+  //     Id: [''],
+  //     OldPermit: new FormControl(''),
+  //     Profession: new FormControl('', [Validators.required]),
+  //     DOB: new FormControl('', [Validators.required]),
+  //     Address: new FormControl('', [Validators.required]),
+  //     Phone: new FormControl('', [Validators.required]),
+  //     FatherName: new FormControl('', [Validators.required]),
+  //     Name: new FormControl('', [Validators.required]),
+  //     CNIC: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
+  //     City: new FormControl('', [Validators.required]),
+  //     District: new FormControl('', [Validators.required]),
+  //     OtherProfession: new FormControl('', [Validators.required]),
+      
+  //   });
+
+  //   this.PRBasicFromForeign = this.fb.group({
+  //     Id: [''],
+  //     OldPermit: new FormControl(''),
+  //     Profession: new FormControl('', [Validators.required]),
+  //     DOB: new FormControl('', [Validators.required]),
+  //     Address: new FormControl('', [Validators.required]),
+  //     Phone: new FormControl('', [Validators.required]),
+  //     FatherName: new FormControl('', [Validators.required]),
+  //     Name: new FormControl('', [Validators.required]),
+  //     Pasportno: new FormControl('', [Validators.required]),
+  //     Country: new FormControl('', [Validators.required]),
+  //     Nationality: new FormControl('', [Validators.required]),
+  //     VisaExpiaryDate: new FormControl('', [Validators.required]),
+
+  //   });
+  //   this.PRDefinationfrom = this.fb.group({
+  //     Id: [''],
+  //     Type: [''],
+  //     Size: [''],
+  //     Quantity: [''],
+  //   });
+
+
+  //   this.AllDistrict();
+  //   this.AllCities();
+  //   this.AllProfessions();
+  //   this.OnCheckChange(1);
+  //   this.GetPermitApplicationList();
+  // }
+
   AllProfessions()
   {
     this.dropdownService.GetProfession().subscribe(
