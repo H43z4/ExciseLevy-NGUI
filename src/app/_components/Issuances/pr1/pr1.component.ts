@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { WebcamImage } from 'ngx-webcam';
+// import { WebcamImage } from 'ngx-webcam';
 import { PR1 } from 'src/app/_models/Issuances/PR1Model';
 import { Dropdown } from 'src/app/_models/setup/Dropdown';
 import { PR1Service } from 'src/app/_services/PR1/pr1-service';
