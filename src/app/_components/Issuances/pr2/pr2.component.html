@@ -1,253 +1,258 @@
 <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col py-3">
-            <div class="container-fluid consignment">
-                <div class="divider mt-3"></div>
-                <div class="container-fluid overflow-hidden px-0">
-                    <div class="container m-0 px-0">
-                        <p class="dashboard-title">Permit Application Form</p>
+  <div class="row flex-nowrap">
+    <div class="col py-3">
+      <div class="container-fluid consignment">
+        <div class="divider mt-3"></div>
+        <div class="container-fluid overflow-hidden px-0">
+          <div class="container m-0 px-0">
+            <p class="dashboard-title">Permit Application Form</p>
 
-                        <ul ngbNav #nav="ngbNav" [(activeId)]="active"
-                        class="nav-tabs w-100 d-flex align-items-center justify-content-between">
-                        <li [ngbNavItem]="1" class="custom-tab-li">
-                            <a ngbNavLink><span class="mx-2"><img src="assets/img-bio.png" alt=""></span> Take Photo</a>
-                            <ng-template ngbNavContent>
-                              <div class="progress-steps-reg">
-                                <div class="photo-header">
-                                  <img src="assets/pic.png" alt="">
-            
-                                  <p class="mb-0 bio-title">Take Photo</p>
-                                </div>
-                              </div>
-                            </ng-template>
-                          </li>
-                      
-                        <li [ngbNavItem]="2" class="custom-tab-li">
-                          <a ngbNavLink><span class="mx-2"><img src="assets/active-bio.png" alt=""></span>Personal
-                            Details</a>
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active"
+              class="nav-tabs w-100 d-flex align-items-center justify-content-between">
+              <li [ngbNavItem]="1" class="custom-tab-li">
+                <a ngbNavLink><span class="mx-2"><img src="assets/img-bio.png" alt=""></span> Take Photo</a>
+                <ng-template ngbNavContent>
+                  <div class="progress-steps-reg">
+                    <div class="photo-header">
+                      <img src="assets/pic.png" alt="">
+
+                      <p class="mb-0 bio-title">Take Photo</p>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+
+              <li [ngbNavItem]="2" class="custom-tab-li">
+                <a ngbNavLink><span class="mx-2"><img src="assets/active-bio.png" alt=""></span>Personal
+                  Details</a>
+                <ng-template ngbNavContent>
+                  <div class="personal-details p-2">
+                    <div class="row" [formGroup]="PRBasicFromForeign">
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Name*</label>
+                          <input type="text" class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
+                            formControlName="Name" placeholder="Name">
+                          <div *ngIf="TypeControl['Name'].touched && TypeControl['Name'].invalid"
+                            class="alert alert-danger">
+                            Name required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Father Name*</label>
+                          <input type="text" class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
+                            formControlName="FatherName" placeholder="Father Name">
+                          <div *ngIf="TypeControl['FatherName'].touched && TypeControl['FatherName'].invalid"
+                            class="alert alert-danger">
+                            Father Name required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Phone Number*</label>
+                          <input type="text" class="form-control" mask="+00-0000-000000" placeholder="+00-0000-000000"
+                            onKeyPress="if(this.value.length==15) return false;" formControlName="Phone">
+                          <div *ngIf="TypeControl['Phone'].touched && TypeControl['Phone'].invalid"
+                            class="alert alert-danger">
+                            Phone Number required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Passport Number*</label>
+                          <input type="text" class="form-control" (keypress)="keyPressAlfhabetnumericOnly($event)"
+                            onKeyPress="if(this.value.length==15) return false;" formControlName="PassportNo">
+                          <div *ngIf="TypeControl['PassportNo'].touched && TypeControl['PassportNo'].invalid"
+                            class="alert alert-danger">
+                            Passport No required.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Country*</label>
+                          <select class="form-control pt-2" formControlName="Country">
+                            <option *ngFor="let op of this.Countries" [value]="op.key">{{op.value}}</option>
+                          </select>
+                          <div *ngIf="TypeControl['Country'].touched && TypeControl['Country'].invalid"
+                            class="alert alert-danger">
+                            District required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Nationality*</label>
+                          <select class="form-control pt-2" formControlName="Nationality">
+                            <option *ngFor="let op of this.nationality" [value]="op.key">{{op.value}}</option>
+                          </select>
+                          <div *ngIf="TypeControl['Nationality'].touched && TypeControl['Nationality'].invalid"
+                            class="alert alert-danger">
+                            Nationality required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Address*</label>
+                          <textarea type="text" rows="1" class="form-control" formControlName="Address"
+                            placeholder="Temporary Address In Pakistan"></textarea>
+                          <div *ngIf="TypeControl['Address'].touched && TypeControl['Address'].invalid"
+                            class="alert alert-danger">
+                            Temporary Address required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">DOB*</label>
+                          <input type="date" class="form-control" formControlName="DOB" (change)="dateChanged($event)"
+                            placeholder="DOB">
+                          <div *ngIf="TypeControl['DOB'].touched && TypeControl['DOB'].invalid"
+                            class="alert alert-danger">
+                            DOB required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Visa Expiary Date*</label>
+                          <input type="date" class="form-control" formControlName="VisaExpiaryDate"
+                            placeholder="VisaExpiaryDate">
+                          <div *ngIf="TypeControl['VisaExpiaryDate'].touched && TypeControl['VisaExpiaryDate'].invalid"
+                            class="alert alert-danger">
+                            Visa Expiary Date required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Profession*</label>
+                          <select class="form-control pt-2" formControlName="Profession"
+                            [(ngModel)]="ShowOtherProfession" (change)="ShowHideOtherProfession($event)">
+                            <option *ngFor="let op of this.Profession" [value]="op.key">{{op.value}}</option>
+                          </select>
+                          <div *ngIf="TypeControl['Profession'].touched && TypeControl['Profession'].invalid"
+                            class="alert alert-danger">
+                            Profession required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" *ngIf="this.ShowOtherProfession === '0'">
+                        <div class="form-floating">
+                          <label for="floatingInput">Other Profession*</label>
+                          <input type="text" class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
+                            formControlName="OtherProfession" placeholder="Profession">
+                          <div *ngIf="TypeControl['OtherProfession'].touched && TypeControl['OtherProfession'].invalid"
+                            class="alert alert-danger">
+                            Other Profession required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Old Permit No. (If any)</label>
+                          <input type="number" class="form-control" formControlName="OldPermit"
+                            (keypress)="keyPressNumberOnly($event)" placeholder="Old Permit No">
+                          <div *ngIf="TypeControl['OldPermit'].touched && TypeControl['OldPermit'].invalid"
+                            class="alert alert-danger">
+                            Old Permit required.
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                    </div>
+
+                    <div class=" w-50 my-4">
+                      <ul ngbNav #nav="ngbNav" [(activeId)]="activeLocal" class="nav-tabs mb-3">
+                        <li [ngbNavItem]="1" class="w-50 custom-tab-li-slide">
+                          <a ngbNavLink>Local Sponser</a>
                           <ng-template ngbNavContent>
-                            <div class="personal-details p-2">
-                              <div class="row" [formGroup]="PRBasicFromForeign">
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                            <div class="row" [formGroup]="PRForeignLocalSponser">
+                              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
                                   <div class="form-floating">
-                                    <label for="floatingInput">Name*</label>
-                                    <input type="text"  class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
-                                      formControlName="Name" placeholder="Name">
-                                    <div *ngIf="TypeControl['Name'].touched && TypeControl['Name'].invalid"
-                                      class="alert alert-danger">
-                                      Name required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Father Name*</label>
-                                    <input type="text"  class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
-                                      formControlName="FatherName" placeholder="Father Name">
-                                    <div *ngIf="TypeControl['FatherName'].touched && TypeControl['FatherName'].invalid"
-                                      class="alert alert-danger">
-                                      Father Name required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Phone Number*</label>
-                                    <input type="text" class="form-control" 
-                                      mask="+00-0000-000000" placeholder="+00-0000-000000"
-                                      onKeyPress="if(this.value.length==15) return false;" formControlName="Phone">
-                                    <div *ngIf="TypeControl['Phone'].touched && TypeControl['Phone'].invalid"
-                                      class="alert alert-danger">
-                                      Phone Number required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                    <div class="form-floating">
-                                      <label for="floatingInput">Passport Number*</label>
-                                      <input type="text" class="form-control" (keypress)="keyPressAlfhabetnumericOnly($event)" 
-                                        onKeyPress="if(this.value.length==15) return false;" formControlName="PassportNo">
-                                      <div *ngIf="TypeControl['PassportNo'].touched && TypeControl['PassportNo'].invalid"
+                                      <label for="floatingInput">Name*</label>
+                                      <input type="text"  class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
+                                        formControlName="Name" placeholder="Name">
+                                      <div *ngIf="LSTypeControl['Name'].touched && LSTypeControl['Name'].invalid"
                                         class="alert alert-danger">
-                                        Passport No required.
+                                        Name required.
                                       </div>
                                     </div>
-                                  </div>
-                              
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Country*</label>
-                                    <select class="form-control pt-2" formControlName="Country">
-                                      <option *ngFor="let op of this.Countries" [value]="op.key">{{op.value}}</option>
-                                    </select>
-                                    <div *ngIf="TypeControl['Country'].touched && TypeControl['Country'].invalid"
-                                      class="alert alert-danger">
-                                      District required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Nationality*</label>
-                                    <select class="form-control pt-2" formControlName="Nationality">
-                                      <option *ngFor="let op of this.nationality" [value]="op.key">{{op.value}}</option>
-                                    </select>
-                                    <div *ngIf="TypeControl['Nationality'].touched && TypeControl['Nationality'].invalid"
-                                      class="alert alert-danger">
-                                      Nationality required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Address*</label>
-                                    <textarea type="text" rows="1" class="form-control" formControlName="Address"
-                                      placeholder="Temporary Address In Pakistan"></textarea>
-                                    <div *ngIf="TypeControl['Address'].touched && TypeControl['Address'].invalid"
-                                      class="alert alert-danger">
-                                      Temporary Address required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">DOB*</label>
-                                    <input type="date" class="form-control"  formControlName="DOB"(change)="dateChanged($event)"
-                                      placeholder="DOB">
-                                    <div *ngIf="TypeControl['DOB'].touched && TypeControl['DOB'].invalid"
-                                      class="alert alert-danger">
-                                      DOB required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                    <div class="form-floating">
-                                      <label for="floatingInput">Visa Expiary Date*</label>
-                                      <input type="date" class="form-control"  formControlName="VisaExpiaryDate"
-                                        placeholder="VisaExpiaryDate">
-                                      <div *ngIf="TypeControl['VisaExpiaryDate'].touched && TypeControl['VisaExpiaryDate'].invalid"
-                                        class="alert alert-danger">
-                                        Visa Expiary Date required.
-                                      </div>
-                                    </div>
-                                  </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Profession*</label>
-                                    <select class="form-control pt-2" formControlName="Profession" [(ngModel)]="ShowOtherProfession" (change)="ShowHideOtherProfession($event)">
-                                      <option *ngFor="let op of this.Profession" [value]="op.key">{{op.value}}</option>
-                                    </select>
-                                    <div *ngIf="TypeControl['Profession'].touched && TypeControl['Profession'].invalid"
-                                      class="alert alert-danger">
-                                      Profession required.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4" *ngIf="this.ShowOtherProfession === '0'">
-                                    <div class="form-floating">
-                                      <label for="floatingInput">Other Profession*</label>
-                                      <input type="text" class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
-                                        formControlName="OtherProfession" placeholder="Profession">
-                                      <div *ngIf="TypeControl['OtherProfession'].touched && TypeControl['OtherProfession'].invalid"
-                                        class="alert alert-danger">
-                                        Other Profession required.
-                                      </div>
-                                    </div>
-                                  </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                                  <div class="form-floating">
-                                    <label for="floatingInput">Old Permit No. (If any)</label>
-                                    <input type="number" class="form-control" formControlName="OldPermit"(keypress)="keyPressNumberOnly($event)"
-                                      placeholder="Old Permit No">
-                                    <div *ngIf="TypeControl['OldPermit'].touched && TypeControl['OldPermit'].invalid"
-                                      class="alert alert-danger">
-                                      Old Permit required.
-                                    </div>
-                                  </div>
-                                </div>
-                        
-                              
-          
-                             
                               </div>
-
-                              <div class=" w-50 my-4">
-                                <ul ngbNav #nav="ngbNav" [(activeId)]="activeLocal" class="nav-tabs mb-3">
-                                  <li [ngbNavItem]="1" class="w-50 custom-tab-li-slide">
-                                    <a ngbNavLink>Local Sponser</a>
-                                    <ng-template ngbNavContent>
-                                      <div class="row" [formGroup]="PRForeignLocalSponser">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                                            <div class="form-floating">
-                                                <label for="floatingInput">Name*</label>
-                                                <input type="text"  class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
-                                                  formControlName="Name" placeholder="Name">
-                                                <div *ngIf="LSTypeControl['Name'].touched && LSTypeControl['Name'].invalid"
-                                                  class="alert alert-danger">
-                                                  Name required.
-                                                </div>
-                                              </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                                            <div class="form-floating">
-                                                <label for="floatingInput">CNIC*</label>
-                                                <input type="text" mask="00000-0000000-0" placeholder="00000-0000000-0"
-                                                  (keypress)="keyPressNumberOnly($event)" onKeyPress="if(this.value.length==15) return false;"
-                                                  class="form-control" formControlName="CNIC">
-                                                <div *ngIf="LSTypeControl['CNIC'].touched && LSTypeControl['CNIC'].invalid"
-                                                  class="alert alert-danger">
-                                                  CNIC required.
-                                                </div>
-                                              </div>
-                                        </div>
+                              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                                  <div class="form-floating">
+                                      <label for="floatingInput">CNIC*</label>
+                                      <input type="text" mask="00000-0000000-0" placeholder="00000-0000000-0"
+                                        (keypress)="keyPressNumberOnly($event)" onKeyPress="if(this.value.length==15) return false;"
+                                        class="form-control" formControlName="CNIC">
+                                      <div *ngIf="LSTypeControl['CNIC'].touched && LSTypeControl['CNIC'].invalid"
+                                        class="alert alert-danger">
+                                        CNIC required.
                                       </div>
-                                    </ng-template>
-                                  </li>
-                                  <li [ngbNavItem]="2" class="w-50 custom-tab-li-slide">
-                                    <a ngbNavLink>Company Sponser</a>
-                                    <ng-template ngbNavContent>
-                                      <div class="row" [formGroup]="PRForeignCompanySponser">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                                            <div class="form-floating">
-                                                <label for="floatingInput">Company Name*</label>
-                                                <input type="text"  class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
-                                                  formControlName="CompanyName" placeholder="Company Name">
-                                                <div *ngIf="CSTypeControl['CompanyName'].touched && CSTypeControl['CompanyName'].invalid"
-                                                  class="alert alert-danger">
-                                                  Company Name required.
-                                                </div>
-                                              </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                                            <div class="form-floating">
-                                                <label for="floatingInput">NTN*</label>
-                                                <input type="text"  class="form-control"(keypress)="keyPressNumberOnly($event)"onKeyPress="if(this.value.length==15) return false;"
-                                                  formControlName="NTN" placeholder="NTN">
-                                                <div *ngIf="CSTypeControl['NTN'].touched && CSTypeControl['NTN'].invalid"
-                                                  class="alert alert-danger">
-                                                  NTN required.
-                                                </div>
-                                              </div>
-                                        </div>
-                                      </div>
-                                    </ng-template>
-                                  </li>
-                                </ul>
-        
-                                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                                    </div>
                               </div>
-                              <div class="w-100 d-flex align-items-center justify-content-start">
-                                <button class="btn-success add-btn" (click)="Save()">SUBMIT</button>
+                            </div>
+                          </ng-template>
+                        </li>
+                        <li [ngbNavItem]="2" class="w-50 custom-tab-li-slide">
+                          <a ngbNavLink>Company Sponser</a>
+                          <ng-template ngbNavContent>
+                            <div class="row" [formGroup]="PRForeignCompanySponser">
+                              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                                  <div class="form-floating">
+                                      <label for="floatingInput">Company Name*</label>
+                                      <input type="text"  class="form-control" (keypress)="keyPressAlfhabetsOnly($event)"
+                                        formControlName="CompanyName" placeholder="Company Name">
+                                      <div *ngIf="CSTypeControl['CompanyName'].touched && CSTypeControl['CompanyName'].invalid"
+                                        class="alert alert-danger">
+                                        Company Name required.
+                                      </div>
+                                    </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                                  <div class="form-floating">
+                                      <label for="floatingInput">NTN*</label>
+                                      <input type="text"  class="form-control"(keypress)="keyPressNumberOnly($event)"onKeyPress="if(this.value.length==15) return false;"
+                                        formControlName="NTN" placeholder="NTN">
+                                      <div *ngIf="CSTypeControl['NTN'].touched && CSTypeControl['NTN'].invalid"
+                                        class="alert alert-danger">
+                                        NTN required.
+                                      </div>
+                                    </div>
                               </div>
                             </div>
                           </ng-template>
                         </li>
                       </ul>
-                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+                      <div [ngbNavOutlet]="nav" class="mt-2"></div>
                     </div>
-                
-                </div>
-            </div>
+
+
+
+
+                    <div class="w-100 d-flex align-items-center justify-content-start">
+                      <button class="btn-success add-btn" (click)="Save()">SUBMIT</button>
+                    </div>
+
+                  </div>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>

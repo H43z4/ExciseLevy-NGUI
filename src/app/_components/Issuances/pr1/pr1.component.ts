@@ -401,6 +401,7 @@ export class PR1Component implements OnInit {
   }
   uploadFile = (files: string | any,appId: string | any) => {
     if (files.length === 0 || appId === "") {
+      this.toastrService.error("Photo is missing!");
       return;
     }
     let fileToUpload = <File>files;
@@ -409,8 +410,11 @@ export class PR1Component implements OnInit {
     formData.append('file', fileToUpload, fileName);
     this.pr1Services.UploadPhoto(formData).subscribe(
       res => {
-        const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
-        imgElement.src = '';
+        let ImD= new ImageData(0,0); 
+        this.webcam.webcamImage = new WebcamImage("","",ImD);
+        // this.webcam.webcamImage?.imageAsDataUrl = "";
+        // const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
+        // imgElement.src = '';
         if (res.status == '0') {
           this.spinner.hide();
           this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);

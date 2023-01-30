@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { WebcamImage } from 'ngx-webcam';
 import { PR2 } from 'src/app/_models/Issuances/PR2Model';
 import { DropDownService } from 'src/app/_services';
 import { PR2Service } from 'src/app/_services/PR1/Pr2-Service';
+import { WebcamComponent } from '../webcam/webcam.component';
 
 @Component({
   selector: 'app-pr2',
@@ -28,11 +30,35 @@ ShowOtherProfession: string="";
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private pr2Services: PR2Service,
+    
     private toastrService: ToastrService,
-    private dropdownService: DropDownService,
+    private dropdownService: DropDownService,   
+    public webcam : WebcamComponent,
+
   ) { }
-
-
+  uploadFile = (files: string | any,appId: string | any) => {
+    if (files.length === 0 || appId === "") {
+      this.toastrService.error("Photo is missing!");
+      return;
+    }
+    debugger
+    let fileToUpload = <File>files;
+    const formData = new FormData();
+    var fileName = fileToUpload.name +"_"+ appId;
+    formData.append('file', fileToUpload, fileName);
+    this.pr2Services.UploadPhoto(formData).subscribe(
+      res => {
+        let ImD= new ImageData(0,0); 
+        this.webcam.webcamImage = new WebcamImage("","",ImD);
+        // const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
+        // imgElement.src = '';
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
+          this.PRBasicFromForeign.reset();
+        }
+      })
+  }
   ngOnInit(): void {
     this.PRForeignLocalSponser = this.fb.group({
       Id: [''],
@@ -198,6 +224,7 @@ ShowOtherProfession: string="";
 
 
   Save() {
+    debugger
     let Sponser = 0;
     if (this.activeLocal == 1) {
       if (!this.PRForeignLocalSponser.valid ) {
@@ -258,10 +285,15 @@ ShowOtherProfession: string="";
     Pr2.sponsorCompanyNTN= NTN
     Pr2.permitTypeId = 4;
     Pr2.sponsorTypeID=this.activeLocal;
+    debugger
+
     this.pr2Services.PR2Save(Pr2).subscribe(
       res => {
         if (res.status == '0') {
+           debugger
+
           this.spinner.hide();
+          this.uploadFile(this.webcam.file,res.data.applicationId);
             this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
           this.PRForeignCompanySponser.reset();
           this.PRForeignLocalSponser.reset();

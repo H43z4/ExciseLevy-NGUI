@@ -28,8 +28,8 @@ export class StockInDetailComponent implements OnInit {
       res => {
         debugger
 
-         this.Record1 = res.data.table[0];
-         this.Record2 = res.data.table1;
+         this.Record1 = res.data;
+         this.Record2 = res.data.items;
 
          for (let index = 0; index < this.Record2.length; index++) {
           this.StockInDetaillist.push({
