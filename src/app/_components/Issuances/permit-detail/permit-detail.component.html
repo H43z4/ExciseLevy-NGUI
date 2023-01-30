@@ -33,7 +33,7 @@
     </div>
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="pos-details-box">
-              <p class="pdb-title mb-0">City</p>
+              <p class="pdb-title mb-0">City/Country</p>
               <p class="pdb-desc mb-0">{{this.Record.city}}</p>
           </div>
       </div>
@@ -57,8 +57,8 @@
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="pos-details-box">
-              <p class="pdb-title mb-0">Permit No (If any)</p>
-              <p class="pdb-desc mb-0">{{this.Record.oldPermitNo == null?'-----':this.Record.oldPermitNo}}</p>
+              <p class="pdb-title mb-0">Old Permit No (If any)</p>
+              <p class="pdb-desc mb-0">{{this.Record.oldPermitNo == 0?'-----':this.Record.oldPermitNo}}</p>
           </div>
       </div>
       <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
@@ -70,13 +70,13 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="pos-details-box">
               <p class="pdb-title mb-0">DOB</p>
-              <p class="pdb-desc mb-0">{{this.Record.dateofBirth}}</p>
+              <p class="pdb-desc mb-0">{{this.Record.dateofBirth| date:'dd-MMM-yyyy'}}</p>
           </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="pos-details-box">
               <p class="pdb-title mb-0">Created At</p>
-              <p class="pdb-desc mb-0">{{this.Record.createdAt}}</p>
+              <p class="pdb-desc mb-0">{{this.Record.createdAt| date:'dd-MMM-yyyy'}}</p>
           </div>
       </div>
       <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">

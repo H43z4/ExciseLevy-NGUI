@@ -45,9 +45,9 @@ export class PermitListComponent implements OnInit, OnDestroy {
   GetPermitApplicationList() {
     this.pr1Services.PRList().subscribe(
       res => {
+        debugger;
         this.PRlist = [];
         var Records = res.data;
-        debugger
         for (let index = 0; index < Records.length; index++) {
           this.PRlist.push({
             count: index + 1,
@@ -60,38 +60,44 @@ export class PermitListComponent implements OnInit, OnDestroy {
             dateofBirth: Records[index].dateofBirth,
             oldPermitNo: Records[index].oldPermitNo,
             applicationDate: Records[index].createdAt,
+            requestTimeLine : Records[index].rowTimeline,
           })
-          this.RequestTimeLine(Records[index].createdAt,index);
         }
 
-
-
-        // if (res.status == '0') {
-        //   this.spinner.hide();
-        // }
-        // else {
-        //   this.spinner.hide();
-        // }
         this.dtTrigger.next(Records);
+        // this.RequestTimeLine(this.PRlist);
+
       });
   }
 
-  RequestTimeLine(currentDate: string,index:number) {
-    const date1 = new Date(currentDate);
+  RequestTimeLine(PRList: any) {
+    debugger
+
+
+
+    PRList.forEach((e: { applicationDate: string | number | Date; count: number; }) => {
+      const date1 = new Date(e.applicationDate);
+         
     const date2 = new Date();
 
     const diffTime = Math.abs(date2.getTime() - date1.getTime());
     const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const inputField = document.getElementById(`permitListCol_`+(e.count-1)) as HTMLElement;
+    debugger
+    // inputField.classList.remove("less24","hours24", "hours48", "hours72");
 if (diffHours<24) {
-  
+  // inputField.classList.add("less24");
 }else if (diffHours>24 && diffHours<48) {
-  
+  // inputField.classList.add("hours24");
 }
 else if (diffHours>24 && diffHours>48 && diffHours<72) {
-  
+  // inputField.classList.add("hours48");
 }else{
-  
+  // inputField.classList.add("hours72");
 }
+    });
+
+ 
   }
 
 }

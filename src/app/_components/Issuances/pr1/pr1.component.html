@@ -27,33 +27,33 @@
             <ul ngbNav #nav="ngbNav" [(activeId)]="active"
               class="nav-tabs w-100 d-flex align-items-center justify-content-between">
               <li [ngbNavItem]="1" class="custom-tab-li">
-                <a class="text-pri" ngbNavLink> <span class="mx-2"><img src="../../assets/bio.png" alt=""></span>
+                <a class="text-pri" ngbNavLink> <span class="mx-2"><img src="/assets/bio.png" alt=""></span>
                   Biometric</a>
                 <ng-template ngbNavContent>
                   <div class="progress-steps-reg">
                     <div class="psr-header">
                       <div class="bio-metric">
-                        <img src="../../assets/bio-metric.png" alt="">
+                        <img src="/assets/bio-metric.png" alt="">
                       </div>
                       <p class="bio-title mb-0">Place left thumb on scanner</p>
                     </div>
                     <div class="proceed">
-                      <img src="../../assets/verified.png" alt="">
+                      <img src="/assets/verified.png" alt="">
                       <p class="mb-0 p-title">Non Muslim Proceed</p>
                     </div>
                     <div class="proceed">
-                      <img src="../../assets/rejected.png" alt="">
+                      <img src="/assets/rejected.png" alt="">
                       <p class="mb-0 p-title">Muslim Cannot Proceed</p>
                     </div>
                   </div>
                 </ng-template>
               </li>
               <li [ngbNavItem]="2" class="custom-tab-li">
-                <a ngbNavLink><span class="mx-2"><img src="../../assets/img-bio.png" alt=""></span> Take Photo</a>
+                <a ngbNavLink><span class="mx-2"><img src="/assets/img-bio.png" alt=""></span> Take Photo</a>
                 <ng-template ngbNavContent>
                   <div class="progress-steps-reg">
                     <div class="photo-header">
-                      <img src="../../assets/pic.png" alt="">
+                      <img src="/assets/pic.png" alt="">
 
                       <p class="mb-0 bio-title">Take Photo</p>
                     </div>
@@ -61,7 +61,7 @@
                 </ng-template>
               </li>
               <li [ngbNavItem]="3" class="custom-tab-li">
-                <a ngbNavLink><span class="mx-2"><img src="../../assets/active-bio.png" alt=""></span>Personal
+                <a ngbNavLink><span class="mx-2"><img src="/assets/active-bio.png" alt=""></span>Personal
                   Details</a>
                 <ng-template ngbNavContent>
                   <div class="personal-details p-2">
@@ -108,7 +108,7 @@
                             onKeyPress="if(this.value.length==12) return false;" formControlName="Phone">
                           <div *ngIf="TypeControl['Phone'].touched && TypeControl['Phone'].invalid"
                             class="alert alert-danger">
-                            Phone Number required.
+                            Phone Number required. 
                           </div>
                         </div>
                       </div>
@@ -186,7 +186,7 @@
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Old Permit No. (If any)</label>
-                          <input type="number" class="form-control" formControlName="OldPermit"
+                          <input type="number" class="form-control" formControlName="OldPermit"(keypress)="keyPressNumberOnly($event)"
                             placeholder="Old Permit No">
                           <div *ngIf="TypeControl['OldPermit'].touched && TypeControl['OldPermit'].invalid"
                             class="alert alert-danger">

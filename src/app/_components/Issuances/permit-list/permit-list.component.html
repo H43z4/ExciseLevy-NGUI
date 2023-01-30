@@ -45,11 +45,10 @@
                 <th scope="col">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let arr of PRlist">
-                <!-- <tr *ngFor="let arr of PRlist let i = index"> -->
-                <!-- <th scope="row" class="promt-table-field">{{i+1}}</th> -->
-                <th scope="row" Id="permitListCol" class="promt-table-field hours24">{{arr.count}}</th>
+            <tbody id="TableId">
+              <tr *ngFor="let arr of PRlist;let i = index">
+             
+                <th scope="row" [id]="'permitListCol_' + i" [class]="'promt-table-field '+ arr.requestTimeLine">{{i+1}}</th>
                 <td>{{arr.personName}}</td>
                 <td>{{arr.cnic}}</td>
                 <td>{{arr.cellNo}}</td>

@@ -72,8 +72,6 @@ export class PR1Component implements OnInit {
   ngOnInit(): void {
 
 
-
-    debugger
     this.PRBasicfromLocal = this.fb.group({
       Id: [''],
       OldPermit: new FormControl(''),
