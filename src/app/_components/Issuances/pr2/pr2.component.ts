@@ -29,11 +29,12 @@ ShowOtherProfession: string="";
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private pr2Services: PR2Service,
+    
     private toastrService: ToastrService,
-    private dropdownService: DropDownService,    public webcam : WebcamComponent,
+    private dropdownService: DropDownService,   
+    public webcam : WebcamComponent,
 
   ) { }
-  PRBasicFromForeign!: FormGroup;
   uploadFile = (files: string | any,appId: string | any) => {
     if (files.length === 0 || appId === "") {
       return;
@@ -42,7 +43,7 @@ ShowOtherProfession: string="";
     const formData = new FormData();
     var fileName = fileToUpload.name +"_"+ appId;
     formData.append('file', fileToUpload, fileName);
-    this.pr1Services.UploadPhoto(formData).subscribe(
+    this.pr2Services.UploadPhoto(formData).subscribe(
       res => {
         const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
         imgElement.src = '';
@@ -282,6 +283,7 @@ ShowOtherProfession: string="";
       res => {
         if (res.status == '0') {
           this.spinner.hide();
+          this.uploadFile(this.webcam.file,res.data.applicationId);
             this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
           this.PRForeignCompanySponser.reset();
           this.PRForeignLocalSponser.reset();

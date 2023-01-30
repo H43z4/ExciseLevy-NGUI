@@ -28,6 +28,10 @@ export class PR2Service {
     }));
   }
 
-
+  UploadPhoto(formData: FormData ) {
+    return this.http.post<any>(`${environment.apiUrlsample}/Person/Upload`, formData)
+    .pipe(map(res => {
+      return res; })); 
+  }
   
 }
