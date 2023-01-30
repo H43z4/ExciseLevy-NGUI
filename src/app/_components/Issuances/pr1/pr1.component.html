@@ -53,9 +53,20 @@
                 <ng-template ngbNavContent>
                   <div class="progress-steps-reg">
                     <div class="photo-header">
-                      <img src="../../assets/pic.png" alt="">
+                      <!-- <img src="../../assets/pic.png" alt=""> -->
+                      <webcam
+                      [trigger]="this.webcam.invokeObservable"
+                      (imageCapture)="this.webcam.captureImg($event)"
+                    ></webcam>
 
-                      <p class="mb-0 bio-title">Take Photo</p>
+                      <button class="btn-success add-btn" (click)="this.webcam.getSnapshot()">Take Photo</button>
+                    </div>
+                  </div>
+                  <div class="progress-steps-reg">
+                    <div class="photo-header" id="results">
+                      <!-- <img src="../../assets/pic.png" alt=""> -->
+                      <img id="myImg" [src]="this.webcam.webcamImage?.imageAsDataUrl" height="400px" />
+                      <p class="mb-0 bio-title">Photo</p>
                     </div>
                   </div>
                 </ng-template>

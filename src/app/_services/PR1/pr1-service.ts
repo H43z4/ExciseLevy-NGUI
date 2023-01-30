@@ -19,7 +19,11 @@ export class PR1Service {
   PR1BasicInfo(pr1: PR1) {
     return this.http.post<any>(`${environment.apiUrlsample}/Permit/SavePermit`, pr1)
   }
-
+  UploadPhoto(formData: FormData ) {
+    return this.http.post<any>(`${environment.apiUrlsample}/Person/Upload`, formData)
+    .pipe(map(res => {
+      return res; })); 
+  }
   PRList() {
     return this.http.get<any>(`${environment.apiUrlsample}/Permit/GetPermitList`)
   }
