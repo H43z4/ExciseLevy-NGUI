@@ -1,21 +1,86 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { WebcamImage } from 'ngx-webcam';
 import { PR1 } from 'src/app/_models/Issuances/PR1Model';
 import { Dropdown } from 'src/app/_models/setup/Dropdown';
 import { PR1Service } from 'src/app/_services/PR1/pr1-service';
 import { DropDownService } from 'src/app/_services/shared/dropDown.service';
-
+import { WebcamComponent } from '../webcam/webcam.component';
 
 @Component({
   selector: 'app-pr1',
   templateUrl: './pr1.component.html',
-  styleUrls: ['./pr1.component.css']
+  styleUrls: ['./pr1.component.css'],
+  providers: [WebcamComponent]
 })
 export class PR1Component implements OnInit {
-
-  PRlist: any[] = [];
+  http: any;
+  
+  constructor(
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private pr1Services: PR1Service,
+    private toastrService: ToastrService,
+    private dropdownService: DropDownService,
+    public webcam : WebcamComponent,
+    
+    ) { }
+    
+      ngOnInit(): void {
+    
+    
+    
+        debugger
+        this.PRBasicfromLocal = this.fb.group({
+          Id: [''],
+          OldPermit: new FormControl(''),
+          Profession: new FormControl('', [Validators.required]),
+          DOB: new FormControl('', [Validators.required]),
+          Address: new FormControl('', [Validators.required]),
+          Phone: new FormControl('', [Validators.required]),
+          FatherName: new FormControl('', [Validators.required]),
+          Name: new FormControl('', [Validators.required]),
+          CNIC: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
+          City: new FormControl('', [Validators.required]),
+          District: new FormControl('', [Validators.required]),
+          OtherProfession: new FormControl('', [Validators.required]),
+          
+        });
+    
+        this.PRBasicFromForeign = this.fb.group({
+          Id: [''],
+          OldPermit: new FormControl(''),
+          Profession: new FormControl('', [Validators.required]),
+          DOB: new FormControl('', [Validators.required]),
+          Address: new FormControl('', [Validators.required]),
+          Phone: new FormControl('', [Validators.required]),
+          FatherName: new FormControl('', [Validators.required]),
+          Name: new FormControl('', [Validators.required]),
+          Pasportno: new FormControl('', [Validators.required]),
+          Country: new FormControl('', [Validators.required]),
+          Nationality: new FormControl('', [Validators.required]),
+          VisaExpiaryDate: new FormControl('', [Validators.required]),
+    
+        });
+        
+        this.PRDefinationfrom = this.fb.group({
+          Id: [''],
+          Type: [''],
+          Size: [''],
+          Quantity: [''],
+        });
+    
+    
+        this.AllDistrict();
+        this.AllCities();
+        this.AllProfessions();
+        this.OnCheckChange(1);
+        this.GetPermitApplicationList();
+      }
+    PRlist: any[] = [];
 
   PRBasicfromLocal!: FormGroup;
   PRBasicFromForeign!: FormGroup;
@@ -57,66 +122,58 @@ export class PR1Component implements OnInit {
   Profession: any;
 
 
-  constructor(
-    private fb: FormBuilder,
-    private spinner: NgxSpinnerService,
-    private pr1Services: PR1Service,
-    private toastrService: ToastrService,
-    private dropdownService: DropDownService,
-
-  ) { }
 
 
 
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
 
 
-    this.PRBasicfromLocal = this.fb.group({
-      Id: [''],
-      OldPermit: new FormControl(''),
-      Profession: new FormControl('', [Validators.required]),
-      DOB: new FormControl('', [Validators.required]),
-      Address: new FormControl('', [Validators.required]),
-      Phone: new FormControl('', [Validators.required]),
-      FatherName: new FormControl('', [Validators.required]),
-      Name: new FormControl('', [Validators.required]),
-      CNIC: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
-      City: new FormControl('', [Validators.required]),
-      District: new FormControl('', [Validators.required]),
-      OtherProfession: new FormControl('', [Validators.required]),
+  //   this.PRBasicfromLocal = this.fb.group({
+  //     Id: [''],
+  //     OldPermit: new FormControl(''),
+  //     Profession: new FormControl('', [Validators.required]),
+  //     DOB: new FormControl('', [Validators.required]),
+  //     Address: new FormControl('', [Validators.required]),
+  //     Phone: new FormControl('', [Validators.required]),
+  //     FatherName: new FormControl('', [Validators.required]),
+  //     Name: new FormControl('', [Validators.required]),
+  //     CNIC: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
+  //     City: new FormControl('', [Validators.required]),
+  //     District: new FormControl('', [Validators.required]),
+  //     OtherProfession: new FormControl('', [Validators.required]),
       
-    });
+  //   });
 
-    this.PRBasicFromForeign = this.fb.group({
-      Id: [''],
-      OldPermit: new FormControl(''),
-      Profession: new FormControl('', [Validators.required]),
-      DOB: new FormControl('', [Validators.required]),
-      Address: new FormControl('', [Validators.required]),
-      Phone: new FormControl('', [Validators.required]),
-      FatherName: new FormControl('', [Validators.required]),
-      Name: new FormControl('', [Validators.required]),
-      Pasportno: new FormControl('', [Validators.required]),
-      Country: new FormControl('', [Validators.required]),
-      Nationality: new FormControl('', [Validators.required]),
-      VisaExpiaryDate: new FormControl('', [Validators.required]),
+  //   this.PRBasicFromForeign = this.fb.group({
+  //     Id: [''],
+  //     OldPermit: new FormControl(''),
+  //     Profession: new FormControl('', [Validators.required]),
+  //     DOB: new FormControl('', [Validators.required]),
+  //     Address: new FormControl('', [Validators.required]),
+  //     Phone: new FormControl('', [Validators.required]),
+  //     FatherName: new FormControl('', [Validators.required]),
+  //     Name: new FormControl('', [Validators.required]),
+  //     Pasportno: new FormControl('', [Validators.required]),
+  //     Country: new FormControl('', [Validators.required]),
+  //     Nationality: new FormControl('', [Validators.required]),
+  //     VisaExpiaryDate: new FormControl('', [Validators.required]),
 
-    });
-    this.PRDefinationfrom = this.fb.group({
-      Id: [''],
-      Type: [''],
-      Size: [''],
-      Quantity: [''],
-    });
+  //   });
+  //   this.PRDefinationfrom = this.fb.group({
+  //     Id: [''],
+  //     Type: [''],
+  //     Size: [''],
+  //     Quantity: [''],
+  //   });
 
 
-    this.AllDistrict();
-    this.AllCities();
-    this.AllProfessions();
-    this.OnCheckChange(1);
-    this.GetPermitApplicationList();
-  }
+  //   this.AllDistrict();
+  //   this.AllCities();
+  //   this.AllProfessions();
+  //   this.OnCheckChange(1);
+  //   this.GetPermitApplicationList();
+  // }
 
   AllProfessions()
   {
@@ -339,9 +396,28 @@ export class PR1Component implements OnInit {
       this.PRBasicfromLocal.get('OtherProfession')?.setValue('');
     }
   }
+  uploadFile = (files: string | any,appId: string | any) => {
+    if (files.length === 0 || appId === "") {
+      return;
+    }
+    let fileToUpload = <File>files;
+    const formData = new FormData();
+    var fileName = fileToUpload.name +"_"+ appId;
+    formData.append('file', fileToUpload, fileName);
+    this.pr1Services.UploadPhoto(formData).subscribe(
+      res => {
+        const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
+        imgElement.src = '';
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
+          this.PRBasicFromForeign.reset();
+        }
+      })
+  }
+  
   Save() {
 debugger
-
     this.spinner.show();
     if (this.ShowForeign == true) {
       if (!this.PRBasicFromForeign.valid) {
@@ -382,7 +458,7 @@ debugger
           debugger
           if (res.status == '0') {
             this.spinner.hide();
-            this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
+            // this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
             this.PRBasicFromForeign.reset();
           }
           else {
@@ -436,6 +512,7 @@ debugger
           debugger
           if (res.status == '0') {
             this.spinner.hide();
+            this.uploadFile(this.webcam.file,res.data.applicationId);
             this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
             this.PRBasicfromLocal.reset();
 

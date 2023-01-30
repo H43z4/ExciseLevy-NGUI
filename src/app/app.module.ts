@@ -28,7 +28,8 @@ import { HeaderComponent } from './_components/header/header.component';
 import { StockInListComponent } from './_components/inventory/stock-in-list/stock-in-list.component';
 import { StockInDetailComponent } from './_components/inventory/stock-in-detail/stock-in-detail.component';
 import { Pr2Component } from './_components/Issuances/pr2/pr2.component';
-
+import { WebcamModule } from 'ngx-webcam';
+import { WebcamComponent } from './_components/Issuances/webcam/webcam.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { Pr2Component } from './_components/Issuances/pr2/pr2.component';
     HeaderComponent,
     StockInListComponent,
     StockInDetailComponent,
-    Pr2Component
+    Pr2Component,
+    WebcamComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ import { Pr2Component } from './_components/Issuances/pr2/pr2.component';
     NgbModule,
     MetismenuAngularModule,
     NgxTrimDirectiveModule,
+    WebcamModule,
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
     // timeOut: 5000, // 5 seconds
@@ -78,7 +81,7 @@ import { Pr2Component } from './_components/Issuances/pr2/pr2.component';
     HttpClientModule
   ],
   providers: [
-
+      WebcamComponent,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],

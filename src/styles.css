@@ -389,7 +389,18 @@ input[type=number] {
     font-size: 25px;
     color: #000000;
 }
-
+.logout-btns{
+    width: 146px;
+    height: 26px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
 .pos-btns{
     width: 146px;
     height: 48px;
@@ -466,6 +477,16 @@ input[type=number] {
     text-decoration-line: underline;
     color: #284F68;
     margin: 24px 0;
+}
+.progress-steps-reg-photo{
+    min-height: 65vh;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    float: left;
+    padding-left: 20%;
 }
 .progress-steps-reg{
     min-height: 65vh;
