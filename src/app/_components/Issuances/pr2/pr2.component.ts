@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { WebcamComponent } from '../webcam/webcam.component';
 
 @Component({
   selector: 'app-pr2',
@@ -10,10 +11,29 @@ export class Pr2Component implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    public webcam : WebcamComponent,
 
   ) { }
   PRBasicFromForeign!: FormGroup;
-
+  uploadFile = (files: string | any,appId: string | any) => {
+    if (files.length === 0 || appId === "") {
+      return;
+    }
+    let fileToUpload = <File>files;
+    const formData = new FormData();
+    var fileName = fileToUpload.name +"_"+ appId;
+    formData.append('file', fileToUpload, fileName);
+    this.pr1Services.UploadPhoto(formData).subscribe(
+      res => {
+        const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
+        imgElement.src = '';
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
+          this.PRBasicFromForeign.reset();
+        }
+      })
+  }
   ngOnInit(): void {
     this.PRBasicFromForeign = this.fb.group({
       Id: [''],
