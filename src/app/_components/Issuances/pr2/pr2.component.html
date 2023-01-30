@@ -12,15 +12,26 @@
                             <li [ngbNavItem]="1" class="custom-tab-li">
                                 <a ngbNavLink><span class="mx-2"><img src="../../assets/img-bio.png" alt=""></span> Take
                                     Photo</a>
-                                <ng-template ngbNavContent>
-                                    <div class="progress-steps-reg">
-                                        <div class="photo-header">
-                                            <img src="../../assets/pic.png" alt="">
-
-                                            <p class="mb-0 bio-title">Take Photo</p>
+                                    <ng-template ngbNavContent>
+                                        <div class="progress-steps-reg">
+                                          <div class="photo-header">
+                                            <!-- <img src="../../assets/pic.png" alt=""> -->
+                                            <webcam
+                                            [trigger]="this.webcam.invokeObservable"
+                                            (imageCapture)="this.webcam.captureImg($event)"
+                                          ></webcam>
+                      
+                                            <button class="btn-success add-btn" (click)="this.webcam.getSnapshot()">Take Photo</button>
+                                          </div>
                                         </div>
-                                    </div>
-                                </ng-template>
+                                        <div class="progress-steps-reg">
+                                          <div class="photo-header" id="results">
+                                            <!-- <img src="../../assets/pic.png" alt=""> -->
+                                            <img id="myImg" [src]="this.webcam.webcamImage?.imageAsDataUrl" height="400px" />
+                                            <p class="mb-0 bio-title">Photo</p>
+                                          </div>
+                                        </div>
+                                      </ng-template>
                             </li>
                             <li [ngbNavItem]="2" class="custom-tab-li">
                                 <a ngbNavLink><span class="mx-2"><img src="../../assets/active-bio.png"

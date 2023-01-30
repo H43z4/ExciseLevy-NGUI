@@ -35,7 +35,7 @@ export class StockInListComponent implements OnInit {
     this.stockIn.StockInList().subscribe(
       res => {
         this.Stocklist= [];
-        var Records = res.data.table;
+        var Records = res.data;
         debugger
         for (let index = 0; index < Records.length; index++) {
           this.Stocklist.push({
