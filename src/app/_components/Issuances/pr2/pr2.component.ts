@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { WebcamImage } from 'ngx-webcam';
 import { PR2 } from 'src/app/_models/Issuances/PR2Model';
 import { DropDownService } from 'src/app/_services';
 import { PR2Service } from 'src/app/_services/PR1/Pr2-Service';
@@ -37,6 +38,7 @@ ShowOtherProfession: string="";
   ) { }
   uploadFile = (files: string | any,appId: string | any) => {
     if (files.length === 0 || appId === "") {
+      this.toastrService.error("Photo is missing!");
       return;
     }
     let fileToUpload = <File>files;
@@ -45,8 +47,10 @@ ShowOtherProfession: string="";
     formData.append('file', fileToUpload, fileName);
     this.pr2Services.UploadPhoto(formData).subscribe(
       res => {
-        const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
-        imgElement.src = '';
+        let ImD= new ImageData(0,0); 
+        this.webcam.webcamImage = new WebcamImage("","",ImD);
+        // const imgElement: HTMLImageElement = document.getElementById('myImg') as HTMLImageElement;
+        // imgElement.src = '';
         if (res.status == '0') {
           this.spinner.hide();
           this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
