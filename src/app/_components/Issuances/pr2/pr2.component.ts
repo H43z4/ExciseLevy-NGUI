@@ -37,7 +37,7 @@ ShowOtherProfession: string="";
 
   ) { }
   uploadFile = (files: string | any,appId: string | any) => {
-    if (files.length === 0 || appId === "") {
+    if (files== null || files.length === 0 || appId === "") {
       this.toastrService.error("Photo is missing!");
       return;
     }
@@ -226,6 +226,10 @@ ShowOtherProfession: string="";
   Save() {
     debugger
     let Sponser = 0;
+    if (this.webcam.file== null || this.webcam.file.length === 0) {
+      this.toastrService.error("Photo is missing!");
+      return;
+    }
     if (this.activeLocal == 1) {
       if (!this.PRForeignLocalSponser.valid ) {
         this.spinner.hide();

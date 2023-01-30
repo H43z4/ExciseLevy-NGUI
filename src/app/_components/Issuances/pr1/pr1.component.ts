@@ -400,7 +400,7 @@ export class PR1Component implements OnInit {
     }
   }
   uploadFile = (files: string | any,appId: string | any) => {
-    if (files.length === 0 || appId === "") {
+    if (files== null || files.length === 0 || appId === "") {
       this.toastrService.error("Photo is missing!");
       return;
     }
@@ -426,6 +426,10 @@ export class PR1Component implements OnInit {
   Save() {
 debugger
     this.spinner.show();
+    if (this.webcam.file== null || this.webcam.file.length === 0) {
+      this.toastrService.error("Photo is missing!");
+      return;
+    }
     if (this.ShowForeign == true) {
       if (!this.PRBasicFromForeign.valid) {
         this.spinner.hide();
