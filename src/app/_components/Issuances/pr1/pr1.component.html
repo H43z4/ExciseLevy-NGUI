@@ -27,33 +27,33 @@
             <ul ngbNav #nav="ngbNav" [(activeId)]="active"
               class="nav-tabs w-100 d-flex align-items-center justify-content-between">
               <li [ngbNavItem]="1" class="custom-tab-li">
-                <a class="text-pri" ngbNavLink> <span class="mx-2"><img src="/assets/bio.png" alt=""></span>
+                <a class="text-pri" ngbNavLink> <span class="mx-2"><img src="assets/bio.png" alt=""></span>
                   Biometric</a>
                 <ng-template ngbNavContent>
                   <div class="progress-steps-reg">
                     <div class="psr-header">
                       <div class="bio-metric">
-                        <img src="/assets/bio-metric.png" alt="">
+                        <img src="assets/bio-metric.png" alt="">
                       </div>
                       <p class="bio-title mb-0">Place left thumb on scanner</p>
                     </div>
                     <div class="proceed">
-                      <img src="/assets/verified.png" alt="">
+                      <img src="assets/verified.png" alt="">
                       <p class="mb-0 p-title">Non Muslim Proceed</p>
                     </div>
                     <div class="proceed">
-                      <img src="/assets/rejected.png" alt="">
+                      <img src="assets/rejected.png" alt="">
                       <p class="mb-0 p-title">Muslim Cannot Proceed</p>
                     </div>
                   </div>
                 </ng-template>
               </li>
               <li [ngbNavItem]="2" class="custom-tab-li">
-                <a ngbNavLink><span class="mx-2"><img src="/assets/img-bio.png" alt=""></span> Take Photo</a>
+                <a ngbNavLink><span class="mx-2"><img src="assets/img-bio.png" alt=""></span> Take Photo</a>
                 <ng-template ngbNavContent>
                   <div class="progress-steps-reg">
                     <div class="photo-header">
-                      <!-- <img src="../../assets/pic.png" alt=""> -->
+                      <!-- <img src="../..assets/pic.png" alt=""> -->
                       <webcam
                       [trigger]="this.webcam.invokeObservable"
                       (imageCapture)="this.webcam.captureImg($event)"
@@ -64,15 +64,15 @@
                   </div>
                   <div class="progress-steps-reg">
                     <div class="photo-header" id="results">
-                      <!-- <img src="../../assets/pic.png" alt=""> -->
-                      <img id="myImg" [src]="this.webcam.webcamImage.imageAsDataUrl" height="400px" />
+                      <!-- <img src="../..assets/pic.png" alt=""> -->
+                      <img id="myImg" [src]="this.webcam.webcamImage?.imageAsDataUrl" height="400px" />
                       <p class="mb-0 bio-title">Photo</p>
                     </div>
                   </div>
                 </ng-template>
               </li>
               <li [ngbNavItem]="3" class="custom-tab-li">
-                <a ngbNavLink><span class="mx-2"><img src="/assets/active-bio.png" alt=""></span>Personal
+                <a ngbNavLink><span class="mx-2"><img src="assets/active-bio.png" alt=""></span>Personal
                   Details</a>
                 <ng-template ngbNavContent>
                   <div class="personal-details p-2">
@@ -162,12 +162,34 @@
                       </div>
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
-                          <label for="floatingInput">Address*</label>
-                          <textarea type="text" rows="1" class="form-control" formControlName="Address"
-                            placeholder="Address"></textarea>
-                          <div *ngIf="TypeControl['Address'].touched && TypeControl['Address'].invalid"
+                          <label for="floatingInput">Street*</label>
+                          <textarea type="text" rows="1" class="form-control" formControlName="Street"
+                            placeholder="Street"></textarea>
+                          <div *ngIf="TypeControl['Street'].touched && TypeControl['Street'].invalid"
                             class="alert alert-danger">
-                            Address required.
+                            Street required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">Area*</label>
+                          <textarea type="text" rows="1" class="form-control" formControlName="Area"
+                            placeholder="Area"></textarea>
+                          <div *ngIf="TypeControl['Area'].touched && TypeControl['Area'].invalid"
+                            class="alert alert-danger">
+                            Area required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="form-floating">
+                          <label for="floatingInput">House No*</label>
+                          <textarea type="text" rows="1" class="form-control" formControlName="House"
+                            placeholder="House"></textarea>
+                          <div *ngIf="TypeControl['House'].touched && TypeControl['House'].invalid"
+                            class="alert alert-danger">
+                            House No required.
                           </div>
                         </div>
                       </div>

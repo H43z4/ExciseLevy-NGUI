@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
   PR()
   {
   this.returnUrl= "";
-    this.returnUrl= '/master/PermitApplication';
+    this.returnUrl= '/master/PermitApplicationL';
     this.router.navigateByUrl(this.returnUrl);
   }
  

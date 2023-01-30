@@ -39,7 +39,7 @@ export class PR1Component implements OnInit {
           OldPermit: new FormControl(''),
           Profession: new FormControl('', [Validators.required]),
           DOB: new FormControl('', [Validators.required]),
-          Address: new FormControl('', [Validators.required]),
+          Address: new FormControl(''),
           Phone: new FormControl('', [Validators.required]),
           FatherName: new FormControl('', [Validators.required]),
           Name: new FormControl('', [Validators.required]),
@@ -47,6 +47,9 @@ export class PR1Component implements OnInit {
           City: new FormControl('', [Validators.required]),
           District: new FormControl('', [Validators.required]),
           OtherProfession: new FormControl('', [Validators.required]),
+          Street: new FormControl('', [Validators.required]),
+          Area: new FormControl('', [Validators.required]),
+          House: new FormControl('', [Validators.required]),
           
         });
     
@@ -437,13 +440,15 @@ debugger
       let Country = this.PRBasicFromForeign.get('Country')?.value;
       let Nationality = this.PRBasicFromForeign.get('Nationality')?.value;
       let VisaExpiaryDate = this.PRBasicFromForeign.get('VisaExpiaryDate')?.value;
+
+      debugger
+
       let pr1 = new PR1();
       pr1.oldPermitNo = oldPermit;
       pr1.personName = Name;
       pr1.fatherHusbandName = FatherName;
       pr1.cnic = "";
       pr1.cellNo = Phone;
-      pr1.address = Address;
       pr1.city = "";
       pr1.dateofBirth = DOB;
       pr1.permitTypeId=4;
@@ -452,6 +457,8 @@ debugger
       pr1.countryId = Country;
       pr1.nationality = Nationality;
       pr1.visaExpiryDate = VisaExpiaryDate;
+      pr1.address = pr1.address;
+   
 
       this.pr1Services.PR1BasicInfo(pr1).subscribe(
         res => {
@@ -489,13 +496,21 @@ debugger
       let Profession = this.PRBasicfromLocal.get('Profession')?.value;
       let OtherProfession = this.PRBasicfromLocal.get('OtherProfession')?.value;
 
+
+      let Street = this.PRBasicfromLocal.get('Street')?.value;
+      let Area = this.PRBasicfromLocal.get('Area')?.value;
+      let House = this.PRBasicfromLocal.get('House')?.value;
+
+      debugger
+
+
       let pr1 = new PR1();
       pr1.oldPermitNo = oldPermit;
       pr1.personName = Name;
       pr1.fatherHusbandName = FatherName;
       pr1.cnic = CNIC;
       pr1.cellNo = Phone;
-      pr1.address = Address;
+      // pr1.address = Address;
       pr1.cityId = City;
       pr1.districtId = District;
       pr1.dateofBirth = DOB;
@@ -506,6 +521,9 @@ debugger
       pr1.permitTypeId=3;
       pr1.nationality = null;
       pr1.visaExpiryDate = "2000-01-01";
+      var StreetArea= Street.toString().concat(", "+Area.toString());
+      pr1.address = StreetArea.concat(", "+House.toString());
+      
       debugger
       this.pr1Services.PR1BasicInfo(pr1).subscribe(
         res => {
