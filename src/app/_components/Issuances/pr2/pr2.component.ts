@@ -41,7 +41,7 @@ ShowOtherProfession: string="";
       this.toastrService.error("Photo is missing!");
       return;
     }
-    debugger
+    
     let fileToUpload = <File>files;
     const formData = new FormData();
     var fileName = fileToUpload.name +"_"+ appId;
@@ -139,6 +139,29 @@ ShowOtherProfession: string="";
       event.preventDefault();
     }
   }
+  searchPassport() {
+
+
+    let passport = this.PRBasicFromForeign.get('PassportNo')?.value;
+
+    
+    this.pr2Services.SerachCnic(passport).subscribe(
+      res => {
+        
+        if (res.status == '0') {
+          this.spinner.hide();
+          this.PRBasicFromForeign.reset();
+          this.PRForeignLocalSponser.reset();
+          this.PRForeignCompanySponser.reset();
+          this.toastrService.error("Passport Number already exist!");
+
+        }
+        else {
+          this.spinner.hide();
+          // this.toastrService.error(res.message, 'Error!');
+        }
+      });
+  }
   searchCnic() {
 
 
@@ -147,7 +170,7 @@ ShowOtherProfession: string="";
     
     this.pr2Services.SerachCnic(CNIC).subscribe(
       res => {
-        debugger
+        
         if (res.status == '0') {
           this.spinner.hide();
           this.PRForeignLocalSponser.reset();
@@ -224,7 +247,7 @@ ShowOtherProfession: string="";
 
 
   Save() {
-    debugger
+    
     let Sponser = 0;
     if (this.webcam.file== null || this.webcam.file.length === 0) {
       this.toastrService.error("Photo is missing!");
@@ -289,12 +312,12 @@ ShowOtherProfession: string="";
     Pr2.sponsorCompanyNTN= NTN
     Pr2.permitTypeId = 4;
     Pr2.sponsorTypeID=this.activeLocal;
-    debugger
+    
 
     this.pr2Services.PR2Save(Pr2).subscribe(
       res => {
         if (res.status == '0') {
-           debugger
+           
 
           this.spinner.hide();
           this.uploadFile(this.webcam.file,res.data.applicationId);

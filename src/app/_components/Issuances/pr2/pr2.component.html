@@ -75,7 +75,7 @@
                       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="form-floating">
                           <label for="floatingInput">Passport Number*</label>
-                          <input type="text" class="form-control" (keypress)="keyPressAlfhabetnumericOnly($event)"
+                          <input type="text" class="form-control" (blur)="searchPassport()" (keypress)="keyPressAlfhabetnumericOnly($event)"
                             onKeyPress="if(this.value.length==15) return false;" formControlName="PassportNo">
                           <div *ngIf="TypeControl['PassportNo'].touched && TypeControl['PassportNo'].invalid"
                             class="alert alert-danger">

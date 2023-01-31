@@ -33,7 +33,7 @@ export class PR1Component implements OnInit {
     
     
     
-        debugger
+        
         this.PRBasicfromLocal = this.fb.group({
           Id: [''],
           OldPermit: new FormControl(''),
@@ -254,7 +254,7 @@ export class PR1Component implements OnInit {
     var aaaa = this.PRlist;
     let CNIC = this.PRBasicfromLocal.get('CNIC')?.value;
 
-    debugger
+    
     if (CNIC! + null && CNIC.trim() != "") {
       if (aaaa.filter(a => a.cnic === CNIC).length > 0) {
 
@@ -280,7 +280,7 @@ export class PR1Component implements OnInit {
       res => {
         // this.PRlist= [];
         var Records = res.data;
-        debugger
+        
         for (let index = 0; index < Records.length; index++) {
           this.PRlist.push({
 
@@ -391,7 +391,7 @@ export class PR1Component implements OnInit {
     }
   }
   ShowHideOtherProfession(event:any) {
-    debugger;
+    ;
     this.ShowOtherProfession = event.target.value;
     if (this.ShowOtherProfession != '0' ) {
       this.PRBasicfromLocal.get('OtherProfession')?.setValue(event.target.options[event.target.selectedIndex].text);
@@ -424,7 +424,7 @@ export class PR1Component implements OnInit {
   }
   
   Save() {
-debugger
+
     this.spinner.show();
     if (this.webcam.file== null || this.webcam.file.length === 0) {
       this.toastrService.error("Photo is missing!");
@@ -449,7 +449,7 @@ debugger
       let Nationality = this.PRBasicFromForeign.get('Nationality')?.value;
       let VisaExpiaryDate = this.PRBasicFromForeign.get('VisaExpiaryDate')?.value;
 
-      debugger
+      
 
       let pr1 = new PR1();
       pr1.oldPermitNo = oldPermit;
@@ -470,7 +470,7 @@ debugger
 
       this.pr1Services.PR1BasicInfo(pr1).subscribe(
         res => {
-          debugger
+          
           if (res.status == '0') {
             this.spinner.hide();
             // this.toastrService.success("Your Application ID: " + res.data.applicationId + "", res.message);
@@ -509,7 +509,7 @@ debugger
       let Area = this.PRBasicfromLocal.get('Area')?.value;
       let House = this.PRBasicfromLocal.get('House')?.value;
 
-      debugger
+      
 
 
       let pr1 = new PR1();
@@ -532,10 +532,10 @@ debugger
       var StreetArea= Street.toString().concat(", "+Area.toString());
       pr1.address = StreetArea.concat(", "+House.toString());
       
-      debugger
+      
       this.pr1Services.PR1BasicInfo(pr1).subscribe(
         res => {
-          debugger
+          
           if (res.status == '0') {
             this.spinner.hide();
             this.uploadFile(this.webcam.file,res.data.applicationId);

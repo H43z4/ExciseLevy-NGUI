@@ -8,7 +8,7 @@
   <div class="form-floating w-25 custom-mb-pos align-items-end justify-content-end">
     <form class="form" [formGroup]="PersonForm" autocomplete="off">
       <label for="floatingInput">CNIC/Passport</label>
-      <input formControlName="passportCNIC"  mask="00000-0000000-0" placeholder="00000-0000000-0" (blur)="fetchPerson()" class="form-control form-control-md">
+      <input formControlName="passportCNIC"   placeholder="000000000000000" (blur)="fetchPerson()" class="form-control form-control-md">
       <p class="mb-0 show-pass">
         <i class="bi bi-search"></i>
       </p>
@@ -22,9 +22,9 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Person Name</th>
-          <th scope="col">CNIC</th>
+          <th scope="col">CNIC/Passport</th>
           <th scope="col">Phone No.</th>
-          <th scope="col">Address</th>
+          <!-- <th scope="col">Address</th> -->
           <th scope="col">City</th>
           <th scope="col">DOB</th>
           <th scope="col">Visa Expiry</th>
@@ -37,7 +37,7 @@
           <td>{{arr.personName}}</td>
           <td>{{arr.cNIC_PASSPORT}}</td>
           <td>{{arr.cellNo}}</td>
-          <td>{{arr.address}}</td>
+          <!-- <td>{{arr.address}}</td> -->
           <td>{{arr.city}}</td>
           <td>{{arr.dateofBirth| date:'dd-MMM-yyyy'}}</td>
           <td>{{arr.visaExpiryDate|date:'dd-MMM-yyyy'}}</td>
