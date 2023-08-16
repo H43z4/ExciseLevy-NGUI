@@ -400,6 +400,7 @@ export class PR1Component implements OnInit {
     }
   }
   uploadFile = (files: string | any,appId: string | any) => {
+    debugger
     if (files== null || files.length === 0 || appId === "") {
       this.toastrService.error("Photo is missing!");
       return;

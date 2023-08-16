@@ -20,6 +20,7 @@ export class PR1Service {
     return this.http.post<any>(`${environment.apiUrlsample}/Permit/SavePermit`, pr1)
   }
   UploadPhoto(formData: FormData ) {
+    debugger
     return this.http.post<any>(`${environment.apiUrlsample}/Person/Upload`, formData)
     .pipe(map(res => {
       return res; })); 
